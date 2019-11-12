@@ -1,4 +1,4 @@
-import { Component, html, Route, Router, TranslationService } from "plumejs";
+import { Component, html, Route, Router, TranslationService, Input } from "plumejs";
 import en from "./i18n/en";
 import fr from "./i18n/fr";
 import { ModalService, NotificationService } from "./ui";
@@ -47,9 +47,12 @@ export class AppRoot {
 
 	openModal() {
 		const modal = this.modalsrvc.show({
-			bodyTemplate: "<nested-modal></nested-modal>",
+			bodyTemplate: "<nested-modal nestedModalData='data'></nested-modal>",
 			modalTitle: "testing modal",
-			modalClass: "sample-class"
+			modalClass: "sample-class",
+			data: {
+				message: 'hello world'
+			}
 		});
 
 		modal.onOpen.subscribe(() => {
@@ -132,6 +135,9 @@ export class AppRoot {
 class NestedModal {
 	constructor(private modalsrvc: ModalService) {}
 
+	@Input()
+	nestedModalData:any = {};
+
 	openAnotherModal() {
 		const modal = this.modalsrvc.show({
 			bodyTemplate: "<div>i'm nested modal</div>",
@@ -151,6 +157,7 @@ class NestedModal {
 	render() {
 		return html`
 			<div>sample modal</div>
+			<div>${ this.nestedModalData.message }</div>
 			<button
 				class="btn btn-sm btn-primary"
 				onclick=${() => {

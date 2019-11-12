@@ -1,15 +1,6 @@
-import { Component, html, Input, useRef } from "plumejs";
+import { Component, html, Input, useRef, DomTransition } from "plumejs";
 import { Subject } from "rxjs";
-
-interface IModalData {
-	Id: Number;
-	title: String;
-	bodyTemplate: string;
-	modalClass: String;
-	backdrop: Boolean;
-	isModalOpen: Boolean;
-	hideDefaultCloseButton: Boolean;
-}
+import { IModalData } from "../modal.interface";
 
 const registerModalComponent = () => {
 	@Component({
@@ -17,6 +8,8 @@ const registerModalComponent = () => {
 		styleUrl: "ui/modal/modal-component/modal.component.scss"
 	})
 	class ModalComponent {
+		constructor(private domSrvc: DomTransition) {}
+
 		@Input()
 		modalData: IModalData = {
 			Id: 0,
@@ -28,37 +21,43 @@ const registerModalComponent = () => {
 			hideDefaultCloseButton: false
 		};
 
-    modalContentRef:any;
+		modalContentRef: any;
 		update: any;
 		onClose: Subject<void> = new Subject();
 		onOpen: Subject<void> = new Subject();
+		transitionDuration: number = 300;
 
 		private close(event: any) {
+			this.domSrvc.onTransitionEnd(
+				this.modalContentRef.current,
+				() => {
+					this.onClose.next();
+				},
+				this.transitionDuration
+			);
 			this.modalData.isModalOpen = false;
 			this.update();
 		}
 
-		private setAnimations() {
-			this.modalContentRef.current.addEventListener('transitionend', () => {
-				this.modalData.isModalOpen ? this.onOpen.next() : this.onClose.next();
-			}, false);
-		}
-
 		mount() {
-			this.setAnimations();
-		}
-
-		unmount(){
-			this.modalContentRef.current.removeEventListener('transitionend');
+			this.domSrvc.onTransitionEnd(
+				this.modalContentRef.current,
+				() => {
+					this.onOpen.next();
+				},
+				this.transitionDuration
+			);
 		}
 
 		render() {
+			let dataIndex = this.modalData.bodyTemplate.indexOf("data");
 			const stringArray = [`${this.modalData.bodyTemplate}`] as any;
 			stringArray.raw = [`${this.modalData.bodyTemplate}`];
 			this.modalContentRef = useRef(null);
 			return html`
 				<div class=${`modalDialog ${this.modalData.modalClass} `}>
-					<div ref=${this.modalContentRef}
+					<div
+						ref=${this.modalContentRef}
 						class=${`modalDialog-content  ${
 							this.modalData.isModalOpen ? "in out" : "out"
 						}`}
