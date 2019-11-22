@@ -1,11 +1,6 @@
 {
   "presets": [
-    ["@babel/preset-env", {
-      "corejs": 2,
-      "useBuiltIns": "entry",
-      "targets": "> 0.25%, not dead"
-    }],
-    "@babel/typescript"
+    "@babel/preset-typescript"
   ],
   "plugins": [
     "babel-plugin-transform-typescript-metadata",
@@ -18,10 +13,6 @@
     "@babel/proposal-object-rest-spread",
     "@babel/plugin-transform-arrow-functions",
     "@babel/plugin-transform-block-scoping",
-    "@babel/plugin-transform-function-name",
-    ["@babel/plugin-transform-runtime", {
-      "corejs": 2,
-      "regenerator": true
-    }]
+    "@babel/plugin-transform-function-name"
   ]
 }

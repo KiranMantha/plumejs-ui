@@ -1,7 +1,7 @@
 import { Component, html, Route, Router, TranslationService, Input } from "plumejs";
 import en from "./i18n/en";
 import fr from "./i18n/fr";
-import { ModalService, NotificationService } from "./ui";
+//import { ModalService, NotificationService } from "./ui";
 
 @Component({
 	selector: "app-root",
@@ -11,9 +11,9 @@ import { ModalService, NotificationService } from "./ui";
 export class AppRoot {
 	constructor(
 		private router: Router,
-		private translations: TranslationService,
-		private modalsrvc: ModalService,
-		private notifySrvc: NotificationService
+		private translations: TranslationService
+		// private modalsrvc: ModalService,
+		// private notifySrvc: NotificationService
 	) {
 		translations.setTranslate(en, "en");
 		translations.setTranslate(fr, "fr");
@@ -38,7 +38,7 @@ export class AppRoot {
 	];
 
 	notify(){
-		this.notifySrvc.sendMessage('hello world');
+		// this.notifySrvc.sendMessage('hello world');
 	}
 
 	navigateTo(path: string) {
@@ -46,85 +46,37 @@ export class AppRoot {
 	}
 
 	openModal() {
-		const modal = this.modalsrvc.show({
-			bodyTemplate: "<nested-modal nestedModalData='data'></nested-modal>",
-			modalTitle: "testing modal",
-			modalClass: "sample-class",
-			data: {
-				message: 'hello world'
-			}
-		});
+		// const modal = this.modalsrvc.show({
+		// 	bodyTemplate: "<nested-modal nestedModalData='data'></nested-modal>",
+		// 	modalTitle: "testing modal",
+		// 	modalClass: "sample-class",
+		// 	data: {
+		// 		message: 'hello world'
+		// 	}
+		// });
 
-		modal.onOpen.subscribe(() => {
-			console.log("main modal open");
-		});
+		// modal.onOpen.subscribe(() => {
+		// 	console.log("main modal open");
+		// });
 
-		modal.onClose.subscribe(() => {
-			console.log("main modal closed");
-		});
+		// modal.onClose.subscribe(() => {
+		// 	console.log("main modal closed");
+		// });
 	}
 
 	render() {
 		return html`
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand" href="#">PlumeJS</a>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
-							<a
-								class="nav-link"
-								href="#"
-								onclick=${() => {
-									this.navigateTo("/todos");
-								}}
-								>Todos
-							</a>
-						</li>
-						<li class="nav-item active">
-							<a
-								class="nav-link"
-								href="#"
-								onclick=${() => {
-									this.navigateTo("/persons/123");
-								}}
-								>Persons</a
-							>
-						</li>
-						<li class="nav-item dropdown">
-							<select
-								class="form-control"
-								onchange=${(e: any) => {
-									this.translations.setDefaultLanguage(e.target.value);
-								}}
-							>
-								<option value="en">EN</option>
-								<option value="fr">FR</option>
-							</select>
-						</li>
-					</ul>
-				</div>
+				<ul>
+					<li onclick=${() => { this.navigateTo("/todos"); }}>
+						Todos
+					</li>
+					<li	onclick=${() => { this.navigateTo("/persons/123"); }}>
+						Persons
+					</li>
+				</ul>
 			</nav>
-			<div class="container">
-				<h2 class="mb-3">
-					This text is common for both todos and persons components
-				</h2>
-				<div>
-					This is a translated value
-					<span
-						innerHTML=${"username.greet".translate({ name: "kiran" })}
-					></span>
-				</div>
-				<button
-					class="btn btn-sm btn-primary"
-					onclick=${() => {
-						this.openModal();
-					}}
-				>
-					Open Modal
-				</button>
-				<button class='btn btn-sm btn-primary' style='margin-left: 10px;' onclick=${() => { this.notify(); }}>Notify</button>
-				<router-outlet routes=${this.routes}></router-outlet>
-			</div>
+			<router-outlet routes=${this.routes}></router-outlet>
 		`;
 	}
 }
@@ -133,25 +85,27 @@ export class AppRoot {
 	selector: "nested-modal"
 })
 class NestedModal {
-	constructor(private modalsrvc: ModalService) {}
+	constructor(
+		//private modalsrvc: ModalService
+		) {}
 
 	@Input()
 	nestedModalData:any = {};
 
 	openAnotherModal() {
-		const modal = this.modalsrvc.show({
-			bodyTemplate: "<div>i'm nested modal</div>",
-			modalTitle: "nested modal",
-			modalClass: "nested-class"
-		});
+		// const modal = this.modalsrvc.show({
+		// 	bodyTemplate: "<div>i'm nested modal</div>",
+		// 	modalTitle: "nested modal",
+		// 	modalClass: "nested-class"
+		// });
 
-		modal.onOpen.subscribe(() => {
-			console.log("nested modal open");
-		});
+		// modal.onOpen.subscribe(() => {
+		// 	console.log("nested modal open");
+		// });
 
-		modal.onClose.subscribe(() => {
-			console.log("nested modal closed");
-		});
+		// modal.onClose.subscribe(() => {
+		// 	console.log("nested modal closed");
+		// });
 	}
 
 	render() {

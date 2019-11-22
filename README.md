@@ -7,3 +7,10 @@ https://stackoverflow.com/questions/9255279/callback-when-css3-transition-finish
 crossbrowser transitions: https://gist.github.com/davidcalhoun/702826
 
 http://jsfiddle.net/swfour/M2B9B/14/ css auto hide
+
+### Plumejs repo
+[here](https://github.com/kiranmantha/plumejs)
+
+### Initial Steps
+1. `npm i`
+2. `npm start`
