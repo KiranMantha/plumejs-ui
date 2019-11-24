@@ -8,6 +8,8 @@ crossbrowser transitions: https://gist.github.com/davidcalhoun/702826
 
 http://jsfiddle.net/swfour/M2B9B/14/ css auto hide
 
+https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
+
 ### Plumejs repo
 [here](https://github.com/kiranmantha/plumejs)
 

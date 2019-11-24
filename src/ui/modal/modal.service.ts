@@ -44,7 +44,7 @@ export class ModalService {
 			backdrop: options.backdrop || false,
 			isModalOpen: true,
 			hideDefaultCloseButton: options.hideDefaultCloseButton || false,
-			data: options.data ? options.data : {}
+			componentData: options.data ? options.data : {}
 		};
 		modalRef.update();
 		this._modalList.push(modalRef);

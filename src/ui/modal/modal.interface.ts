@@ -17,7 +17,7 @@ export interface IModalData {
 	backdrop: Boolean;
 	isModalOpen: Boolean;
 	hideDefaultCloseButton: Boolean;
-	data?:any;
+	componentData?:any;
 }
 
 export interface IModal {
