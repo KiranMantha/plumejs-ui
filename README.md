@@ -10,6 +10,8 @@ http://jsfiddle.net/swfour/M2B9B/14/ css auto hide
 
 https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
 
+https://github.com/karlhorky/typescript-tricks
+
 ### Plumejs repo
 [here](https://github.com/kiranmantha/plumejs)
 
