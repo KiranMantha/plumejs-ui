@@ -4,7 +4,7 @@ import registerModalComponent from "./modal-component/modal.component";
 
 @Injectable()
 export class ModalService {
-	private _modalList: Array<any> = [];
+	private _modalList: Array<HTMLElement> = [];
 
 	constructor() {
 		registerModalComponent();
