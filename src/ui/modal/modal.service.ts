@@ -39,12 +39,11 @@ export class ModalService {
 		model.modalData = {
 			Id: modelId,
 			title: options.modalTitle,
-			bodyTemplate: options.bodyTemplate,
+			bodyTemplate: options.renderTemplate(),
 			modalClass: options.modalClass || "",
 			backdrop: options.backdrop || false,
 			isModalOpen: true,
-			hideDefaultCloseButton: options.hideDefaultCloseButton || false,
-			componentData: options.data ? options.data : {}
+			hideDefaultCloseButton: options.hideDefaultCloseButton || false
 		};
 		model.update();
 		this._modalList.push(modalRef);
@@ -53,12 +52,14 @@ export class ModalService {
 
 	private _close(modalRef: any, index: number) {
 		index > -1 && this._modalList.splice(index, 1);
+		let activeEle:any = document.activeElement;
+		activeEle && activeEle.blur();
 		this._removeChild(modalRef);
 	}
 
 	show(options: IModalOptions): IModal {
-		if (!options.bodyTemplate) {
-			throw Error("Provide bodyTemplate");
+		if (!options.renderTemplate) {
+			throw Error("Provide renderTemplate function to render html inside modal component.");
 		}
 		return this._addModal(options);
 	}

@@ -47,12 +47,9 @@ export class AppRoot {
 
 	openModal() {
 		const modal = this.modalsrvc.show({
-			bodyTemplate: "<nested-modal></nested-modal>",
+			renderTemplate: () => html`<nested-modal nestedModalData=${{message: 'Hello World'}}></nested-modal>`,
 			modalTitle: "testing modal",
 			modalClass: "sample-class",
-			data: {
-				message: 'hello world'
-			}
 		});
 
 		modal.onOpen.subscribe(() => {
@@ -140,7 +137,7 @@ class NestedModal {
 
 	openAnotherModal() {
 		const modal = this.modalsrvc.show({
-			bodyTemplate: "<div>i'm nested modal</div>",
+			renderTemplate: () => html`<div>i'm nested modal</div>`,
 			modalTitle: "nested modal",
 			modalClass: "nested-class"
 		});

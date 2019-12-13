@@ -28,6 +28,7 @@ const registerModalComponent = () => {
 		transitionDuration: number = 300;
 
 		private close(event: any) {
+			this.modalData.isModalOpen = false;
 			this.domSrvc.onTransitionEnd(
 				this.modalContentRef.current,
 				() => {
@@ -35,7 +36,6 @@ const registerModalComponent = () => {
 				},
 				this.transitionDuration
 			);
-			this.modalData.isModalOpen = false;
 			this.update();
 		}
 
@@ -49,10 +49,7 @@ const registerModalComponent = () => {
 			);
 		}
 
-		render() {
-			let dataIndex = this.modalData.bodyTemplate.indexOf("data");
-			const stringArray = [`${this.modalData.bodyTemplate}`] as any;
-			stringArray.raw = [`${this.modalData.bodyTemplate}`];
+		render() {			
 			this.modalContentRef = useRef(null);
 			return html`
 				<div class=${`modalDialog ${this.modalData.modalClass} `}>
@@ -78,7 +75,7 @@ const registerModalComponent = () => {
 								  `}
 						</div>
 						<div>
-							${html(stringArray)}
+							${ this.modalData.bodyTemplate }
 						</div>
 					</div>
 				</div>

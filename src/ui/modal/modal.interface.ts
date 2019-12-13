@@ -2,11 +2,10 @@ import { Subject } from "rxjs";
 
 export interface IModalOptions {
 	modalTitle: string;
-	bodyTemplate: string;
+	renderTemplate: () => any;
 	modalClass?: string;
 	backdrop?: Boolean;
 	hideDefaultCloseButton?: Boolean;
-	data?: any;
 }
 
 export interface IModalData {
@@ -17,7 +16,6 @@ export interface IModalData {
 	backdrop: Boolean;
 	isModalOpen: Boolean;
 	hideDefaultCloseButton: Boolean;
-	componentData?:any;
 }
 
 export interface IModal {
