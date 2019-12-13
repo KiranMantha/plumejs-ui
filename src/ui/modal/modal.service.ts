@@ -36,7 +36,7 @@ export class ModalService {
 			this.close(modal);
 		});
 
-		modalRef.modalData = {
+		model.modalData = {
 			Id: modelId,
 			title: options.modalTitle,
 			bodyTemplate: options.bodyTemplate,
@@ -46,7 +46,7 @@ export class ModalService {
 			hideDefaultCloseButton: options.hideDefaultCloseButton || false,
 			componentData: options.data ? options.data : {}
 		};
-		modalRef.update();
+		model.update();
 		this._modalList.push(modalRef);
 		return modal;
 	}

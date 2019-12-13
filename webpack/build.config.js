@@ -3,7 +3,7 @@ const baseConfig = require('./base.config.js');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(baseConfig, {
-  mode: 'development',
+  mode: 'production',
   plugins: [
     new BundleAnalyzerPlugin({
         analyzerMode: 'static'
