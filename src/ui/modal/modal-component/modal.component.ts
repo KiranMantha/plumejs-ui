@@ -28,7 +28,6 @@ const registerModalComponent = () => {
 		transitionDuration: number = 300;
 
 		private close(event:any) {
-			event.target.blur();
 			this.domSrvc.onTransitionEnd(
 				this.modalContentRef.current,
 				() => {
