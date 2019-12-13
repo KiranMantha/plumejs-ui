@@ -52,8 +52,6 @@ export class ModalService {
 
 	private _close(modalRef: any, index: number) {
 		index > -1 && this._modalList.splice(index, 1);
-		let activeEle:any = document.activeElement;
-		activeEle && activeEle.blur();
 		this._removeChild(modalRef);
 	}
 

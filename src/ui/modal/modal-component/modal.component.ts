@@ -22,13 +22,13 @@ const registerModalComponent = () => {
 		};
 
 		modalContentRef: any;
-		update: any;
+		update: Function;
 		onClose: Subject<void> = new Subject();
 		onOpen: Subject<void> = new Subject();
 		transitionDuration: number = 300;
 
-		private close(event: any) {
-			this.modalData.isModalOpen = false;
+		private close(event:any) {
+			event.target.blur();
 			this.domSrvc.onTransitionEnd(
 				this.modalContentRef.current,
 				() => {
@@ -36,6 +36,7 @@ const registerModalComponent = () => {
 				},
 				this.transitionDuration
 			);
+			this.modalData.isModalOpen = false;
 			this.update();
 		}
 
@@ -66,9 +67,7 @@ const registerModalComponent = () => {
 								: html`
 										<button
 											class="btn-close"
-											onclick=${(event: any) => {
-												this.close(event);
-											}}
+											onclick=${(event:any)=>{ this.close(event); }}
 										>
 											&times;
 										</button>
