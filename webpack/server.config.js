@@ -9,7 +9,13 @@ module.exports = merge(baseConfig, {
         compress: true,
         hot: true,
         port: 3001,
-        open: true
+        open: true,
+        historyApiFallback: {
+            rewrites: [
+                { from: /^\/$/, to: '/' },
+                { from: /./, to: '/' }
+            ]
+        }
     },
     watch: true
 });
