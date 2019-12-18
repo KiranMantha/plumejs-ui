@@ -1,4 +1,4 @@
-import { Component, html, useRef, Input } from "plumejs";
+import { Component, html, useRef, Input, Ref } from "plumejs";
 
 @Component({
     selector: 'todo-list'
@@ -69,7 +69,7 @@ class TodoList {
     selector: 'todo-form'
 })
 class TodoForm {
-    inputRef:any;
+    inputRef:Ref<HTMLInputElement> = useRef(null);
     @Input()
     formprops:any = {};
 
@@ -79,7 +79,6 @@ class TodoForm {
         this.inputRef.current.value = '';
     }
     render(){
-        this.inputRef = useRef(null);
         return html`
             <form class='mb-3' onsubmit=${(e:Event)=>{ this.submit(e); }}>
                 <input type='text' class='form-control' placeholder='Todo' ref=${this.inputRef} value='${ this.formprops.todo }'/>
