@@ -18,7 +18,7 @@ class PersonsList {
 	persondetails: any = {};
 	update: any;
 	element: any;
-	routeId = '';
+	routeId:any;
 	constructor(private personSrvc: PersonService, private router:Router) {
 		this.routeId = this.router.getCurrentRoute().params.id;
 	}

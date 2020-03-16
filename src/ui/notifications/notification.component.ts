@@ -11,7 +11,7 @@ interface INotification {
 const registerNotificationsComponent = () => {
 	@Component({
 		selector: "notification-container",
-		styleUrl: "ui/notifications/notification.component.scss"
+		styleUrl: "notification.component.scss"
 	})
 	class NotificationContainerComponent {
 		private _notifications:Array<Message> = [];

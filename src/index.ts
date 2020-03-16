@@ -28,12 +28,12 @@ export class AppRoot {
 		{
 			path: "/todos",
 			template: "<todo-list></todo-list>",
-			templatePath: "todos/index.ts"
+			templatePath: () => import("./todos/index")
 		},
 		{
 			path: "/persons/:id",
 			template: "<persons-list></persons-list>",
-			templatePath: "persons/index.ts"
+			templatePath: () => import("./persons/index")
 		}
 	];
 
