@@ -21,7 +21,7 @@ const registerModalComponent = () => {
 			hideDefaultCloseButton: false
 		};
 
-		modalContentRef: Ref<HTMLDivElement> = useRef(null);;
+		modalContentRef: Ref<HTMLElement> = useRef(null);
 		update: Function;
 		onClose: Subject<void> = new Subject();
 		onOpen: Subject<void> = new Subject();
