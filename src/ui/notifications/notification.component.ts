@@ -11,7 +11,7 @@ interface INotification {
 const registerNotificationsComponent = () => {
 	@Component({
 		selector: "notification-container",
-		styleUrl: "notification.container.scss"
+		styleUrl: "notification.component.scss"
 	})
 	class NotificationContainerComponent {
 		private _notifications:Array<Message> = [];
@@ -52,7 +52,7 @@ const registerNotificationsComponent = () => {
 
 	@Component({
 		selector: "notification-message",
-		styleUrl: "notification.component.scss"
+		useShadow: false
 	})
 	class NotificationMessage {
 		@Input()

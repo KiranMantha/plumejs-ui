@@ -6,48 +6,55 @@ $red1: #c82333;
 $red-border: #bd2130;
 $white: #fff;
 
-.notification {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  margin-bottom: 10px;
+.notifications_wrapper {
+  position: fixed;
+  top: 3.5rem;
   right: 0;
-  z-index: 1000;
   padding: 10px;
-  min-width: 15rem;
-  max-width: 18rem;
-  border-radius: 2px;
-  overflow: hidden;
 
-  &.is-info {
-    background-color: $blue;
-
-    .dismiss {
-      background-color: $blue1;
-      border-color: $blue-border;
-    }
-  }
-
-  &.is-danger {
-    background-color: $red;
-
-    .dismiss {
-      background-color: $red1;
-      border-color: $red-border;
-    }
-  }
-
-  &.is-info,
-  &.is-danger {
-    color: $white;
-  }
-
-  .dismiss {
-    outline: 0;
-    border: none;
-    cursor: pointer;
+  .notification {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 10px;
+    right: 0;
+    z-index: 1000;
+    padding: 10px;
+    min-width: 15rem;
+    max-width: 18rem;
     border-radius: 2px;
-    color: $white;
+    overflow: hidden;
+
+    &.is-info {
+      background-color: $blue;
+
+      .dismiss {
+        background-color: $blue1;
+        border-color: $blue-border;
+      }
+    }
+
+    &.is-danger {
+      background-color: $red;
+
+      .dismiss {
+        background-color: $red1;
+        border-color: $red-border;
+      }
+    }
+
+    &.is-info,
+    &.is-danger {
+      color: $white;
+    }
+
+    .dismiss {
+      outline: 0;
+      border: none;
+      cursor: pointer;
+      border-radius: 2px;
+      color: $white;
+    }
   }
 }
