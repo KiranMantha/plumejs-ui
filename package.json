@@ -1,5 +1,5 @@
 {
-  "name": "plume-ui",
+  "name": "plumejs-ui",
   "version": "1.0.0",
   "description": "A collection of UI components built using PlumeJs",
   "files": [
