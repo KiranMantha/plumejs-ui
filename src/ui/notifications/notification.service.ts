@@ -1,6 +1,7 @@
 import { Injectable } from "plumejs";
 import { Message } from "./message";
 import registerNotificationsComponent from "./notification.component";
+import { NotificationType } from './notification.type';
 
 @Injectable()
 export class NotificationService {
@@ -41,7 +42,7 @@ export class NotificationService {
 		this._containerModel.setNotifications(message);
 	}
 
-	sendMessage(content: string, type: string = "info") {
+	sendMessage(content: string, type: NotificationType = NotificationType.Info) {
 		const message = new Message(content, type);
 		this._addMessage(message);
 	}

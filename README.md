@@ -15,6 +15,75 @@ https://github.com/karlhorky/typescript-tricks
 ### Plumejs repo
 [here](https://github.com/kiranmantha/plumejs)
 
-### Initial Steps
-1. `npm i`
-2. `npm start`
+### Installation
+`npm i -S plume-ui`
+
+### Modal Service
+
+ModalService exposes three methods show, close and closeAll. Inorder to use this service:
+
+```
+import { ModalService, IModal } from 'plume-ui';
+
+@Component({
+    selector: 'your-selector'
+})
+class YourComponent {
+    modal:IModal;
+    constructor(private modalService:ModalService){ }
+
+    showModal() {
+        //show method returns IModal interface which have property `Id` and methods `onOpen, onClose`
+        this.modal = this.modalsrvc.show({
+			renderTemplate: () => html`<div>Hello World</div>`,
+			modalTitle: "testing modal",
+			modalClass: "sample-class" //optional property to add custom class to modal dialog which allows customization
+            hideDefaultCloseButton: true //optional property to hide modal's close button
+            backdrop: true //optional property to show or hide modal backdrop
+		});
+
+		this.modal.onOpen.subscribe(() => {
+			console.log("main modal open: ", this.modal.Id);
+		});
+
+		this.modal.onClose.subscribe(() => {
+			console.log("main modal closed");
+		});
+    }
+
+    closeModal() {
+        //close method used to close modal dialog and accepts modal reference
+        this.modalsrvc.close(this.modal);
+    }
+
+    closeAllModals() {
+        //closeAll method is used to close all opened modal dialogs
+        this.modalsrvc.closeAll();
+    }
+}
+
+```
+
+### Notification Service
+
+NotificationService is used to show simple notification. Inorder to use this
+
+```
+import { NotificationService, NotificationType } from 'plume-ui';
+
+@Component({
+    selector: 'your-selector'
+})
+class YourComponent {
+    constructor(private notifySrvc: NotificationService){}
+
+    showNotification() {
+        //sendMessage accepts two arguments, text and optional notification type
+        //By default info type is displayed
+        this.notifySrvc.sendMessage('hello world');
+
+        // This display notification with danger type
+        this.notifySrvc.sendMessage('hello world', NotificationType.Danger);
+    }
+}
+```

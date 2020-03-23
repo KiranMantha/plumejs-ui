@@ -11,7 +11,7 @@ interface INotification {
 const registerNotificationsComponent = () => {
 	@Component({
 		selector: "notification-container",
-		styleUrl: "ui/notifications/notification.component.scss"
+		styleUrl: "notification.component.scss"
 	})
 	class NotificationContainerComponent {
 		private _notifications:Array<Message> = [];
@@ -33,7 +33,7 @@ const registerNotificationsComponent = () => {
 		render() {
 			return html`
 				<div class="notifications_wrapper">
-					${this._notifications.map((msg: Message, i) => {
+					${ this._notifications.map((msg: Message, i) => {
 						let notify: INotification = {
 							message: msg,
 							index: i,
@@ -44,7 +44,7 @@ const registerNotificationsComponent = () => {
 								notification=${notify}
 							></notification-message>
 						`;
-					})}
+					}) }
 				</div>
 			`;
 		}
@@ -89,7 +89,7 @@ const registerNotificationsComponent = () => {
 					</div>
 				`;
 			} else {
-				return html``;
+				return html`<div></div>`;
 			}
 		}
 	}

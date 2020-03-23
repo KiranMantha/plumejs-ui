@@ -1,11 +1,11 @@
-import { Component, html, Input, useRef, DomTransition } from "plumejs";
+import { Component, html, Input, useRef, DomTransition, Ref } from "plumejs";
 import { Subject } from "rxjs";
 import { IModalData } from "../modal.interface";
 
 const registerModalComponent = () => {
 	@Component({
 		selector: "modal-dialog",
-		styleUrl: "ui/modal/modal-component/modal.component.scss"
+		styleUrl: "modal.component.scss"
 	})
 	class ModalComponent {
 		constructor(private domSrvc: DomTransition) {}
@@ -21,7 +21,7 @@ const registerModalComponent = () => {
 			hideDefaultCloseButton: false
 		};
 
-		modalContentRef: any;
+		modalContentRef: Ref<HTMLElement> = useRef(null);
 		update: Function;
 		onClose: Subject<void> = new Subject();
 		onOpen: Subject<void> = new Subject();
@@ -49,8 +49,7 @@ const registerModalComponent = () => {
 			);
 		}
 
-		render() {			
-			this.modalContentRef = useRef(null);
+		render() {
 			return html`
 				<div class=${`modalDialog ${this.modalData.modalClass} `}>
 					<div
