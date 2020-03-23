@@ -12,8 +12,20 @@
     "tsc": "tsc && copyfiles src/**/*.scss dist/"
   },
   "main": "./dist/index.js",
-  "author": "",
   "license": "ISC",
+  "author": "KiranMantha <kiranv.mantha@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KiranMantha/plumejs-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/KiranMantha/plumejs-ui/issues"
+  },
+  "homepage": "https://github.com/KiranMantha/plumejs-ui#readme",
+  "keywords": [
+    "plumejs",
+    "plumejs-ui"
+  ],
   "devDependencies": {
     "bootstrap": "^4.3.1",
     "copyfiles": "^2.2.0",
