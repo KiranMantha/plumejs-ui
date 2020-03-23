@@ -11,7 +11,7 @@
     "tag-release": "npm run patch-update && npm run tag",
     "tsc": "tsc && copyfiles src/**/*.scss dist/"
   },
-  "main": "./index.ts",
+  "main": "./dist/index.js",
   "author": "",
   "license": "ISC",
   "devDependencies": {

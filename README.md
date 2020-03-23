@@ -23,7 +23,7 @@ https://github.com/karlhorky/typescript-tricks
 ModalService exposes three methods show, close and closeAll. Inorder to use this service:
 
 ```
-import { ModalService, IModal } from 'plume-ui';
+import { ModalService, IModal } from 'plumejs-ui';
 
 @Component({
     selector: 'your-selector'
@@ -69,7 +69,7 @@ class YourComponent {
 NotificationService is used to show simple notification. Inorder to use this
 
 ```
-import { NotificationService, NotificationType } from 'plume-ui';
+import { NotificationService, NotificationType } from 'plumejs-ui';
 
 @Component({
     selector: 'your-selector'
