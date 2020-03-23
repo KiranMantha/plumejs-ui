@@ -16,7 +16,7 @@ https://github.com/karlhorky/typescript-tricks
 [here](https://github.com/kiranmantha/plumejs)
 
 ### Installation
-`npm i -S plume-ui`
+`npm i -S plumejs-ui`
 
 ### Modal Service
 
