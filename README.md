@@ -12,13 +12,31 @@ https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
 
 https://github.com/karlhorky/typescript-tricks
 
-### Plumejs repo
+## Plumejs repo
 [here](https://github.com/kiranmantha/plumejs)
 
-### Installation
+## Installation
 `npm i -S plumejs-ui`
 
-### Modal Service
+### Changes needed in your application
+
+Update your plumejs application's `base.config.js` as:
+
+from
+
+```
+const scssMap = fromDir(path.resolve(__dirname, appconstants.sourceDir, '.scss');
+```
+
+to
+
+```
+appconstants.plumeuiDir = '../node_modules/plumejs-ui'
+
+const scssMap = fromDir([path.resolve(__dirname, appconstants.sourceDir), path.resolve(__dirname, appconstants.plumeuiDir)], '.scss');
+```
+
+## Modal Service
 
 ModalService exposes three methods show, close and closeAll. Inorder to use this service:
 
@@ -64,7 +82,7 @@ class YourComponent {
 
 ```
 
-### Notification Service
+## Notification Service
 
 NotificationService is used to show simple notification. Inorder to use this
 
