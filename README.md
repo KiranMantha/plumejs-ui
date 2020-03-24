@@ -105,3 +105,29 @@ class YourComponent {
     }
 }
 ```
+
+## Toggle Button
+
+Toggle button provide a switch interface. It accepts input `toggleOptions`. It can be used as:
+
+```
+import { IToggleInput, ToggleComponent } from 'plumejs-ui';
+
+@Component({
+    selector: 'my-comp'
+})
+class MyComponent {
+    toggleInput:IToggleInput = {
+        onchange: (_check:boolean) => { console.log(_checked) } // execute when toggle. Required.
+        onText: 'my.translation' // string. also works for translation or normal text. Optional. will not display text when not passed.
+        offText: 'my.translation' // string. also works for translation or normal text. Optional. will not display text when not passed.
+        isSelected: true // boolean. set the initial state of toggle switch. will be false by default. Optional
+    }
+
+    render() {
+        return html`
+            <toggle-button toggleOptions=${ this.toggleInput }></toggle-button>
+        `
+    }
+}
+```

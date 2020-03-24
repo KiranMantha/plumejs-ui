@@ -3,3 +3,7 @@ interface HTMLElement {
 	update: () => void;
 	getModel: () => { [key: string]: any };
 }
+
+interface String {
+	translate: (...args: any) => string;
+}
