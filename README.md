@@ -118,10 +118,18 @@ import { IToggleInput, ToggleComponent } from 'plumejs-ui';
 })
 class MyComponent {
     toggleInput:IToggleInput = {
-        onchange: (_check:boolean) => { console.log(_checked) } // execute when toggle. Required.
+        onchange: this.onToggleChange // executed when toggle change. Required.
         onText: 'my.translation' // string. also works for translation or normal text. Optional. will not display text when not passed.
         offText: 'my.translation' // string. also works for translation or normal text. Optional. will not display text when not passed.
         isSelected: true // boolean. set the initial state of toggle switch. will be false by default. Optional
+    }
+
+    constructor() {
+        this.onToggleChange = this.onToggleChange.bind(this);
+    }
+
+    onToggleChange(_checked: boolean) {
+        console.log(_checked);
     }
 
     render() {
