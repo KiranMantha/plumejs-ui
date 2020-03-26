@@ -1,1 +1,1 @@
-export { IToggleInput, ToggleComponent } from './toggle.component';
+export { IToggleInput, registerToggleComponent } from './toggle.component';
