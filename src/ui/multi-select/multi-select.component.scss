@@ -1,0 +1,88 @@
+$trigger-border-color: #ccc;
+$trigger-background-color: #fff;
+$popup-background-color: #fff;
+$select-item-hover-color: #eee;
+$select-item-active-color: #eee;
+$padder: 5px 10px;
+
+.multi-select-container {
+    position: relative;
+
+    .multi-select-trigger {
+        cursor: pointer;
+        width: 100%;
+        border: 1px solid $trigger-border-color;
+        background-color: $trigger-background-color;
+        padding: $padder;
+        text-align: left;
+        border-radius: 2px;
+
+        &:focus {
+            border-color: $trigger-border-color;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            color: rgba(16, 16, 16, 0.3);
+        }
+    }
+
+    .multi-select-popup {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        background-color: $popup-background-color;
+        right: 0;
+        left: 0;
+        border: 1px solid $trigger-border-color;
+        border-top: none;
+
+        &.show-popup {
+            display: block;
+        }
+
+        .multi-select-filter {
+            padding: $padder;
+
+            .filter-input {
+                width: 100%;
+                border: 1px solid $trigger-border-color;
+                border-radius: 2px;
+
+                &:focus {
+                    border-color: $trigger-border-color;
+                }
+            }
+        }
+
+        .select-items-list {
+            max-height: 204px;
+            overflow: auto;
+
+            .select-item {
+                cursor: pointer;
+                text-align: left;
+                padding: $padder;
+                display: flex;
+                align-items: center;
+                margin: 0;
+
+                input {
+                    margin-right: 10px;
+                }
+
+                &:not(.active):hover {
+                    background-color: $select-item-hover-color;
+                }
+
+                &.active {
+                    background-color: $select-item-active-color;
+                }
+
+                &.hide-item {
+                    display: none;
+                }
+            }
+        }
+    }
+}
