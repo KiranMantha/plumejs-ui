@@ -111,7 +111,9 @@ class YourComponent {
 Toggle button provide a switch interface. It accepts input `toggleOptions`. It can be used as:
 
 ```
-import { IToggleInput, ToggleComponent } from 'plumejs-ui';
+import { IToggleInput, registerToggleComponent } from 'plumejs-ui';
+
+registerToggleComponent(); // Call this function in your root component. No need to execute this when ever you import.
 
 @Component({
     selector: 'my-comp'
@@ -138,4 +140,71 @@ class MyComponent {
         `
     }
 }
+```
+
+## Multi-select Dropdown
+
+This component can replace traditional html dropdown and also can be transformed as multi select dropdown. To use this:
+
+```
+import { IMultiSelectOptions, registerMultiSelectComponent } from 'plumejs-ui';
+
+registerMultiSelectComponent(); // Call this function in your root component. No need to execute this when ever you import.
+
+@Component({
+    selector: 'your-selector'
+})
+class YourComponent {
+    multiSelectOptions: IMultiSelectOptions = {
+        // The items collection to display in dropdown list. Required
+		data: [{
+			name: 'option1'
+		}, {
+            name: 'option2'
+        },{
+            name: 'option3'
+        },{
+            name: 'option4'
+        },{
+            name: 'option5'
+        }],
+
+        // The property of item in items collection which needs to display as option text. This can't be a nested property. Required.
+		displayField: 'name',
+
+        // The flag which helps to render as single select or multi select dropdown. Default false. Optional.
+		multiple: false,
+
+        // The flag which enable search to find option in log dropdown list. Default false. Will work for both single select/ multi select lists. Optional.
+		enableFilter: true,
+
+        // The flag to disable dropdown. Default false. Optional.
+		disableDropdown: false,
+
+        // Default button text when no item is selected. Default 'Select'. Optional.
+        nonSelectedText: 'Select',
+
+        // The function used to display custom text in the case of multi select list. The argument `options` is the options selected in multi select. By default the button text is displayed as comma seperated options. Optional.
+		buttonText: (options:Array<any>) => {
+			if (options.length === 0) {
+				return 'None selected';
+			}
+			else if (options.length > 3) {
+				return options.length + ' selected';
+			} else {
+				return options.map(i=>i.name).join(', ');
+			}
+		},
+
+        // A listener function to get selected option. The option will be a simple object in the case of single select or an array of objects in the case of multi select. Required.
+		onchange: (selectedOption: any) => { console.log(selectedOption); }
+	}
+
+    render() {
+        return html`
+            <multi-select multiSelectOptions=${ this.multiSelectOptions }></multi-select>
+        `;
+    }
+}
+
 ```

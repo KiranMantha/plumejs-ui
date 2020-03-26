@@ -125,18 +125,18 @@ const registerMultiSelectComponent = () => {
             });
         }
 
-        private _buildItem(item: any) {
+        private _buildItem(item: any, index) {
             let id = Math.random();
             if (this.multiSelectOptions.multiple) {
                 return html`
-            <label for='${ id}' class='select-item' onclick=${this._preventLabelClick}>
-                <input name='select' id='${ id}' type='checkbox' onchange=${(e: Event) => { this._onOptionSelected(e, item); }}/>
+            <label for='id-${ index }' class='select-item' onclick=${this._preventLabelClick}>
+                <input name='select' id='id-${ index }' type='checkbox' onchange=${(e: Event) => { this._onOptionSelected(e, item); }}/>
                 ${ item[this.multiSelectOptions.displayField]}
             </label>`;
             } else {
                 return html`
-            <label for='${ id}' class='select-item' onclick=${this._preventLabelClick}>
-                <input name='select' id='${ id}' type='radio' onchange=${(e: Event) => { this._onOptionSelected(e, item); }}/>
+            <label for='id-${ index}' class='select-item' onclick=${this._preventLabelClick}>
+                <input name='select' id='id-${ index}' type='radio' onchange=${(e: Event) => { this._onOptionSelected(e, item); }}/>
                 ${ item[this.multiSelectOptions.displayField]}
             </label>`;
             }
@@ -163,8 +163,8 @@ const registerMultiSelectComponent = () => {
                     }
                         <div class='select-items-list' ref=${ this._selectItemsListContainer}>
                             ${
-                    this.multiSelectOptions.data.map((item: any) => {
-                        return this._buildItem(item);
+                    this.multiSelectOptions.data.map((item: any, index: Number) => {
+                        return this._buildItem(item, index);
                     })
                     }
                         </div>                    
