@@ -1,4 +1,4 @@
-import { Component, html, Input, useRef, Ref } from 'plumejs';
+import { Component, html, Input, useRef, Ref, IHooks } from 'plumejs';
 import { Subscription } from 'rxjs';
 import { windowClick } from '../../window-event.observable';
 import { IMultiSelectOptions } from './multi-select.interface';
@@ -8,7 +8,7 @@ const registerMultiSelectComponent = () => {
         selector: 'multi-select',
         styleUrl: 'multi-select.component.scss'
     })
-    class MultiSelectComponent {
+    class MultiSelectComponent implements IHooks {
 
         @Input()
         multiSelectOptions: IMultiSelectOptions = {
@@ -24,11 +24,18 @@ const registerMultiSelectComponent = () => {
         private _popupContainer: Ref<HTMLDivElement> = useRef(null);
         private _searchText: string = '';
         private _selectItemsListContainer: Ref<HTMLDivElement> = useRef(null);
-        update: any;
+        update: () => void;
 
         constructor() {
             this._onButtonClickTrigger = this._onButtonClickTrigger.bind(this);
             this._filterList = this._filterList.bind(this);
+        }
+
+        inputChanged(oldValue:IMultiSelectOptions, newValue: IMultiSelectOptions) {
+            if(!!newValue.resetWidget) {
+                this._selectedOptions = [];
+                this._buttonText = this.multiSelectOptions.nonSelectedText || 'Select';
+            }
         }
 
         mount() {
@@ -45,25 +52,40 @@ const registerMultiSelectComponent = () => {
         }
 
         private _onButtonClickTrigger(e: Event) {
-            e.stopPropagation();
             this._showPopup = true;
             this._searchText = '';
             this._filterItems(this._searchText.toLowerCase());
             this.update();
         }
 
-        private _preventLabelClick(e: Event) {
-            e.stopPropagation();
-        }
-
-        private _preventInputClick(e: Event) {
-            e.preventDefault();
+        private _preventClickPropagation(e: Event) {
             e.stopPropagation();
         }
 
         private _clearSelectionIfNotMultiple(isMultiple: boolean) {
             if (!isMultiple) {
                 this._popupContainer.current.querySelectorAll('.active').forEach(i => i.classList.remove('active'));
+            }
+        }
+
+        private _setButtontext(isMultiple:boolean, displayField: string) {            
+            if (isMultiple) {
+                if (!!this.multiSelectOptions.buttonText) {
+                    this._buttonText = this.multiSelectOptions.buttonText(this._selectedOptions);
+                } else {
+                    this._buttonText = this._selectedOptions.map((item: any) => item[displayField]).join(',');
+                    if (this._selectedOptions.length === 0) this._buttonText = this.multiSelectOptions.nonSelectedText || 'Select';
+                }
+            } else {
+                this._buttonText = this._selectedOptions[0][displayField];
+            }
+        }
+
+        private _setupSelectedOptions(isMultiple: boolean, selectedOption: any) {
+            if(isMultiple) {
+                this._selectedOptions.push(selectedOption);
+            } else {
+                this._selectedOptions = [selectedOption];
             }
         }
 
@@ -75,10 +97,9 @@ const registerMultiSelectComponent = () => {
             let _selectedValue: any;
             this._clearSelectionIfNotMultiple(isMultiple);
 
-
             if (isInputChecked) {
                 target.parentElement.classList.add('active');
-                this._selectedOptions.push(selectedOption);
+                this._setupSelectedOptions(isMultiple, selectedOption);
             } else {
                 target.parentElement.classList.remove('active');
                 this._selectedOptions = this._selectedOptions.filter((item: any) => {
@@ -87,19 +108,8 @@ const registerMultiSelectComponent = () => {
                     }
                 });
             }
-
-            if (isMultiple) {
-                if (!!this.multiSelectOptions.buttonText) {
-                    this._buttonText = this.multiSelectOptions.buttonText(this._selectedOptions);
-                } else {
-                    this._buttonText = this._selectedOptions.map((item: any) => item[displayField]).join(',');
-                    if (this._selectedOptions.length === 0) this._buttonText = this.multiSelectOptions.nonSelectedText || 'Select';
-                }
-                _selectedValue = this._selectedOptions;
-            } else {
-                this._buttonText = selectedOption[displayField];
-                _selectedValue = selectedOption;
-            }
+            _selectedValue = isMultiple ? this._selectedOptions : this._selectedOptions[0];
+            this._setButtontext(isMultiple, displayField);
             this.multiSelectOptions.onchange(_selectedValue);
             this.update();
         }
@@ -107,7 +117,6 @@ const registerMultiSelectComponent = () => {
         private _filterList(e: Event) {
             this._searchText = (e.target as HTMLInputElement).value;
             this._filterItems(this._searchText.toLowerCase());
-            this.update();
         }
 
         private _filterItems(filterText: string) {
@@ -126,26 +135,25 @@ const registerMultiSelectComponent = () => {
         }
 
         private _buildItem(item: any, index) {
-            let id = Math.random();
             if (this.multiSelectOptions.multiple) {
                 return html`
-            <label for='id-${ index }' class='select-item' onclick=${this._preventLabelClick}>
-                <input name='select' id='id-${ index }' type='checkbox' onchange=${(e: Event) => { this._onOptionSelected(e, item); }}/>
-                ${ item[this.multiSelectOptions.displayField]}
-            </label>`;
+                <label for='id-${ index }' class='select-item'>
+                    <input name='select' id='id-${ index }' type='checkbox' onchange=${(e: Event) => { this._onOptionSelected(e, item); }}/>
+                    ${ item[this.multiSelectOptions.displayField]}
+                </label>`;
             } else {
                 return html`
-            <label for='id-${ index}' class='select-item' onclick=${this._preventLabelClick}>
-                <input name='select' id='id-${ index}' type='radio' onchange=${(e: Event) => { this._onOptionSelected(e, item); }}/>
-                ${ item[this.multiSelectOptions.displayField]}
-            </label>`;
+                <label for='id-${ index}' class='select-item'>
+                    <input name='select' id='id-${ index}' type='radio' onchange=${(e: Event) => { this._onOptionSelected(e, item); }}/>
+                    ${ item[this.multiSelectOptions.displayField]}
+                </label>`;
             }
         }
 
         render() {
             if (this.multiSelectOptions.data.length > 0) {
                 return html`
-                <div class='multi-select-container'>
+                <div class='multi-select-container' onclick=${this._preventClickPropagation}>
                     <button class='multi-select-trigger' onclick=${this._onButtonClickTrigger} disabled=${!!this.multiSelectOptions.disableDropdown}>
                         ${ this._buttonText.translate()}
                     </button>
@@ -154,19 +162,19 @@ const registerMultiSelectComponent = () => {
                     (() => {
                         if (!!this.multiSelectOptions.enableFilter) {
                             return html`
-                                        <div class='multi-select-filter'>
-                                            <input class='filter-input' type='text' value='${ this._searchText}' onclick=${this._preventInputClick} onkeyup=${this._filterList} />
-                                        </div>
-                                    `
+                                <div class='multi-select-filter'>
+                                    <input class='filter-input' type='text' value='${ this._searchText}' onkeyup=${this._filterList} />
+                                </div>
+                            `;
                         }
                     })()
                     }
                         <div class='select-items-list' ref=${ this._selectItemsListContainer}>
                             ${
-                    this.multiSelectOptions.data.map((item: any, index: Number) => {
-                        return this._buildItem(item, index);
-                    })
-                    }
+                                this.multiSelectOptions.data.map((item: any, index: Number) => {
+                                    return this._buildItem(item, index);
+                                })
+                            }
                         </div>                    
                     </div>
                 </div>

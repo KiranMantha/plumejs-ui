@@ -6,5 +6,6 @@ export interface IMultiSelectOptions {
     multiple?: boolean;
     nonSelectedText?: string;
     enableFilter?: boolean;
-    disableDropdown?: boolean
+    disableDropdown?: boolean;
+    resetWidget?: boolean;
 }

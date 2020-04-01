@@ -1,4 +1,4 @@
-import { Component, html, Input } from "plumejs";
+import { Component, html, Input, IHooks } from "plumejs";
 
 interface IToggleInput {
     onchange: (checked?: boolean) => void;
@@ -12,7 +12,7 @@ const registerToggleComponent = () => {
         selector: 'toggle-button',
         styleUrl: 'toggle.component.scss'
     })
-    class ToggleComponent {
+    class ToggleComponent implements IHooks {
         @Input()
         toggleOptions: IToggleInput = {
             onchange: () => { },
@@ -22,9 +22,16 @@ const registerToggleComponent = () => {
         };
 
         private _id = Math.random();
+        private _showWidget = false;
 
         constructor() {
             this.toggleChange = this.toggleChange.bind(this);
+        }
+
+        inputChanged(oldVal: IToggleInput, newVal: IToggleInput) {
+            if(newVal.onchange) {
+                this._showWidget = true;
+            }
         }
 
         toggleChange(e: Event) {
@@ -33,7 +40,7 @@ const registerToggleComponent = () => {
         }
 
         render() {
-            if (this.toggleOptions.onchange) {
+            if (this._showWidget) {
                 return html`
                 <div class='toggle-container'>
                     <span>${ this.toggleOptions.offText ? this.toggleOptions.offText.translate() : ''}</span>

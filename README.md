@@ -198,6 +198,9 @@ class YourComponent {
 
         // A listener function to get selected option. The option will be a simple object in the case of single select or an array of objects in the case of multi select. Required.
 		onchange: (selectedOption: any) => { console.log(selectedOption); }
+
+        // A boolean flag used to reset multi select widget
+        resetWidget: false
 	}
 
     render() {
