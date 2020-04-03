@@ -3,7 +3,7 @@ $trigger-background-color: #fff;
 $popup-background-color: #fff;
 $select-item-hover-color: #eee;
 $select-item-active-color: #eee;
-$padder: 5px 10px;
+$padder: 0.5rem 1rem;
 
 .multi-select-container {
     position: relative;
@@ -16,6 +16,8 @@ $padder: 5px 10px;
         padding: $padder;
         text-align: left;
         border-radius: 2px;
+        position: relative;
+        padding-right: 2.5rem;
 
         &:focus {
             border-color: $trigger-border-color;
@@ -24,6 +26,26 @@ $padder: 5px 10px;
         &:disabled {
             cursor: not-allowed;
             color: rgba(16, 16, 16, 0.3);
+        }
+
+        &:after {
+            border: 3px solid transparent;
+            border-radius: 2px;
+            border-right: 0;
+            border-top: 0;
+            content: " ";
+            display: block;
+            height: .625em;
+            margin-top: -.4375em;
+            pointer-events: none;
+            position: absolute;
+            top: 50%;
+            transform: rotate(-45deg);
+            transform-origin: center;
+            width: .625em;
+            border-color: #3273dc;
+            right: 1.125em;
+            z-index: 4;
         }
     }
 
@@ -48,6 +70,7 @@ $padder: 5px 10px;
                 width: 100%;
                 border: 1px solid $trigger-border-color;
                 border-radius: 2px;
+                padding: 0.3rem;
 
                 &:focus {
                     border-color: $trigger-border-color;
