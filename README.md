@@ -1,3 +1,9 @@
+[![GitHub contributors](https://img.shields.io/github/contributors/kiranmantha/plumejs-ui)](https://GitHub.com/KiranMantha/plumejs-ui/graphs/contributors/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+
+[![npm](https://img.shields.io/npm/dw/plumejs-ui)](https://www.npmjs.com/package/plumejs-ui)  [![npm](https://img.shields.io/npm/v/plumejs-ui)](https://www.npmjs.com/package/plumejs-ui)
+
+Demo [here](https://kiranmantha.github.io/plumejs/#/controls). Check console logs for further details.
+
 ### Useful Links
 
 https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions#Detecting_the_start_and_completion_of_a_transition
@@ -13,7 +19,7 @@ https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
 https://github.com/karlhorky/typescript-tricks
 
 ## Plumejs repo
-[here](https://github.com/kiranmantha/plumejs)
+Please find the documentation [here](https://github.com/kiranmantha/plumejs).
 
 ## Installation
 `npm i -S plumejs-ui`
