@@ -7,6 +7,8 @@
   left: 0;
   right: 0;
   z-index: 1000;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.52);
   animation: modalIn 0.5s;
 
@@ -15,7 +17,8 @@
     background: #fff;
     z-index: 1;
     width: auto;
-    margin: 1.75rem;
+    max-width: 100%;
+    margin: 0.5rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: 2px;
@@ -35,7 +38,7 @@
       outline: none;
       background: #fff;
       font-weight: 600;
-      font-size: 3rem;
+      font-size: 2rem;
       line-height: 1;
       position: absolute;
       right: 0;
@@ -60,12 +63,7 @@
 
 @media screen and (min-width: 981px) {
   :host /deep/ .modalDialog .modalDialog-content {
-      max-width: 600px;
-      margin-right: auto;
-      margin-left: auto;
-
-      .btn-close {
-        font-size: 2rem;
-      }
+    max-width: 600px;
+    margin: 1.75rem auto;
   }
 }
