@@ -15,7 +15,6 @@ const registerModalComponent = () => {
 			Id: 0,
 			title: "",
 			bodyTemplate: "",
-			modalClass: "",
 			backdrop: false,
 			isModalOpen: false,
 			hideDefaultCloseButton: false
@@ -51,7 +50,7 @@ const registerModalComponent = () => {
 
 		render() {
 			return html`
-				<div class=${`modalDialog ${this.modalData.modalClass} `}>
+				<div class='modalDialog'>
 					<div
 						ref=${this.modalContentRef}
 						class=${`modalDialog-content  ${

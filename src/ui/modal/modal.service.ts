@@ -40,11 +40,15 @@ export class ModalService {
 			Id: modelId,
 			title: options.modalTitle,
 			bodyTemplate: options.renderTemplate(),
-			modalClass: options.modalClass || "",
 			backdrop: options.backdrop || false,
 			isModalOpen: true,
 			hideDefaultCloseButton: options.hideDefaultCloseButton || false
 		};
+
+		if(!!options.modalClass) {
+			modalRef.classList.add(options.modalClass);
+		}
+		
 		model.update();
 		this._modalList.push(modalRef);
 		return modal;
