@@ -11,6 +11,8 @@ $padder: 0.5rem 1rem;
     .multi-select-trigger {
         cursor: pointer;
         width: 100%;
+        font-size: inherit;
+        font-family: inherit;
         border: 1px solid $trigger-border-color;
         background-color: $trigger-background-color;
         padding: $padder;
@@ -61,12 +63,15 @@ $padder: 0.5rem 1rem;
 
         &.show-popup {
             display: block;
+            min-width: 16rem;
         }
 
         .multi-select-filter {
             padding: $padder;
 
             .filter-input {
+                font-size: inherit;
+                font-family: inherit;
                 width: 100%;
                 border: 1px solid $trigger-border-color;
                 border-radius: 2px;
@@ -84,6 +89,8 @@ $padder: 0.5rem 1rem;
 
             .select-item {
                 cursor: pointer;
+                font-size: inherit;
+                font-family: inherit;
                 text-align: left;
                 padding: $padder;
                 display: flex;
