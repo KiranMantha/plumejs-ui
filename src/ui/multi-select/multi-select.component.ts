@@ -35,6 +35,7 @@ const registerMultiSelectComponent = () => {
             if(!!newValue.resetWidget) {
                 this._selectedOptions = [];
                 this._buttonText = this.multiSelectOptions.nonSelectedText || 'Select';
+                this._deselectInputonreset();
             }
         }
 
@@ -49,6 +50,13 @@ const registerMultiSelectComponent = () => {
 
         unmount() {
             this._windowClickListner.unsubscribe();
+        }
+
+        private _deselectInputonreset() {
+            this._selectItemsListContainer.current.querySelectorAll('.active').forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('input').checked = false;
+            });
         }
 
         private _onButtonClickTrigger(e: Event) {
