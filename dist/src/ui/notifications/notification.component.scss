@@ -7,12 +7,14 @@ $red-border: #bd2130;
 $white: #fff;
 
 .notifications_wrapper {
-  position: fixed;
+  position: absolute;
   top: 3.5rem;
   right: 0;
   padding: 10px;
 
   .notification {
+    font-size: inherit;
+    font-family: inherit;
     display: flex;
     justify-content: space-between;
     align-items: center;

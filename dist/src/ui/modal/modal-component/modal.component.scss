@@ -9,10 +9,14 @@
   z-index: 1000;
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: rgba(0, 0, 0, 0.52);
   animation: modalIn 0.5s;
 
   .modalDialog-content {
+    font-size: inherit;
+    font-family: inherit;
     position: relative;
     background: #fff;
     z-index: 1;
@@ -61,8 +65,8 @@
   width: 100%;
 }
 
-@media screen and (min-width: 981px) {
-  :host /deep/ .modalDialog .modalDialog-content {
+@include breakpoint-up(md) {
+  .modalDialog .modalDialog-content {
     max-width: 600px;
     margin: 1.75rem auto;
   }
