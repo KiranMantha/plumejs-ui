@@ -119,6 +119,7 @@ const registerMultiSelectComponent = () => {
             _selectedValue = isMultiple ? this._selectedOptions : this._selectedOptions[0];
             this._setButtontext(isMultiple, displayField);
             this.multiSelectOptions.onchange(_selectedValue);
+            if(!isMultiple) this._showPopup = false;
             this.update();
         }
 
