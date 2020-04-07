@@ -5,5 +5,5 @@ export declare class NotificationService {
     private _addChild;
     private _removeChild;
     private _addMessage;
-    sendMessage(content: string, type?: NotificationType): void;
+    sendMessage(content: string, type?: NotificationType, autoHide?: boolean): void;
 }

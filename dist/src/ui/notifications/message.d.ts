@@ -3,5 +3,6 @@ export declare class Message {
     type: string;
     index: number;
     dismissed: boolean;
-    constructor(content: string, type?: string);
+    autoHide: boolean;
+    constructor(content: string, type?: string, autoHide?: boolean);
 }

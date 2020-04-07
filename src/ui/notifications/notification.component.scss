@@ -9,7 +9,7 @@ $red-border: #bd2130;
 $white: #fff;
 
 .notifications_wrapper {
-  position: absolute;
+  position: fixed;
   top: 3.5rem;
   right: 0;
   padding: 10px;
@@ -29,6 +29,7 @@ $white: #fff;
     max-width: 18rem;
     border-radius: 2px;
     overflow: hidden;
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,.2);
 
     &.is-info {
       background-color: $blue;
@@ -59,19 +60,24 @@ $white: #fff;
       cursor: pointer;
       border-radius: 2px;
       color: $white;
+
+      &.hide-notify {
+        display: none;
+      }
     }
   }
 }
 
 @include breakpoint(sm) {
   .notifications_wrapper {
-    position: fixed;
     top: 0;
     right: 0;
     left: 0;
     margin: 0 auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     z-index: 100;
   }
 }

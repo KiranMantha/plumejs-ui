@@ -1,4 +1,4 @@
-import { Component, html, Input } from "plumejs";
+import { Component, html, Input, IHooks } from "plumejs";
 import { Message } from "./message";
 import { Subject } from "rxjs";
 
@@ -6,6 +6,7 @@ interface INotification {
 	message: Message;
 	index: number;
 	dismiss: (index: number) => void;
+	autoHide: boolean
 }
 
 const registerNotificationsComponent = () => {
@@ -25,7 +26,7 @@ const registerNotificationsComponent = () => {
 		}
 
 		private dismiss(index: number) {
-			this._notifications.splice(index, 1);
+			this._notifications = this._notifications.splice(index, 1);
 			this.update();
 			this.onDismiss.next(this._notifications.length);
 		}
@@ -37,7 +38,8 @@ const registerNotificationsComponent = () => {
 						let notify: INotification = {
 							message: msg,
 							index: i,
-							dismiss: this.dismiss.bind(this)
+							dismiss: this.dismiss.bind(this),
+							autoHide: msg.autoHide
 						};
 						return html`
 							<notification-message
@@ -54,13 +56,22 @@ const registerNotificationsComponent = () => {
 		selector: "notification-message",
 		useShadow: false
 	})
-	class NotificationMessage {
+	class NotificationMessage implements IHooks {
 		@Input()
 		notification: INotification = {
 			message: new Message(""),
 			index: 0,
-			dismiss: () => {}
+			dismiss: () => {},
+			autoHide: false
 		};
+
+		inputChanged(oldval: INotification, newval: INotification) {
+			if(newval.autoHide) {
+				setTimeout(() => {
+					this.notification.dismiss(this.notification.index);
+				}, 2000);
+			}
+		}
 
 		onDismiss(e:Event) {
 			e.preventDefault();
@@ -81,7 +92,7 @@ const registerNotificationsComponent = () => {
 					>
 						${this.notification.message.content}
 						<button
-							class="dismiss"
+							class="dismiss ${ this.notification.autoHide ? 'hide-notify' : '' }"
 							onclick=${(e:Event) => {
 								this.onDismiss(e);
 							}}

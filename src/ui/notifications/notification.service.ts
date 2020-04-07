@@ -42,8 +42,8 @@ export class NotificationService {
 		this._containerModel.setNotifications(message);
 	}
 
-	sendMessage(content: string, type: NotificationType = NotificationType.Info) {
-		const message = new Message(content, type);
+	sendMessage(content: string, type: NotificationType = NotificationType.Info, autoHide: boolean = false) {
+		const message = new Message(content, type, autoHide);
 		this._addMessage(message);
 	}
 }
