@@ -1,3 +1,5 @@
+@import '../../mixins';
+
 $blue: #4A89DC;
 $blue1: #3362cd;
 $blue-border: #005cbf;
@@ -58,5 +60,18 @@ $white: #fff;
       border-radius: 2px;
       color: $white;
     }
+  }
+}
+
+@include breakpoint(sm) {
+  .notifications_wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
   }
 }
