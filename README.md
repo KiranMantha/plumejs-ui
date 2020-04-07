@@ -108,6 +108,9 @@ class YourComponent {
 
         // This display notification with danger type
         this.notifySrvc.sendMessage('hello world', NotificationType.Danger);
+
+        // This display auto hide notification after 2sec
+        this.notifySrvc.sendMessage('hello world', NotificationType.Info, true);
     }
 }
 ```
