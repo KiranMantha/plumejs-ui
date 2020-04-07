@@ -1,4 +1,4 @@
-import { Component, html, Input, IHooks, Ref, useRef } from "plumejs";
+import { Component, html, Input, IHooks } from "plumejs";
 import { Message } from "./message";
 import { Subject } from "rxjs";
 
