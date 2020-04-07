@@ -1,12 +1,10 @@
-import { Component, html, Input, IHooks } from "plumejs";
+import { Component, html, Input, IHooks, Ref, useRef } from "plumejs";
 import { Message } from "./message";
 import { Subject } from "rxjs";
 
 interface INotification {
 	message: Message;
-	index: number;
 	dismiss: (index: number) => void;
-	autoHide: boolean
 }
 
 const registerNotificationsComponent = () => {
@@ -14,39 +12,54 @@ const registerNotificationsComponent = () => {
 		selector: "notification-container",
 		styleUrl: "notification.component.scss"
 	})
-	class NotificationContainerComponent {
+	class NotificationContainerComponent implements IHooks {
 		private _notifications:Array<Message> = [];
 		update:any;
-
 		onDismiss: Subject<number> = new Subject();
 
-		setNotifications(message:Message){
+		constructor() {
+			this.dismiss = this.dismiss.bind(this);
+		}
+
+		setNotifications(message:Message) {			
 			this._notifications.push(message);
+			message.index = this._notifications.length -1;
 			this.update();
 		}
 
 		private dismiss(index: number) {
-			this._notifications = this._notifications.splice(index, 1);
+			this._notifications = this._notifications.filter(m => { if(m.index !== index) return m; });
 			this.update();
 			this.onDismiss.next(this._notifications.length);
+		}
+
+		_renderNotifications() {
+			if(this._notifications.length > 0) { 
+				let list = this._notifications.map((msg: Message, i) => {
+					let notify: INotification = {
+						message: msg,
+						dismiss: this.dismiss
+					};
+					return html`
+						<notification-message
+							notification=${notify}
+						></notification-message>
+					`;
+				});
+				return list;
+			} else {
+				return html`<div></div>`
+			}
+		}
+
+		unmount() {
+			this.onDismiss.complete();
 		}
 
 		render() {
 			return html`
 				<div class="notifications_wrapper">
-					${ this._notifications.map((msg: Message, i) => {
-						let notify: INotification = {
-							message: msg,
-							index: i,
-							dismiss: this.dismiss.bind(this),
-							autoHide: msg.autoHide
-						};
-						return html`
-							<notification-message
-								notification=${notify}
-							></notification-message>
-						`;
-					}) }
+					${this._renderNotifications()}
 				</div>
 			`;
 		}
@@ -60,22 +73,20 @@ const registerNotificationsComponent = () => {
 		@Input()
 		notification: INotification = {
 			message: new Message(""),
-			index: 0,
-			dismiss: () => {},
-			autoHide: false
+			dismiss: () => {}
 		};
 
 		inputChanged(oldval: INotification, newval: INotification) {
-			if(newval.autoHide) {
+			if(newval.message.autoHide) {
 				setTimeout(() => {
-					this.notification.dismiss(this.notification.index);
+					this.notification.dismiss(this.notification.message.index);
 				}, 2000);
 			}
 		}
 
 		onDismiss(e:Event) {
 			e.preventDefault();
-			this.notification.dismiss(this.notification.index);
+			this.notification.dismiss(this.notification.message.index);
 		}
 
 		render() {
@@ -92,7 +103,7 @@ const registerNotificationsComponent = () => {
 					>
 						${this.notification.message.content}
 						<button
-							class="dismiss ${ this.notification.autoHide ? 'hide-notify' : '' }"
+							class="dismiss ${ this.notification.message.autoHide ? 'hide-notify' : '' }"
 							onclick=${(e:Event) => {
 								this.onDismiss(e);
 							}}
