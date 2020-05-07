@@ -28,18 +28,21 @@ Please find the documentation [here](https://github.com/kiranmantha/plumejs).
 
 Update your plumejs application's `base.config.js` as:
 
-from
-
+from 
 ```
-const scssMap = fromDir(path.resolve(__dirname, appconstants.sourceDir, '.scss');
+{
+    test: /\.(s*)css$/,
+    exclude: /node_modules/,
+    use: ['css-loader', 'sass-loader']
+}
 ```
 
 to
-
 ```
-appconstants.plumeuiDir = '../node_modules/plumejs-ui'
-
-const scssMap = fromDir([path.resolve(__dirname, appconstants.sourceDir), path.resolve(__dirname, appconstants.plumeuiDir)], '.scss');
+{
+    test: /\.(s*)css$/,
+    use: ['css-loader', 'sass-loader']
+}
 ```
 
 ## Modal Service
