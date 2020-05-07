@@ -1,4 +1,5 @@
 import { Component, html, Input, IHooks } from "plumejs";
+import toggleStyles from './toggle.component.scss';
 
 interface IToggleInput {
     onchange: (checked?: boolean) => void;
@@ -10,7 +11,7 @@ interface IToggleInput {
 const registerToggleComponent = () => {
     @Component({
         selector: 'toggle-button',
-        styleUrl: 'toggle.component.scss'
+        styles: toggleStyles
     })
     class ToggleComponent implements IHooks {
         @Input()

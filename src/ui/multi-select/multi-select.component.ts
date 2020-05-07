@@ -2,11 +2,12 @@ import { Component, html, Input, useRef, Ref, IHooks } from 'plumejs';
 import { Subscription } from 'rxjs';
 import { windowClick } from '../../window-event.observable';
 import { IMultiSelectOptions } from './multi-select.interface';
+import multiselectStyles from './multi-select.component.scss';
 
 const registerMultiSelectComponent = () => {
     @Component({
         selector: 'multi-select',
-        styleUrl: 'multi-select.component.scss'
+        styles: multiselectStyles
     })
     class MultiSelectComponent implements IHooks {
 

@@ -1,6 +1,7 @@
 import { Component, html, Input, IHooks } from "plumejs";
 import { Message } from "./message";
 import { Subject } from "rxjs";
+import notificationStyles from './notification.component.scss';
 
 interface INotification {
 	message: Message;
@@ -10,7 +11,7 @@ interface INotification {
 const registerNotificationsComponent = () => {
 	@Component({
 		selector: "notification-container",
-		styleUrl: "notification.component.scss"
+		styles: notificationStyles
 	})
 	class NotificationContainerComponent implements IHooks {
 		private _notifications:Array<Message> = [];

@@ -1,11 +1,12 @@
 import { Component, html, Input, useRef, DomTransition, Ref } from "plumejs";
 import { Subject } from "rxjs";
 import { IModalData } from "../modal.interface";
+import modalComponentStyles from './modal.component.scss';
 
 const registerModalComponent = () => {
 	@Component({
 		selector: "modal-dialog",
-		styleUrl: "modal.component.scss"
+		styles: modalComponentStyles
 	})
 	class ModalComponent {
 		constructor(private domSrvc: DomTransition) {}
