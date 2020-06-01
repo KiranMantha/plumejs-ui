@@ -35,17 +35,18 @@ const registerMultiSelectComponent = () => {
 		}
 
 		inputChanged(oldValue: IMultiSelectOptions, newValue: IMultiSelectOptions) {
+			if (!!newValue.resetWidget) {
+				this.multiSelectOptions.selectedValues = [];
+				this._selectedOptions = [];
+				this._buttonText = this.multiSelectOptions.nonSelectedText || "Select";
+				this._deselectInputonreset();
+			}
 			this.multiSelectOptions.selectedValues = this.multiSelectOptions
 				.selectedValues
 				? this.multiSelectOptions.selectedValues
 				: [];
 			this._selectedOptions = this.multiSelectOptions.selectedValues;
 			this._setButtonTextOnInit(this.multiSelectOptions.multiple);
-			if (!!newValue.resetWidget) {
-				this._selectedOptions = [];
-				this._buttonText = this.multiSelectOptions.nonSelectedText || "Select";
-				this._deselectInputonreset();
-			}
 		}
 
 		mount() {
