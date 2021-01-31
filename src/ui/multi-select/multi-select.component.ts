@@ -1,4 +1,4 @@
-import { Component, html, Input, useRef, Ref, IHooks } from "plumejs";
+import { Component, html, Input, useRef, Ref, IHooks } from "@plumejs/core";
 import { Subscription } from "rxjs";
 import { windowClick } from "../../window-event.observable";
 import { IMultiSelectOptions } from "./multi-select.interface";

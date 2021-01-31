@@ -1,4 +1,4 @@
-import { Component, html, Input, IHooks } from "plumejs";
+import { Component, html, Input, IHooks } from "@plumejs/core";
 import toggleStyles from './toggle.component.scss';
 
 interface IToggleInput {

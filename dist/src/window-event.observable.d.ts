@@ -1,2 +1,2 @@
-declare const windowClick: import("rxjs").Observable<Event>;
+declare const windowClick: any;
 export { windowClick };

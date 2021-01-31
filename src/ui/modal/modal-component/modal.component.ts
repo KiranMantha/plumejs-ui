@@ -1,4 +1,4 @@
-import { Component, html, Input, useRef, DomTransition, Ref } from "plumejs";
+import { Component, html, Input, useRef, DomTransition, Ref } from "@plumejs/core";
 import { Subject } from "rxjs";
 import { IModalData } from "../modal.interface";
 import modalComponentStyles from './modal.component.scss';

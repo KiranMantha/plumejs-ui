@@ -1,4 +1,4 @@
-import { Injectable } from "plumejs";
+import { Injectable } from "@plumejs/core";
 import { Message } from "./message";
 import registerNotificationsComponent from "./notification.component";
 import { NotificationType } from './notification.type';

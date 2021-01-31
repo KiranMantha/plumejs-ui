@@ -1,4 +1,4 @@
-import { Component, html, Input, IHooks } from "plumejs";
+import { Component, html, Input, IHooks } from "@plumejs/core";
 import { Message } from "./message";
 import { Subject } from "rxjs";
 import notificationStyles from './notification.component.scss';

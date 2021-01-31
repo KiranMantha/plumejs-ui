@@ -1,4 +1,4 @@
-import { Injectable } from "plumejs";
+import { Injectable } from "@plumejs/core";
 import { IModal, IModalOptions } from "./modal.interface";
 import registerModalComponent from "./modal-component/modal.component";
 

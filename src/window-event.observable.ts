@@ -1,4 +1,4 @@
 import { fromEvent } from 'rxjs';
 
-const windowClick = fromEvent(window, 'click');
+const windowClick: any = fromEvent(window, 'click');
 export { windowClick };

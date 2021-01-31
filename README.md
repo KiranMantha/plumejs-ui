@@ -24,6 +24,10 @@ Please find the documentation [here](https://github.com/kiranmantha/plumejs).
 ## Installation
 `npm i -S plumejs-ui`
 
+## Upcoming
+
+Tabs
+
 ### Changes needed in your application
 
 Update your plumejs application's `base.config.js` as:
