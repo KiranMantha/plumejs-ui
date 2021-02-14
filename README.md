@@ -1,6 +1,6 @@
-[![GitHub contributors](https://img.shields.io/github/contributors/kiranmantha/plumejs-ui)](https://GitHub.com/KiranMantha/plumejs-ui/graphs/contributors/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![GitHub contributors](https://img.shields.io/github/contributors/kiranmantha/@plumejs/ui)](https://GitHub.com/KiranMantha/@plumejs/ui/graphs/contributors/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-[![npm](https://img.shields.io/npm/dw/plumejs-ui)](https://www.npmjs.com/package/plumejs-ui)  [![npm](https://img.shields.io/npm/v/plumejs-ui)](https://www.npmjs.com/package/plumejs-ui)
+[![npm](https://img.shields.io/npm/dw/@plumejs/ui)](https://www.npmjs.com/package/@plumejs/ui)  [![npm](https://img.shields.io/npm/v/@plumejs/ui)](https://www.npmjs.com/package/@plumejs/ui)
 
 Demo [here](https://kiranmantha.github.io/plumejs/#/controls). Check console logs for further details.
 
@@ -22,7 +22,7 @@ https://github.com/karlhorky/typescript-tricks
 Please find the documentation [here](https://github.com/kiranmantha/plumejs).
 
 ## Installation
-`npm i -S plumejs-ui`
+`npm i -S @plumejs/ui`
 
 ## Upcoming
 
@@ -54,7 +54,7 @@ to
 ModalService exposes three methods show, close and closeAll. Inorder to use this service:
 
 ```
-import { ModalService, IModal } from 'plumejs-ui';
+import { ModalService, IModal } from '@plumejs/ui';
 
 @Component({
     selector: 'your-selector'
@@ -100,7 +100,7 @@ class YourComponent {
 NotificationService is used to show simple notification. Inorder to use this
 
 ```
-import { NotificationService, NotificationType } from 'plumejs-ui';
+import { NotificationService, NotificationType } from '@plumejs/ui';
 
 @Component({
     selector: 'your-selector'
@@ -127,7 +127,7 @@ class YourComponent {
 Toggle button provide a switch interface. It accepts input `toggleOptions`. It can be used as:
 
 ```
-import { IToggleInput, registerToggleComponent } from 'plumejs-ui';
+import { IToggleInput, registerToggleComponent } from '@plumejs/ui';
 
 registerToggleComponent(); // Call this function in your root component. No need to execute this when ever you import.
 
@@ -163,7 +163,7 @@ class MyComponent {
 This component can replace traditional html dropdown and also can be transformed as multi select dropdown. To use this:
 
 ```
-import { IMultiSelectOptions, registerMultiSelectComponent } from 'plumejs-ui';
+import { IMultiSelectOptions, registerMultiSelectComponent } from '@plumejs/ui';
 
 registerMultiSelectComponent(); // Call this function in your root component. No need to execute this when ever you import.
 
