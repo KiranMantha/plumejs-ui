@@ -1,13 +1,12 @@
 {
     "compilerOptions": {
         "rootDir": "./",
-        "target": "es2015",
+        "target": "ESNext",
         "moduleResolution": "node",
-        "module": "commonjs",
+        "module": "ESNext",
         "lib": [
             "dom",
-            "es2015",
-            "es2015.promise"
+            "ESNext"
         ],
         "declaration": true,
         "inlineSourceMap": true,
@@ -24,5 +23,8 @@
             "node_modules/@types"
         ]
     },
-    "exclude": ["node_modules", "dist"]
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
 }
