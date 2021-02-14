@@ -234,8 +234,8 @@ class YourComponent {
 		},
 
         // A listener function to get selected option. 
-        // If data is object array option will be a simple object in the case of single select or an array of objects in the case of multi select.
-        // If data is string array option will be a string in the case of single select or an array of strings in the case of multi select. 
+        // If data is object array, option will be a simple object in the case of single select or an array of objects in the case of multi select.
+        // If data is string array, option will be a string in the case of single select or an array of strings in the case of multi select. 
         // Required.
 		onchange: (selectedOption: any) => { console.log(selectedOption); }
 
