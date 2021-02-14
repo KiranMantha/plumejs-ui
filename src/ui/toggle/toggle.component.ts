@@ -1,4 +1,4 @@
-import { Component, html, Input, IHooks } from "@plumejs/core";
+import { Component, html, IHooks, Input } from "@plumejs/core";
 import toggleStyles from './toggle.component.scss';
 
 interface IToggleInput {
@@ -14,7 +14,7 @@ const registerToggleComponent = () => {
         styles: toggleStyles
     })
     class ToggleComponent implements IHooks {
-        @Input()
+        @Input
         toggleOptions: IToggleInput = {
             onchange: () => { },
             onText: '',
@@ -30,7 +30,7 @@ const registerToggleComponent = () => {
         }
 
         inputChanged(oldVal: IToggleInput, newVal: IToggleInput) {
-            if(newVal.onchange) {
+            if (newVal.onchange) {
                 this._showWidget = true;
             }
         }
@@ -44,10 +44,10 @@ const registerToggleComponent = () => {
             if (this._showWidget) {
                 return html`
                 <div class='toggle-container'>
-                    <span>${ this.toggleOptions.offText ? this.toggleOptions.offText.translate() : ''}</span>
-                    <input type='checkbox' id='${ this._id}' checked='${!!this.toggleOptions.isSelected}' onchange=${this.toggleChange}/>
+                    <span>${this.toggleOptions.offText ? this.toggleOptions.offText.translate() : ''}</span>
+                    <input type='checkbox' id='${this._id}' checked='${!!this.toggleOptions.isSelected}' onchange=${this.toggleChange}/>
                     <label for='${this._id}'></label>
-                    <span>${ this.toggleOptions.onText ? this.toggleOptions.onText.translate() : ''}</span>
+                    <span>${this.toggleOptions.onText ? this.toggleOptions.onText.translate() : ''}</span>
                 </div>`;
             } else {
                 return html`<div></div>`
@@ -57,3 +57,4 @@ const registerToggleComponent = () => {
 }
 
 export { registerToggleComponent, IToggleInput };
+

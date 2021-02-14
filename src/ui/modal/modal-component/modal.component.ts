@@ -1,4 +1,4 @@
-import { Component, html, Input, useRef, DomTransition, Ref } from "@plumejs/core";
+import { Component, DomTransition, html, Input, Ref, useRef } from "@plumejs/core";
 import { Subject } from "rxjs";
 import { IModalData } from "../modal.interface";
 import modalComponentStyles from './modal.component.scss';
@@ -9,9 +9,9 @@ const registerModalComponent = () => {
 		styles: modalComponentStyles
 	})
 	class ModalComponent {
-		constructor(private domSrvc: DomTransition) {}
+		constructor(private domSrvc: DomTransition) { }
 
-		@Input()
+		@Input
 		modalData: IModalData = {
 			Id: 0,
 			title: "",
@@ -27,7 +27,7 @@ const registerModalComponent = () => {
 		onOpen: Subject<void> = new Subject();
 		transitionDuration: number = 300;
 
-		private close(event:any) {
+		private close(event: any) {
 			this.domSrvc.onTransitionEnd(
 				this.modalContentRef.current,
 				() => {
@@ -54,25 +54,24 @@ const registerModalComponent = () => {
 				<div class='modalDialog'>
 					<div
 						ref=${this.modalContentRef}
-						class=${`modalDialog-content  ${
-							this.modalData.isModalOpen ? "in out" : "out"
-						}`}
+						class=${`modalDialog-content  ${this.modalData.isModalOpen ? "in out" : "out"
+				}`}
 					>
 						<div class="title">
 							${this.modalData.title}
 							${this.modalData.hideDefaultCloseButton
-								? html``
-								: html`
+					? html``
+					: html`
 										<button
 											class="btn-close"
-											onclick=${(event:any)=>{ this.close(event); }}
+											onclick=${(event: any) => { this.close(event); }}
 										>
 											&times;
 										</button>
 								  `}
 						</div>
 						<div>
-							${ this.modalData.bodyTemplate }
+							${this.modalData.bodyTemplate}
 						</div>
 					</div>
 				</div>

@@ -1,6 +1,6 @@
 import { Injectable } from "@plumejs/core";
-import { IModal, IModalOptions } from "./modal.interface";
 import registerModalComponent from "./modal-component/modal.component";
+import { IModal, IModalOptions } from "./modal.interface";
 
 @Injectable()
 export class ModalService {
@@ -45,10 +45,10 @@ export class ModalService {
 			hideDefaultCloseButton: options.hideDefaultCloseButton || false
 		};
 
-		if(!!options.modalClass) {
+		if (!!options.modalClass) {
 			modalRef.classList.add(options.modalClass);
 		}
-		
+
 		model.update();
 		this._modalList.push(modalRef);
 		return modal;

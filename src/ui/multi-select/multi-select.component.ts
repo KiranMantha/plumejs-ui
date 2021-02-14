@@ -1,8 +1,8 @@
-import { Component, html, Input, useRef, Ref, IHooks } from "@plumejs/core";
+import { Component, html, IHooks, Input, Ref, useRef } from "@plumejs/core";
 import { Subscription } from "rxjs";
 import { windowClick } from "../../window-event.observable";
-import { IMultiSelectOptions } from "./multi-select.interface";
 import multiselectStyles from "./multi-select.component.scss";
+import { IMultiSelectOptions } from "./multi-select.interface";
 
 const registerMultiSelectComponent = () => {
 	@Component({
@@ -10,7 +10,7 @@ const registerMultiSelectComponent = () => {
 		styles: multiselectStyles,
 	})
 	class MultiSelectComponent implements IHooks {
-		@Input()
+		@Input
 		multiSelectOptions: IMultiSelectOptions = {
 			data: [],
 			displayField: "",
@@ -109,8 +109,8 @@ const registerMultiSelectComponent = () => {
 					this._buttonText =
 						displayField !== ""
 							? this._selectedOptions
-									.map((item: any) => item[displayField])
-									.join(",")
+								.map((item: any) => item[displayField])
+								.join(",")
 							: this._selectedOptions.join(",");
 					if (this._selectedOptions.length === 0)
 						this._buttonText =
@@ -196,11 +196,11 @@ const registerMultiSelectComponent = () => {
 					let _displayField = this.multiSelectOptions.displayField;
 					index = isMultiple
 						? (this.multiSelectOptions.selectedValues as any)
-								.map((item) => item[_displayField])
-								.indexOf(item[_displayField])
+							.map((item) => item[_displayField])
+							.indexOf(item[_displayField])
 						: [this.multiSelectOptions.selectedValues[0]]
-								.map((item) => item[_displayField])
-								.indexOf(item[_displayField]);
+							.map((item) => item[_displayField])
+							.indexOf(item[_displayField]);
 				}
 			}
 			return index > -1 ? true : false;
@@ -218,8 +218,8 @@ const registerMultiSelectComponent = () => {
 						type="checkbox"
 						checked=${checked}
 						onchange=${(e: Event) => {
-							this._onOptionSelected(e, item);
-						}}
+						this._onOptionSelected(e, item);
+					}}
 					/>
 					${itemType !== "string"
 						? item[this.multiSelectOptions.displayField]
@@ -233,8 +233,8 @@ const registerMultiSelectComponent = () => {
 						type="radio"
 						checked=${checked}
 						onchange=${(e: Event) => {
-							this._onOptionSelected(e, item);
-						}}
+						this._onOptionSelected(e, item);
+					}}
 					/>
 					${itemType !== "string"
 						? item[this.multiSelectOptions.displayField]
@@ -259,13 +259,12 @@ const registerMultiSelectComponent = () => {
 						</button>
 						<div
 							ref=${this._popupContainer}
-							class=${`multi-select-popup ${
-								this._showPopup ? "show-popup" : ""
-							}`}
+							class=${`multi-select-popup ${this._showPopup ? "show-popup" : ""
+					}`}
 						>
 							${(() => {
-								if (!!this.multiSelectOptions.enableFilter) {
-									return html`
+						if (!!this.multiSelectOptions.enableFilter) {
+							return html`
 										<div class="multi-select-filter">
 											<input
 												class="filter-input"
@@ -275,17 +274,17 @@ const registerMultiSelectComponent = () => {
 											/>
 										</div>
 									`;
-								}
-							})()}
+						}
+					})()}
 							<div
 								class="select-items-list"
 								ref=${this._selectItemsListContainer}
 							>
 								${(this.multiSelectOptions.data as any).map(
-									(item: any, index: Number) => {
-										return this._buildItem(item, index);
-									}
-								)}
+						(item: any, index: Number) => {
+							return this._buildItem(item, index);
+						}
+					)}
 							</div>
 						</div>
 					</div>
@@ -298,3 +297,4 @@ const registerMultiSelectComponent = () => {
 };
 
 export { registerMultiSelectComponent };
+

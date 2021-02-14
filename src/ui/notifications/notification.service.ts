@@ -9,7 +9,7 @@ export class NotificationService {
 		registerNotificationsComponent();
 	}
 
-	private _containerModel:any;
+	private _containerModel: any;
 
 	private _addChild(child: HTMLElement, parent: HTMLElement = document.body) {
 		parent.appendChild(child);
@@ -29,7 +29,7 @@ export class NotificationService {
 			this._addChild(notificationContainer);
 		}
 
-		if(!this._containerModel) {
+		if (!this._containerModel) {
 			this._containerModel = notificationContainer.getModel();
 			this._containerModel.onDismiss.subscribe((count: number) => {
 				if (count === 0) {
