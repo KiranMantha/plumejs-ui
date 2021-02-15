@@ -5,6 +5,9 @@
   "files": [
     "dist/**/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "patch-update": "npm version patch",
     "tag": "git push --follow-tags",
