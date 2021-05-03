@@ -1,7 +1,7 @@
 {
   "name": "@plumejs/ui",
-  "version": "1.1.1",
-  "description": "A collection of UI components built using PlumeJs",
+  "version": "3.0.0-beta",
+  "description": "A collection of UI components built using PlumeJs.",
   "files": [
     "dist/**/*"
   ],
@@ -30,7 +30,6 @@
     "plumejs-ui"
   ],
   "devDependencies": {
-    "bootstrap": "^4.3.1",
     "copyfiles": "^2.2.0",
     "plumejs": "^2.2.2",
     "rimraf": "^2.7.1",

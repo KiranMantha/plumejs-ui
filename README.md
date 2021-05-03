@@ -18,17 +18,18 @@ https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
 
 https://github.com/karlhorky/typescript-tricks
 
-## Plumejs repo
-Please find the documentation [here](https://github.com/kiranmantha/plumejs).
+# PlumeJs UI
+
+This module is a collection of UI components built using [PlumeJs](https://github.com/kiranmantha/plumejs).
 
 ## Installation
 `npm i -S @plumejs/ui`
 
 ## Upcoming
 
-Tabs
+Tabs Component
 
-### Changes needed in your application
+## Changes needed in your application
 
 Update your plumejs application's `base.config.js` as:
 
@@ -54,6 +55,7 @@ to
 ModalService exposes three methods show, close and closeAll. Inorder to use this service:
 
 ```
+import { Component } from '@plumejs/core';
 import { ModalService, IModal } from '@plumejs/ui';
 
 @Component({
@@ -61,6 +63,7 @@ import { ModalService, IModal } from '@plumejs/ui';
 })
 class YourComponent {
     modal:IModal;
+
     constructor(private modalService:ModalService){ }
 
     showModal() {
@@ -100,6 +103,7 @@ class YourComponent {
 NotificationService is used to show simple notification. Inorder to use this
 
 ```
+import { Component } from '@plumejs/core';
 import { NotificationService, NotificationType } from '@plumejs/ui';
 
 @Component({
@@ -127,9 +131,11 @@ class YourComponent {
 Toggle button provide a switch interface. It accepts input `toggleOptions`. It can be used as:
 
 ```
+import { Component, html } from '@plumejs/core';
 import { IToggleInput, registerToggleComponent } from '@plumejs/ui';
 
-registerToggleComponent(); // Call this function in your root component. No need to execute this when ever you import.
+// Call this function in your root component. No need to execute this when ever you import.
+registerToggleComponent();
 
 @Component({
     selector: 'my-comp'
@@ -163,9 +169,11 @@ class MyComponent {
 This component can replace traditional html dropdown and also can be transformed as multi select dropdown. To use this:
 
 ```
+import { Component, html } from '@plumejs/core';
 import { IMultiSelectOptions, registerMultiSelectComponent } from '@plumejs/ui';
 
-registerMultiSelectComponent(); // Call this function in your root component. No need to execute this when ever you import.
+// Call this function in your root component. No need to execute this when ever you import.
+registerMultiSelectComponent();
 
 @Component({
     selector: 'your-selector'
