@@ -9,10 +9,10 @@
     "access": "public"
   },
   "scripts": {
+    "build": "rimraf dist && ttsc && copyfiles src/**/*.scss dist/",
     "patch-update": "npm version patch",
     "tag": "git push --follow-tags",
-    "tag-release": "npm run patch-update && npm run tag",
-    "tsc": "rimraf dist && tsc && copyfiles src/**/*.scss dist/"
+    "tag-release": "npm run patch-update && npm run tag"
   },
   "main": "./dist/index.js",
   "license": "ISC",
@@ -29,10 +29,13 @@
     "plumejs",
     "plumejs-ui"
   ],
+  "dependencies": {
+    "plumejs": "^2.2.5"
+  },
   "devDependencies": {
-    "copyfiles": "^2.2.0",
-    "plumejs": "^2.2.2",
-    "rimraf": "^2.7.1",
-    "typescript": "^3.7.2"
+    "copyfiles": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "ttypescript": "^1.5.12",
+    "typescript": "^4.2.4"
   }
 }
