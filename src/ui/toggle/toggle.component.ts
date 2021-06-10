@@ -1,4 +1,4 @@
-import { Component, html, Input } from "@plumejs/core";
+import { Component, html } from "@plumejs/core";
 import toggleStyles from './toggle.component.scss';
 
 interface IToggleInput {
@@ -14,25 +14,12 @@ const registerToggleComponent = () => {
         styles: toggleStyles
     })
     class ToggleComponent {
-        @Input
-        toggleOptions: IToggleInput = {
-            onchange: () => { },
-            onText: '',
-            offText: '',
-            isSelected: false
-        };
+        toggleOptions: IToggleInput;
 
         private _id = Math.random();
-        private _showWidget = false;
 
         constructor() {
             this.toggleChange = this.toggleChange.bind(this);
-        }
-
-        inputChanged(oldVal: IToggleInput, newVal: IToggleInput) {
-            if (newVal.onchange) {
-                this._showWidget = true;
-            }
         }
 
         toggleChange(e: Event) {
@@ -41,7 +28,7 @@ const registerToggleComponent = () => {
         }
 
         render() {
-            if (this._showWidget) {
+            if (this.toggleOptions) {
                 return html`
                 <div class='toggle-container'>
                     <span>${this.toggleOptions.offText ? this.toggleOptions.offText.translate() : ''}</span>
