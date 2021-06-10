@@ -1,4 +1,4 @@
-import { Component, html, Input, useRef } from "@plumejs/core";
+import { Component, html, Input } from "@plumejs/core";
 import { windowClick } from "../../window-event.observable";
 import multiselectStyles from "./multi-select.component.scss";
 const registerMultiSelectComponent = () => {
@@ -14,9 +14,7 @@ const registerMultiSelectComponent = () => {
             };
             this._showPopup = false;
             this._selectedOptions = [];
-            this._popupContainer = useRef(null);
             this._searchText = "";
-            this._selectItemsListContainer = useRef(null);
             this._onButtonClickTrigger = this._onButtonClickTrigger.bind(this);
             this._filterList = this._filterList.bind(this);
         }
@@ -55,7 +53,7 @@ const registerMultiSelectComponent = () => {
             }
         }
         _deselectInputonreset() {
-            this._selectItemsListContainer.current
+            this._selectItemsListContainer
                 .querySelectorAll(".active")
                 .forEach((i) => {
                 i.classList.remove("active");
@@ -73,7 +71,7 @@ const registerMultiSelectComponent = () => {
         }
         _clearSelectionIfNotMultiple(isMultiple) {
             if (!isMultiple) {
-                this._popupContainer.current
+                this._popupContainer
                     .querySelectorAll(".active")
                     .forEach((i) => i.classList.remove("active"));
             }
@@ -143,7 +141,7 @@ const registerMultiSelectComponent = () => {
             this._filterItems(this._searchText.toLowerCase());
         }
         _filterItems(filterText) {
-            Array.from(this._selectItemsListContainer.current.children).forEach((element) => {
+            Array.from(this._selectItemsListContainer.children).forEach((element) => {
                 let itemText = element.textContent || element.innerText;
                 if (filterText) {
                     if (itemText.toLowerCase().indexOf(filterText) !== -1) {
@@ -231,7 +229,7 @@ const registerMultiSelectComponent = () => {
 							${this._buttonText.translate()}
 						</button>
 						<div
-							ref=${this._popupContainer}
+							ref=${(node) => { this._popupContainer = node; }}
 							class=${`multi-select-popup ${this._showPopup ? "show-popup" : ""}`}
 						>
 							${(() => {
@@ -250,7 +248,7 @@ const registerMultiSelectComponent = () => {
                 })()}
 							<div
 								class="select-items-list"
-								ref=${this._selectItemsListContainer}
+								ref=${(node) => { this._selectItemsListContainer = node; }}
 							>
 								${this.multiSelectOptions.data.map((item, index) => {
                     return this._buildItem(item, index);

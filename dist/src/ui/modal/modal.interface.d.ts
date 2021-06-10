@@ -11,11 +11,10 @@ export interface IModalData {
     title: String;
     bodyTemplate: string;
     backdrop: Boolean;
-    isModalOpen: Boolean;
     hideDefaultCloseButton: Boolean;
 }
 export interface IModal {
     onClose: Subject<void>;
     onOpen: Subject<void>;
-    Id: Number;
+    Id: number;
 }

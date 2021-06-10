@@ -1,4 +1,4 @@
-import { Component, html, IHooks, Input, Ref, useRef } from "@plumejs/core";
+import { Component, html, IHooks, Input } from "@plumejs/core";
 import { Subscription } from "rxjs";
 import { windowClick } from "../../window-event.observable";
 import multiselectStyles from "./multi-select.component.scss";
@@ -24,9 +24,9 @@ const registerMultiSelectComponent = () => {
 		private _showPopup: boolean = false;
 		private _selectedOptions: Array<any> = [];
 		private _buttonText: string;
-		private _popupContainer: Ref<HTMLDivElement> = useRef(null);
+		private _popupContainer: HTMLDivElement;
 		private _searchText: string = "";
-		private _selectItemsListContainer: Ref<HTMLDivElement> = useRef(null);
+		private _selectItemsListContainer: HTMLDivElement;
 		update: () => void;
 
 		constructor() {
@@ -72,7 +72,7 @@ const registerMultiSelectComponent = () => {
 		}
 
 		private _deselectInputonreset() {
-			this._selectItemsListContainer.current
+			this._selectItemsListContainer
 				.querySelectorAll(".active")
 				.forEach((i) => {
 					i.classList.remove("active");
@@ -93,7 +93,7 @@ const registerMultiSelectComponent = () => {
 
 		private _clearSelectionIfNotMultiple(isMultiple: boolean) {
 			if (!isMultiple) {
-				this._popupContainer.current
+				this._popupContainer
 					.querySelectorAll(".active")
 					.forEach((i) => i.classList.remove("active"));
 			}
@@ -166,7 +166,7 @@ const registerMultiSelectComponent = () => {
 		}
 
 		private _filterItems(filterText: string) {
-			Array.from(this._selectItemsListContainer.current.children).forEach(
+			Array.from(this._selectItemsListContainer.children).forEach(
 				(element: HTMLLabelElement) => {
 					let itemText = element.textContent || element.innerText;
 					if (filterText) {
@@ -258,7 +258,7 @@ const registerMultiSelectComponent = () => {
 							${this._buttonText.translate()}
 						</button>
 						<div
-							ref=${this._popupContainer}
+							ref=${(node) => { this._popupContainer = node; }}
 							class=${`multi-select-popup ${this._showPopup ? "show-popup" : ""
 					}`}
 						>
@@ -278,7 +278,7 @@ const registerMultiSelectComponent = () => {
 					})()}
 							<div
 								class="select-items-list"
-								ref=${this._selectItemsListContainer}
+								ref=${(node) => { this._selectItemsListContainer = node; }}
 							>
 								${(this.multiSelectOptions.data as any).map(
 						(item: any, index: Number) => {

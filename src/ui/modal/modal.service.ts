@@ -4,7 +4,7 @@ import { IModal, IModalOptions } from "./modal.interface";
 
 @Injectable()
 export class ModalService {
-	private _modalList: Array<HTMLElement> = [];
+	private _modalList: Map<number, HTMLElement> = new Map();
 
 	constructor() {
 		registerModalComponent();
@@ -26,37 +26,32 @@ export class ModalService {
 		this._addChild(modalRef);
 		const model = modalRef.getModel();
 		const modelId = new Date().getTime();
-		let modal: IModal = {
+		let modalData: IModal = {
 			onClose: model.onClose,
 			onOpen: model.onOpen,
 			Id: modelId
 		};
 
 		model.onClose.subscribe(() => {
-			this.close(modal);
+			this.close(modalData);
 		});
 
-		model.modalData = {
-			Id: modelId,
-			title: options.modalTitle,
-			bodyTemplate: options.renderTemplate(),
-			backdrop: options.backdrop || false,
-			isModalOpen: true,
-			hideDefaultCloseButton: options.hideDefaultCloseButton || false
-		};
+		modalRef.setProps({
+			modalData: {
+				Id: modelId,
+				title: options.modalTitle,
+				bodyTemplate: options.renderTemplate(),
+				backdrop: options.backdrop || false,
+				hideDefaultCloseButton: options.hideDefaultCloseButton || false
+			}
+		});
 
 		if (!!options.modalClass) {
 			modalRef.classList.add(options.modalClass);
 		}
 
-		model.update();
-		this._modalList.push(modalRef);
-		return modal;
-	}
-
-	private _close(modalRef: any, index: number) {
-		index > -1 && this._modalList.splice(index, 1);
-		this._removeChild(modalRef);
+		this._modalList.set(modelId, modalRef);
+		return modalData;
 	}
 
 	show(options: IModalOptions): IModal {
@@ -67,19 +62,15 @@ export class ModalService {
 	}
 
 	close(modal: IModal) {
-		let index = -1;
-		let modalRef = this._modalList.filter((x, i) => {
-			if (x.getModel().modalData.Id === modal.Id) {
-				index = i;
-				return x;
-			}
-		})[0];
-		modalRef && this._close(modalRef, index);
+		let modalRef = this._modalList.get(modal.Id);
+		this._removeChild(modalRef);
+		this._modalList.delete(modal.Id);
 	}
 
 	closeAll() {
-		this._modalList.forEach((modalRef, i) => {
-			this._close(modalRef, i);
-		});
+		for (let modalRef of this._modalList.values()) {
+			this._removeChild(modalRef);
+		}
+		this._modalList.clear();
 	}
 }

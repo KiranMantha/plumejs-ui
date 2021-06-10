@@ -2,7 +2,7 @@ import { Injectable } from "@plumejs/core";
 import registerModalComponent from "./modal-component/modal.component";
 export class ModalService {
     constructor() {
-        this._modalList = [];
+        this._modalList = new Map();
         registerModalComponent();
     }
     _addChild(child, parent = document.body) {
@@ -16,32 +16,28 @@ export class ModalService {
         this._addChild(modalRef);
         const model = modalRef.getModel();
         const modelId = new Date().getTime();
-        let modal = {
+        let modalData = {
             onClose: model.onClose,
             onOpen: model.onOpen,
             Id: modelId
         };
         model.onClose.subscribe(() => {
-            this.close(modal);
+            this.close(modalData);
         });
-        model.modalData = {
-            Id: modelId,
-            title: options.modalTitle,
-            bodyTemplate: options.renderTemplate(),
-            backdrop: options.backdrop || false,
-            isModalOpen: true,
-            hideDefaultCloseButton: options.hideDefaultCloseButton || false
-        };
+        modalRef.setProps({
+            modalData: {
+                Id: modelId,
+                title: options.modalTitle,
+                bodyTemplate: options.renderTemplate(),
+                backdrop: options.backdrop || false,
+                hideDefaultCloseButton: options.hideDefaultCloseButton || false
+            }
+        });
         if (!!options.modalClass) {
             modalRef.classList.add(options.modalClass);
         }
-        model.update();
-        this._modalList.push(modalRef);
-        return modal;
-    }
-    _close(modalRef, index) {
-        index > -1 && this._modalList.splice(index, 1);
-        this._removeChild(modalRef);
+        this._modalList.set(modelId, modalRef);
+        return modalData;
     }
     show(options) {
         if (!options.renderTemplate) {
@@ -50,19 +46,15 @@ export class ModalService {
         return this._addModal(options);
     }
     close(modal) {
-        let index = -1;
-        let modalRef = this._modalList.filter((x, i) => {
-            if (x.getModel().modalData.Id === modal.Id) {
-                index = i;
-                return x;
-            }
-        })[0];
-        modalRef && this._close(modalRef, index);
+        let modalRef = this._modalList.get(modal.Id);
+        this._removeChild(modalRef);
+        this._modalList.delete(modal.Id);
     }
     closeAll() {
-        this._modalList.forEach((modalRef, i) => {
-            this._close(modalRef, i);
-        });
+        for (let modalRef of this._modalList.values()) {
+            this._removeChild(modalRef);
+        }
+        this._modalList.clear();
     }
 }
 Injectable("ModalService")([ModalService]);

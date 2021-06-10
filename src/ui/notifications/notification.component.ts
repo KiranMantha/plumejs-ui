@@ -70,7 +70,7 @@ const registerNotificationsComponent = () => {
 		selector: "notification-message",
 		useShadow: false
 	})
-	class NotificationMessage implements IHooks {
+	class NotificationMessage {
 		@Input
 		notification: INotification = {
 			message: new Message(""),

@@ -1,60 +1,55 @@
-import { Component, DomTransition, html, Input, useRef } from "@plumejs/core";
+import { Component, DomTransition, html } from "@plumejs/core";
 import { Subject } from "rxjs";
 import modalComponentStyles from './modal.component.scss';
 const registerModalComponent = () => {
     class ModalComponent {
         constructor(domSrvc) {
             this.domSrvc = domSrvc;
-            this.modalData = {
-                Id: 0,
-                title: "",
-                bodyTemplate: "",
-                backdrop: false,
-                isModalOpen: false,
-                hideDefaultCloseButton: false
-            };
-            this.modalContentRef = useRef(null);
             this.onClose = new Subject();
             this.onOpen = new Subject();
             this.transitionDuration = 300;
         }
-        static get inputProp() {
-            return "modalData";
-        }
-        close(event) {
-            this.domSrvc.onTransitionEnd(this.modalContentRef.current, () => {
-                this.onClose.next();
-            }, this.transitionDuration);
-            this.modalData.isModalOpen = false;
-            this.update();
-        }
         mount() {
-            this.domSrvc.onTransitionEnd(this.modalContentRef.current, () => {
+            this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
                 this.onOpen.next();
+                this.onOpen.complete();
             }, this.transitionDuration);
+        }
+        _close(event) {
+            this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
+                this.onClose.next();
+                this.onClose.complete();
+            }, this.transitionDuration);
+            this.modalContentRef.classList.remove('in');
+        }
+        _renderModalCloseButton() {
+            if (this.modalData.hideDefaultCloseButton) {
+                return html ``;
+            }
+            else {
+                return html `
+					<button
+						class="btn-close"
+						onclick=${(event) => { this._close(event); }}
+					>
+						&times;
+					</button>
+				`;
+            }
         }
         render() {
             return html `
 				<div class='modalDialog'>
 					<div
-						ref=${this.modalContentRef}
-						class=${`modalDialog-content  ${this.modalData.isModalOpen ? "in out" : "out"}`}
+						ref=${(node) => { this.modalContentRef = node; }}
+						class="modalDialog-content in out"
 					>
 						<div class="title">
-							${this.modalData.title}
-							${this.modalData.hideDefaultCloseButton
-                ? html ``
-                : html `
-										<button
-											class="btn-close"
-											onclick=${(event) => { this.close(event); }}
-										>
-											&times;
-										</button>
-								  `}
+							${this.modalData ? this.modalData.title : ''}
+							${this.modalData && this._renderModalCloseButton()}
 						</div>
 						<div>
-							${this.modalData.bodyTemplate}
+							${this.modalData && this.modalData.bodyTemplate}
 						</div>
 					</div>
 				</div>
