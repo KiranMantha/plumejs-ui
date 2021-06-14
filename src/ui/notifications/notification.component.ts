@@ -1,4 +1,4 @@
-import { Component, html, IHooks, Input } from "@plumejs/core";
+import { Component, html, IHooks } from "@plumejs/core";
 import { Subject } from "rxjs";
 import { Message } from "./message";
 import notificationStyles from './notification.component.scss';
@@ -34,6 +34,15 @@ const registerNotificationsComponent = () => {
 			this.onDismiss.next(this._notifications.length);
 		}
 
+		private _renderNotification(target: any, notification: INotification) {
+			target.setProps({ notification });
+			if (notification.message.autoHide) {
+				setTimeout(() => {
+					notification.dismiss(notification.message.index);
+				}, 2000);
+			}
+		}
+
 		_renderNotifications() {
 			if (this._notifications.length > 0) {
 				let list = this._notifications.map((msg: Message, i) => {
@@ -43,7 +52,7 @@ const registerNotificationsComponent = () => {
 					};
 					return html`
 						<notification-message
-							notification=${notify}
+							onrendered=${(e) => { this._renderNotification(e.target, notify); }}
 						></notification-message>
 					`;
 				});
@@ -70,19 +79,13 @@ const registerNotificationsComponent = () => {
 		selector: "notification-message",
 		useShadow: false
 	})
-	class NotificationMessage {
-		@Input
-		notification: INotification = {
-			message: new Message(""),
-			dismiss: () => { }
-		};
+	class NotificationMessage implements IHooks {
+		notification: INotification;
 
-		inputChanged(oldval: INotification, newval: INotification) {
-			if (newval.message.autoHide) {
-				setTimeout(() => {
-					this.notification.dismiss(this.notification.message.index);
-				}, 2000);
-			}
+		emitEvent: (eventName: string) => void;
+
+		mount() {
+			this.emitEvent('rendered');
 		}
 
 		onDismiss(e: Event) {
@@ -91,23 +94,22 @@ const registerNotificationsComponent = () => {
 		}
 
 		render() {
-			if (this.notification.message.content) {
+			if (this.notification && this.notification.message.content) {
 				return html`
 					<div
-						class=${`notification ${this.notification.message.type === "info"
+						class="notification ${this.notification.message.type === "info"
 						? "is-info"
 						: this.notification.message.type === "danger"
 							? "is-danger"
 							: ""
-					}`}
-					>
+					}">
 						${this.notification.message.content}
 						<button
 							class="dismiss ${this.notification.message.autoHide ? 'hide-notify' : ''}"
-							onclick=${(e: Event) => {
-						this.onDismiss(e);
-					}}
-						>&times;</button>						
+							onclick=${(e: Event) => { this.onDismiss(e); }}
+						>
+							&times;
+						</button>						
 					</div>
 				`;
 			} else {
