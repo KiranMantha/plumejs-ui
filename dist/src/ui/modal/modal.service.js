@@ -1,4 +1,4 @@
-import { Injectable } from "@plumejs/core";
+import { Injectable } from '@plumejs/core';
 export class ModalService {
     constructor() {
         this._modalList = new Map();
@@ -10,12 +10,12 @@ export class ModalService {
         parent.removeChild(child);
     }
     _addModal(options) {
-        const modalDOM = document.createElement("modal-dialog");
+        const modalDOM = document.createElement('modal-dialog');
         this._addChild(modalDOM);
         const modalRef = modalDOM;
         const model = modalRef.getInstance();
         const modelId = new Date().getTime();
-        let modalData = {
+        const modalData = {
             onClose: model.onClose,
             onOpen: model.onOpen,
             Id: modelId
@@ -40,17 +40,17 @@ export class ModalService {
     }
     show(options) {
         if (!options.renderTemplate) {
-            throw Error("Provide renderTemplate function to render html inside modal component.");
+            throw Error('Provide renderTemplate function to render html inside modal component.');
         }
         return this._addModal(options);
     }
     close(modal) {
-        let modalRef = this._modalList.get(modal.Id);
+        const modalRef = this._modalList.get(modal.Id);
         this._removeChild(modalRef);
         this._modalList.delete(modal.Id);
     }
     closeAll() {
-        for (let modalRef of this._modalList.values()) {
+        for (const modalRef of this._modalList.values()) {
             this._removeChild(modalRef);
         }
         this._modalList.clear();

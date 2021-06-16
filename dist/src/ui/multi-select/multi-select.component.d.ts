@@ -1,4 +1,4 @@
-import { IHooks } from "@plumejs/core";
+import { IHooks } from '@plumejs/core';
 export declare class MultiSelectComponent implements IHooks {
     private renderer;
     private multiSelectOptions;

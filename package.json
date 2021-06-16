@@ -9,7 +9,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && ttsc && copyfiles src/**/*.scss dist/",
+    "build": "npm run lint && rimraf dist && ttsc && copyfiles src/**/*.scss dist/",
+    "lint": "eslint . --ext .ts --fix",
     "patch-update": "npm version patch",
     "tag": "git push --follow-tags",
     "tag-release": "npm run patch-update && npm run tag"
@@ -30,10 +31,15 @@
     "plumejs-ui"
   ],
   "dependencies": {
-    "plumejs": "^2.2.5"
+    "plumejs": "^2.0.8"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
     "copyfiles": "^2.4.1",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
     "ttypescript": "^1.5.12",
     "typescript": "^4.2.4"

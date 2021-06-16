@@ -1,23 +1,23 @@
-import { Subject } from "rxjs";
+import { Subject } from 'rxjs';
 
 export interface IModalOptions {
-	modalTitle: string;
-	renderTemplate: () => any;
-	modalClass?: string;
-	backdrop?: Boolean;
-	hideDefaultCloseButton?: Boolean;
+  modalTitle: string;
+  renderTemplate: () => any;
+  modalClass?: string;
+  backdrop?: boolean;
+  hideDefaultCloseButton?: boolean;
 }
 
 export interface IModalData {
-	Id: Number;
-	title: String;
-	bodyTemplate: string;
-	backdrop: Boolean;
-	hideDefaultCloseButton: Boolean;
+  Id: number;
+  title: string;
+  bodyTemplate: string;
+  backdrop: boolean;
+  hideDefaultCloseButton: boolean;
 }
 
 export interface IModal {
-	onClose: Subject<void>;
-	onOpen: Subject<void>;
-	Id: number;
+  onClose: Subject<void>;
+  onOpen: Subject<void>;
+  Id: number;
 }

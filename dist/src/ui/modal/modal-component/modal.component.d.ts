@@ -1,6 +1,6 @@
-import { DomTransition, IHooks } from "@plumejs/core";
-import { Subject } from "rxjs";
-import { IModalData } from "../modal.interface";
+import { DomTransition, IHooks } from '@plumejs/core';
+import { Subject } from 'rxjs';
+import { IModalData } from '../modal.interface';
 export declare class ModalComponent implements IHooks {
     private domSrvc;
     modalData: IModalData;

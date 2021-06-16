@@ -1,6 +1,6 @@
-import { IHooks } from "@plumejs/core";
-import { Subject } from "rxjs";
-import { Message } from "./message";
+import { IHooks } from '@plumejs/core';
+import { Subject } from 'rxjs';
+import { Message } from './message';
 export interface INotification {
     message: Message;
     dismiss: (index: number) => void;

@@ -1,5 +1,5 @@
-import { Component, DomTransition, html } from "@plumejs/core";
-import { Subject } from "rxjs";
+import { Component, DomTransition, html } from '@plumejs/core';
+import { Subject } from 'rxjs';
 import modalComponentStyles from './modal.component.scss';
 export class ModalComponent {
     constructor(domSrvc) {
@@ -14,7 +14,7 @@ export class ModalComponent {
             this.onOpen.complete();
         }, this.transitionDuration);
     }
-    _close(event) {
+    _close() {
         this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
             this.onClose.next();
             this.onClose.complete();
@@ -27,35 +27,36 @@ export class ModalComponent {
         }
         else {
             return html `
-					<button
-						class="btn-close"
-						onclick=${(event) => { this._close(event); }}
-					>
-						&times;
-					</button>
-				`;
+        <button
+          class="btn-close"
+          onclick=${() => {
+                this._close();
+            }}
+        >
+          &times;
+        </button>
+      `;
         }
     }
     render() {
         return html `
-				<div class='modalDialog'>
-					<div
-						ref=${(node) => { this.modalContentRef = node; }}
-						class="modalDialog-content in out"
-					>
-						<div class="title">
-							${this.modalData ? this.modalData.title : ''}
-							${this.modalData && this._renderModalCloseButton()}
-						</div>
-						<div>
-							${this.modalData && this.modalData.bodyTemplate}
-						</div>
-					</div>
-				</div>
-			`;
+      <div class="modalDialog">
+        <div
+          ref=${(node) => {
+            this.modalContentRef = node;
+        }}
+          class="modalDialog-content in out"
+        >
+          <div class="title">
+            ${this.modalData ? this.modalData.title : ''} ${this.modalData && this._renderModalCloseButton()}
+          </div>
+          <div>${this.modalData && this.modalData.bodyTemplate}</div>
+        </div>
+      </div>
+    `;
     }
 }
 Component({
-	selector: "modal-dialog",
-	styles: modalComponentStyles
+  selector: 'modal-dialog',
+  styles: modalComponentStyles
 })(["DomTransition", ModalComponent]);

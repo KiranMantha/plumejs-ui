@@ -1,8 +1,7 @@
-import { Injectable } from "@plumejs/core";
-import { Message } from "./message";
+import { Injectable } from '@plumejs/core';
+import { Message } from './message';
 import { NotificationType } from './notification.type';
 export class NotificationService {
-    constructor() { }
     _addChild(child, parent = document.body) {
         parent.appendChild(child);
     }
@@ -10,9 +9,9 @@ export class NotificationService {
         parent.removeChild(child);
     }
     _addMessage(message) {
-        let notificationContainer = document.getElementsByTagName("notification-container")[0];
+        let notificationContainer = document.getElementsByTagName('notification-container')[0];
         if (!notificationContainer) {
-            notificationContainer = document.createElement("notification-container");
+            notificationContainer = document.createElement('notification-container');
             this._addChild(notificationContainer);
         }
         if (!this._containerModel) {

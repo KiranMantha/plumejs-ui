@@ -1,4 +1,4 @@
-import { Component, html } from "@plumejs/core";
+import { Component, html } from '@plumejs/core';
 import toggleStyles from './toggle.component.scss';
 export class ToggleComponent {
     constructor() {
@@ -6,18 +6,22 @@ export class ToggleComponent {
         this.toggleChange = this.toggleChange.bind(this);
     }
     toggleChange(e) {
-        let value = e.target.checked;
+        const value = e.target.checked;
         this.toggleOptions.onchange(value);
     }
     render() {
         if (this.toggleOptions) {
-            return html `
-                <div class='toggle-container'>
-                    <span>${this.toggleOptions.offText ? this.toggleOptions.offText.translate() : ''}</span>
-                    <input type='checkbox' id='${this._id}' checked='${!!this.toggleOptions.isSelected}' onchange=${this.toggleChange}/>
-                    <label for='${this._id}'></label>
-                    <span>${this.toggleOptions.onText ? this.toggleOptions.onText.translate() : ''}</span>
-                </div>`;
+            return html ` <div class="toggle-container">
+        <span>${this.toggleOptions.offText ? this.toggleOptions.offText.translate() : ''}</span>
+        <input
+          type="checkbox"
+          id="${this._id}"
+          checked="${!!this.toggleOptions.isSelected}"
+          onchange=${this.toggleChange}
+        />
+        <label for="${this._id}"></label>
+        <span>${this.toggleOptions.onText ? this.toggleOptions.onText.translate() : ''}</span>
+      </div>`;
         }
         else {
             return html `<div></div>`;
@@ -25,6 +29,6 @@ export class ToggleComponent {
     }
 }
 Component({
-    selector: 'toggle-button',
-    styles: toggleStyles
+  selector: 'toggle-button',
+  styles: toggleStyles
 })([ToggleComponent]);

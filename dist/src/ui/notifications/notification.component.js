@@ -1,5 +1,5 @@
-import { Component, html } from "@plumejs/core";
-import { Subject } from "rxjs";
+import { Component, html } from '@plumejs/core';
+import { Subject } from 'rxjs';
 import notificationStyles from './notification.component.scss';
 export class NotificationContainerComponent {
     constructor() {
@@ -13,8 +13,10 @@ export class NotificationContainerComponent {
         this.renderer.update();
     }
     dismiss(index) {
-        this._notifications = this._notifications.filter(m => { if (m.index !== index)
-            return m; });
+        this._notifications = this._notifications.filter((m) => {
+            if (m.index !== index)
+                return m;
+        });
         this.renderer.update();
         this.onDismiss.next(this._notifications.length);
     }
@@ -28,16 +30,18 @@ export class NotificationContainerComponent {
     }
     _renderNotifications() {
         if (this._notifications.length > 0) {
-            let list = this._notifications.map((msg, i) => {
-                let notify = {
+            const list = this._notifications.map((msg) => {
+                const notify = {
                     message: msg,
                     dismiss: this.dismiss
                 };
                 return html `
-						<notification-message
-							onrendered=${(e) => { this._renderNotification(e.target, notify); }}
-						></notification-message>
-					`;
+          <notification-message
+            onrendered=${(e) => {
+                    this._renderNotification(e.target, notify);
+                }}
+          ></notification-message>
+        `;
             });
             return list;
         }
@@ -49,16 +53,12 @@ export class NotificationContainerComponent {
         this.onDismiss.complete();
     }
     render() {
-        return html `
-			<div class="notifications_wrapper">
-				${this._renderNotifications()}
-			</div>
-		`;
+        return html ` <div class="notifications_wrapper">${this._renderNotifications()}</div> `;
     }
 }
 Component({
-	selector: "notification-container",
-	styles: notificationStyles
+  selector: 'notification-container',
+  styles: notificationStyles
 })([NotificationContainerComponent]);
 export class NotificationMessage {
     mount() {
@@ -71,21 +71,24 @@ export class NotificationMessage {
     render() {
         if (this.notification && this.notification.message.content) {
             return html `
-					<div
-						class="notification ${this.notification.message.type === "info"
-                ? "is-info"
-                : this.notification.message.type === "danger"
-                    ? "is-danger"
-                    : ""}">
-						${this.notification.message.content}
-						<button
-							class="dismiss ${this.notification.message.autoHide ? 'hide-notify' : ''}"
-							onclick=${(e) => { this.onDismiss(e); }}
-						>
-							&times;
-						</button>						
-					</div>
-				`;
+        <div
+          class="notification ${this.notification.message.type === 'info'
+                ? 'is-info'
+                : this.notification.message.type === 'danger'
+                    ? 'is-danger'
+                    : ''}"
+        >
+          ${this.notification.message.content}
+          <button
+            class="dismiss ${this.notification.message.autoHide ? 'hide-notify' : ''}"
+            onclick=${(e) => {
+                this.onDismiss(e);
+            }}
+          >
+            &times;
+          </button>
+        </div>
+      `;
         }
         else {
             return html `<div></div>`;
@@ -93,6 +96,6 @@ export class NotificationMessage {
     }
 }
 Component({
-	selector: "notification-message",
-	useShadow: false
+  selector: 'notification-message',
+  useShadow: false
 })([NotificationMessage]);
