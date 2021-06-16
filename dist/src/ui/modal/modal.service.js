@@ -1,9 +1,7 @@
 import { Injectable } from "@plumejs/core";
-import registerModalComponent from "./modal-component/modal.component";
 export class ModalService {
     constructor() {
         this._modalList = new Map();
-        registerModalComponent();
     }
     _addChild(child, parent = document.body) {
         parent.appendChild(child);
@@ -12,9 +10,10 @@ export class ModalService {
         parent.removeChild(child);
     }
     _addModal(options) {
-        const modalRef = document.createElement("modal-dialog");
-        this._addChild(modalRef);
-        const model = modalRef.getModel();
+        const modalDOM = document.createElement("modal-dialog");
+        this._addChild(modalDOM);
+        const modalRef = modalDOM;
+        const model = modalRef.getInstance();
         const modelId = new Date().getTime();
         let modalData = {
             onClose: model.onClose,
@@ -34,9 +33,9 @@ export class ModalService {
             }
         });
         if (!!options.modalClass) {
-            modalRef.classList.add(options.modalClass);
+            modalDOM.classList.add(options.modalClass);
         }
-        this._modalList.set(modelId, modalRef);
+        this._modalList.set(modelId, modalDOM);
         return modalData;
     }
     show(options) {

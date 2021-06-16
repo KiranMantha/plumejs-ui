@@ -1,14 +1,12 @@
-import { Injectable } from "@plumejs/core";
-import registerModalComponent from "./modal-component/modal.component";
+import { ComponentRef, Injectable } from "@plumejs/core";
+import { ModalComponent } from "./modal-component/modal.component";
 import { IModal, IModalOptions } from "./modal.interface";
 
 @Injectable()
 export class ModalService {
 	private _modalList: Map<number, HTMLElement> = new Map();
 
-	constructor() {
-		registerModalComponent();
-	}
+	constructor() { }
 
 	private _addChild(child: HTMLElement, parent: HTMLElement = document.body) {
 		parent.appendChild(child);
@@ -22,9 +20,10 @@ export class ModalService {
 	}
 
 	private _addModal(options: IModalOptions): IModal {
-		const modalRef: any = document.createElement("modal-dialog");
-		this._addChild(modalRef);
-		const model = modalRef.getModel();
+		const modalDOM = document.createElement("modal-dialog");
+		this._addChild(modalDOM);
+		const modalRef = modalDOM as unknown as ComponentRef<ModalComponent>;
+		const model = modalRef.getInstance();
 		const modelId = new Date().getTime();
 		let modalData: IModal = {
 			onClose: model.onClose,
@@ -47,10 +46,10 @@ export class ModalService {
 		});
 
 		if (!!options.modalClass) {
-			modalRef.classList.add(options.modalClass);
+			modalDOM.classList.add(options.modalClass);
 		}
 
-		this._modalList.set(modelId, modalRef);
+		this._modalList.set(modelId, modalDOM);
 		return modalData;
 	}
 

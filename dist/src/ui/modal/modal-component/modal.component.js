@@ -1,33 +1,32 @@
 import { Component, DomTransition, html } from "@plumejs/core";
 import { Subject } from "rxjs";
 import modalComponentStyles from './modal.component.scss';
-const registerModalComponent = () => {
-    class ModalComponent {
-        constructor(domSrvc) {
-            this.domSrvc = domSrvc;
-            this.onClose = new Subject();
-            this.onOpen = new Subject();
-            this.transitionDuration = 300;
+export class ModalComponent {
+    constructor(domSrvc) {
+        this.domSrvc = domSrvc;
+        this.onClose = new Subject();
+        this.onOpen = new Subject();
+        this.transitionDuration = 300;
+    }
+    mount() {
+        this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
+            this.onOpen.next();
+            this.onOpen.complete();
+        }, this.transitionDuration);
+    }
+    _close(event) {
+        this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
+            this.onClose.next();
+            this.onClose.complete();
+        }, this.transitionDuration);
+        this.modalContentRef.classList.remove('in');
+    }
+    _renderModalCloseButton() {
+        if (this.modalData.hideDefaultCloseButton) {
+            return html ``;
         }
-        mount() {
-            this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
-                this.onOpen.next();
-                this.onOpen.complete();
-            }, this.transitionDuration);
-        }
-        _close(event) {
-            this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
-                this.onClose.next();
-                this.onClose.complete();
-            }, this.transitionDuration);
-            this.modalContentRef.classList.remove('in');
-        }
-        _renderModalCloseButton() {
-            if (this.modalData.hideDefaultCloseButton) {
-                return html ``;
-            }
-            else {
-                return html `
+        else {
+            return html `
 					<button
 						class="btn-close"
 						onclick=${(event) => { this._close(event); }}
@@ -35,10 +34,10 @@ const registerModalComponent = () => {
 						&times;
 					</button>
 				`;
-            }
         }
-        render() {
-            return html `
+    }
+    render() {
+        return html `
 				<div class='modalDialog'>
 					<div
 						ref=${(node) => { this.modalContentRef = node; }}
@@ -54,11 +53,9 @@ const registerModalComponent = () => {
 					</div>
 				</div>
 			`;
-        }
     }
-    Component({
-		selector: "modal-dialog",
-		styles: modalComponentStyles
-	})(["DomTransition", ModalComponent]);
-};
-export default registerModalComponent;
+}
+Component({
+	selector: "modal-dialog",
+	styles: modalComponentStyles
+})(["DomTransition", ModalComponent]);

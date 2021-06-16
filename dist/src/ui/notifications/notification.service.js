@@ -1,11 +1,8 @@
 import { Injectable } from "@plumejs/core";
 import { Message } from "./message";
-import registerNotificationsComponent from "./notification.component";
 import { NotificationType } from './notification.type';
 export class NotificationService {
-    constructor() {
-        registerNotificationsComponent();
-    }
+    constructor() { }
     _addChild(child, parent = document.body) {
         parent.appendChild(child);
     }
@@ -14,13 +11,13 @@ export class NotificationService {
     }
     _addMessage(message) {
         let notificationContainer = document.getElementsByTagName("notification-container")[0];
-        ;
         if (!notificationContainer) {
             notificationContainer = document.createElement("notification-container");
             this._addChild(notificationContainer);
         }
         if (!this._containerModel) {
-            this._containerModel = notificationContainer.getModel();
+            const notificationContainerRef = notificationContainer;
+            this._containerModel = notificationContainerRef.getInstance();
             this._containerModel.onDismiss.subscribe((count) => {
                 if (count === 0) {
                     this._removeChild(notificationContainer);

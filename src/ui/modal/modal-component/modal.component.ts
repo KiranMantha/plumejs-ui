@@ -3,47 +3,44 @@ import { Subject } from "rxjs";
 import { IModalData } from "../modal.interface";
 import modalComponentStyles from './modal.component.scss';
 
-const registerModalComponent = () => {
-	@Component({
-		selector: "modal-dialog",
-		styles: modalComponentStyles
-	})
-	class ModalComponent implements IHooks {
-		modalData: IModalData;
-		update: () => void;
-		onClose: Subject<void> = new Subject();
-		onOpen: Subject<void> = new Subject();
-		renderer: HTMLElement;
+@Component({
+	selector: "modal-dialog",
+	styles: modalComponentStyles
+})
+export class ModalComponent implements IHooks {
+	modalData: IModalData;
+	onClose: Subject<void> = new Subject();
+	onOpen: Subject<void> = new Subject();
 
-		private modalContentRef: HTMLElement;
-		private transitionDuration: number = 300;
+	private modalContentRef: HTMLElement;
+	private transitionDuration: number = 300;
 
-		constructor(private domSrvc: DomTransition) { }
+	constructor(private domSrvc: DomTransition) { }
 
-		mount() {
-			this.domSrvc.onTransitionEnd(
-				this.modalContentRef,
-				() => {
-					this.onOpen.next();
-					this.onOpen.complete();
-				},
-				this.transitionDuration
-			);
-		}
+	mount() {
+		this.domSrvc.onTransitionEnd(
+			this.modalContentRef,
+			() => {
+				this.onOpen.next();
+				this.onOpen.complete();
+			},
+			this.transitionDuration
+		);
+	}
 
-		private _close(event: any) {
-			this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
-				this.onClose.next();
-				this.onClose.complete();
-			}, this.transitionDuration);
-			this.modalContentRef.classList.remove('in');
-		}
+	private _close(event: any) {
+		this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
+			this.onClose.next();
+			this.onClose.complete();
+		}, this.transitionDuration);
+		this.modalContentRef.classList.remove('in');
+	}
 
-		private _renderModalCloseButton() {
-			if (this.modalData.hideDefaultCloseButton) {
-				return html``;
-			} else {
-				return html`
+	private _renderModalCloseButton() {
+		if (this.modalData.hideDefaultCloseButton) {
+			return html``;
+		} else {
+			return html`
 					<button
 						class="btn-close"
 						onclick=${(event: any) => { this._close(event); }}
@@ -51,11 +48,11 @@ const registerModalComponent = () => {
 						&times;
 					</button>
 				`;
-			}
 		}
+	}
 
-		render() {
-			return html`
+	render() {
+		return html`
 				<div class='modalDialog'>
 					<div
 						ref=${(node) => { this.modalContentRef = node; }}
@@ -71,7 +68,5 @@ const registerModalComponent = () => {
 					</div>
 				</div>
 			`;
-		}
 	}
-};
-export default registerModalComponent;
+}

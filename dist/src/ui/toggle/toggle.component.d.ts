@@ -1,8 +1,13 @@
-interface IToggleInput {
-    onchange: (checked?: boolean) => void;
+export interface IToggleInput {
+    onchange(checked?: boolean): void;
     onText?: string;
     offText?: string;
     isSelected?: boolean;
 }
-declare const registerToggleComponent: () => void;
-export { registerToggleComponent, IToggleInput };
+export declare class ToggleComponent {
+    toggleOptions: IToggleInput;
+    private _id;
+    constructor();
+    private toggleChange;
+    render(): DocumentFragment;
+}
