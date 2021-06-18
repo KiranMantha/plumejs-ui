@@ -1,4 +1,4 @@
-import { Component, html } from '@plumejs/core';
+import { Component, html, IHooks } from '@plumejs/core';
 import toggleStyles from './toggle.component.scss';
 
 export interface IToggleInput {
@@ -12,7 +12,7 @@ export interface IToggleInput {
   selector: 'toggle-button',
   styles: toggleStyles
 })
-export class ToggleComponent {
+export class ToggleComponent implements IHooks {
   readonly ObservedProperties = <const>['toggleOptions'];
 
   toggleOptions: IToggleInput;
