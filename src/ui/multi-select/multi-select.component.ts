@@ -11,8 +11,8 @@ import { IMultiSelectOptions } from './multi-select.interface';
 export class MultiSelectComponent implements IHooks {
   readonly ObservedProperties = <const>['multiSelectOptions'];
 
+  multiSelectOptions: IMultiSelectOptions;
   private renderer: Renderer;
-  private multiSelectOptions: IMultiSelectOptions;
   private _windowClickListner: Subscription;
   private _selectedOptions: Array<any> = [];
   private _buttonEle: HTMLButtonElement;

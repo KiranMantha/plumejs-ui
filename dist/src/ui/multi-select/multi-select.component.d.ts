@@ -1,8 +1,9 @@
 import { IHooks } from '@plumejs/core';
+import { IMultiSelectOptions } from './multi-select.interface';
 export declare class MultiSelectComponent implements IHooks {
     readonly ObservedProperties: readonly ["multiSelectOptions"];
+    multiSelectOptions: IMultiSelectOptions;
     private renderer;
-    private multiSelectOptions;
     private _windowClickListner;
     private _selectedOptions;
     private _buttonEle;

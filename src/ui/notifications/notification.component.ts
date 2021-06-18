@@ -81,8 +81,8 @@ export class NotificationContainerComponent implements IHooks {
 export class NotificationMessage implements IHooks {
   readonly ObservedProperties = <const>['notification'];
 
-  private renderer: Renderer;
   notification: INotification;
+  private renderer: Renderer;
 
   mount() {
     this.renderer.emitEvent('rendered');
