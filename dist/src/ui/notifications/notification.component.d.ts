@@ -18,6 +18,7 @@ export declare class NotificationContainerComponent implements IHooks {
     render(): DocumentFragment;
 }
 export declare class NotificationMessage implements IHooks {
+    readonly ObservedProperties: readonly ["notification"];
     private renderer;
     notification: INotification;
     mount(): void;

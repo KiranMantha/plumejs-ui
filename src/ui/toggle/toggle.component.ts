@@ -13,6 +13,8 @@ export interface IToggleInput {
   styles: toggleStyles
 })
 export class ToggleComponent {
+  readonly ObservedProperties = <const>['toggleOptions'];
+
   toggleOptions: IToggleInput;
   private _id = Math.random();
 

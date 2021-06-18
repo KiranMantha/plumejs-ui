@@ -61,6 +61,9 @@ Component({
   styles: notificationStyles
 })([NotificationContainerComponent]);
 export class NotificationMessage {
+    constructor() {
+        this.ObservedProperties = ['notification'];
+    }
     mount() {
         this.renderer.emitEvent('rendered');
     }

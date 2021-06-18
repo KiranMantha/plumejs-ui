@@ -9,6 +9,8 @@ import { IMultiSelectOptions } from './multi-select.interface';
   styles: multiselectStyles
 })
 export class MultiSelectComponent implements IHooks {
+  readonly ObservedProperties = <const>['multiSelectOptions'];
+
   private renderer: Renderer;
   private multiSelectOptions: IMultiSelectOptions;
   private _windowClickListner: Subscription;

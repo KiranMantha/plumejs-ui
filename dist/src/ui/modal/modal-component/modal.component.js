@@ -4,6 +4,7 @@ import modalComponentStyles from './modal.component.scss';
 export class ModalComponent {
     constructor(domSrvc) {
         this.domSrvc = domSrvc;
+        this.ObservedProperties = ['modalData'];
         this.onClose = new Subject();
         this.onOpen = new Subject();
         this.transitionDuration = 300;

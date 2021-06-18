@@ -8,6 +8,8 @@ import modalComponentStyles from './modal.component.scss';
   styles: modalComponentStyles
 })
 export class ModalComponent implements IHooks {
+  readonly ObservedProperties = <const>['modalData'];
+
   modalData: IModalData;
   onClose: Subject<void> = new Subject();
   onOpen: Subject<void> = new Subject();

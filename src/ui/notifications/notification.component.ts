@@ -79,6 +79,8 @@ export class NotificationContainerComponent implements IHooks {
   useShadow: false
 })
 export class NotificationMessage implements IHooks {
+  readonly ObservedProperties = <const>['notification'];
+
   private renderer: Renderer;
   notification: INotification;
 

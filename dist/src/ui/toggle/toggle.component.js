@@ -2,6 +2,7 @@ import { Component, html } from '@plumejs/core';
 import toggleStyles from './toggle.component.scss';
 export class ToggleComponent {
     constructor() {
+        this.ObservedProperties = ['toggleOptions'];
         this._id = Math.random();
         this.toggleChange = this.toggleChange.bind(this);
     }

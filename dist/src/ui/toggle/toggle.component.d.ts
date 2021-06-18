@@ -5,6 +5,7 @@ export interface IToggleInput {
     isSelected?: boolean;
 }
 export declare class ToggleComponent {
+    readonly ObservedProperties: readonly ["toggleOptions"];
     toggleOptions: IToggleInput;
     private _id;
     constructor();

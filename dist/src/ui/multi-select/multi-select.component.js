@@ -3,6 +3,7 @@ import { windowClick } from '../../window-event.observable';
 import multiselectStyles from './multi-select.component.scss';
 export class MultiSelectComponent {
     constructor() {
+        this.ObservedProperties = ['multiSelectOptions'];
         this._selectedOptions = [];
         this._searchText = '';
         this._onButtonClickTrigger = this._onButtonClickTrigger.bind(this);
