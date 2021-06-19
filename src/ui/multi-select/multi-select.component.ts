@@ -12,7 +12,6 @@ export class MultiSelectComponent implements IHooks {
   readonly ObservedProperties = <const>['multiSelectOptions'];
 
   multiSelectOptions: IMultiSelectOptions;
-  private renderer: Renderer;
   private _windowClickListner: Subscription;
   private _selectedOptions: Array<any> = [];
   private _buttonEle: HTMLButtonElement;
@@ -21,7 +20,7 @@ export class MultiSelectComponent implements IHooks {
   private _searchText = '';
   private _selectItemsListContainer: HTMLDivElement;
 
-  constructor() {
+  constructor(private renderer: Renderer) {
     this._onButtonClickTrigger = this._onButtonClickTrigger.bind(this);
     this._filterList = this._filterList.bind(this);
   }

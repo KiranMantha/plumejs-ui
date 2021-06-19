@@ -13,11 +13,10 @@ export interface INotification {
   styles: notificationStyles
 })
 export class NotificationContainerComponent implements IHooks {
-  private renderer: Renderer;
   private _notifications: Array<Message> = [];
   onDismiss: Subject<number> = new Subject();
 
-  constructor() {
+  constructor(private renderer: Renderer) {
     this.dismiss = this.dismiss.bind(this);
   }
 
@@ -80,9 +79,9 @@ export class NotificationContainerComponent implements IHooks {
 })
 export class NotificationMessage implements IHooks {
   readonly ObservedProperties = <const>['notification'];
-
   notification: INotification;
-  private renderer: Renderer;
+
+  constructor(private renderer: Renderer) {}
 
   mount() {
     this.renderer.emitEvent('rendered');

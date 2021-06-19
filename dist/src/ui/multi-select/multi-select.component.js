@@ -1,8 +1,9 @@
-import { Component, html } from '@plumejs/core';
+import { Component, html, Renderer } from '@plumejs/core';
 import { windowClick } from '../../window-event.observable';
 import multiselectStyles from './multi-select.component.scss';
 export class MultiSelectComponent {
-    constructor() {
+    constructor(renderer) {
+        this.renderer = renderer;
         this.ObservedProperties = ['multiSelectOptions'];
         this._selectedOptions = [];
         this._searchText = '';
@@ -241,4 +242,4 @@ export class MultiSelectComponent {
 Component({
   selector: 'multi-select',
   styles: multiselectStyles
-})([MultiSelectComponent]);
+})(["Renderer", MultiSelectComponent]);

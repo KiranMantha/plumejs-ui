@@ -1,9 +1,9 @@
-import { IHooks } from '@plumejs/core';
+import { IHooks, Renderer } from '@plumejs/core';
 import { IMultiSelectOptions } from './multi-select.interface';
 export declare class MultiSelectComponent implements IHooks {
+    private renderer;
     readonly ObservedProperties: readonly ["multiSelectOptions"];
     multiSelectOptions: IMultiSelectOptions;
-    private renderer;
     private _windowClickListner;
     private _selectedOptions;
     private _buttonEle;
@@ -11,7 +11,7 @@ export declare class MultiSelectComponent implements IHooks {
     private _popupContainer;
     private _searchText;
     private _selectItemsListContainer;
-    constructor();
+    constructor(renderer: Renderer);
     onPropsChanged(): void;
     mount(): void;
     unmount(): void;

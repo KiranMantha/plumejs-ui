@@ -1,4 +1,4 @@
-import { IHooks } from '@plumejs/core';
+import { IHooks, Renderer } from '@plumejs/core';
 import { Subject } from 'rxjs';
 import { Message } from './message';
 export interface INotification {
@@ -9,7 +9,7 @@ export declare class NotificationContainerComponent implements IHooks {
     private renderer;
     private _notifications;
     onDismiss: Subject<number>;
-    constructor();
+    constructor(renderer: Renderer);
     setNotifications(message: Message): void;
     private dismiss;
     private _renderNotification;
@@ -18,9 +18,10 @@ export declare class NotificationContainerComponent implements IHooks {
     render(): DocumentFragment;
 }
 export declare class NotificationMessage implements IHooks {
+    private renderer;
     readonly ObservedProperties: readonly ["notification"];
     notification: INotification;
-    private renderer;
+    constructor(renderer: Renderer);
     mount(): void;
     onDismiss(e: Event): void;
     render(): DocumentFragment;

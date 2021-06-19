@@ -1,8 +1,9 @@
-import { Component, html } from '@plumejs/core';
+import { Component, html, Renderer } from '@plumejs/core';
 import { Subject } from 'rxjs';
 import notificationStyles from './notification.component.scss';
 export class NotificationContainerComponent {
-    constructor() {
+    constructor(renderer) {
+        this.renderer = renderer;
         this._notifications = [];
         this.onDismiss = new Subject();
         this.dismiss = this.dismiss.bind(this);
@@ -59,9 +60,10 @@ export class NotificationContainerComponent {
 Component({
   selector: 'notification-container',
   styles: notificationStyles
-})([NotificationContainerComponent]);
+})(["Renderer", NotificationContainerComponent]);
 export class NotificationMessage {
-    constructor() {
+    constructor(renderer) {
+        this.renderer = renderer;
         this.ObservedProperties = ['notification'];
     }
     mount() {
@@ -101,4 +103,4 @@ export class NotificationMessage {
 Component({
   selector: 'notification-message',
   useShadow: false
-})([NotificationMessage]);
+})(["Renderer", NotificationMessage]);
