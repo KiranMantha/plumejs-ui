@@ -1,9 +1,11 @@
+import { __decorate, __metadata } from "tslib";
 import { Component, html } from '@plumejs/core';
 import toggleStyles from './toggle.component.scss';
-export class ToggleComponent {
+let ToggleComponent = class ToggleComponent {
+    ObservedProperties = ['toggleOptions'];
+    toggleOptions;
+    _id = Math.random();
     constructor() {
-        this.ObservedProperties = ['toggleOptions'];
-        this._id = Math.random();
         this.toggleChange = this.toggleChange.bind(this);
     }
     toggleChange(e) {
@@ -28,8 +30,12 @@ export class ToggleComponent {
             return html `<div></div>`;
         }
     }
-}
-Component({
-  selector: 'toggle-button',
-  styles: toggleStyles
-})([ToggleComponent]);
+};
+ToggleComponent = __decorate([
+    Component({
+        selector: 'toggle-button',
+        styles: toggleStyles
+    }),
+    __metadata("design:paramtypes", [])
+], ToggleComponent);
+export { ToggleComponent };

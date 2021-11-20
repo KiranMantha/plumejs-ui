@@ -1,8 +1,7 @@
+import { __decorate } from "tslib";
 import { Injectable } from '@plumejs/core';
-export class ModalService {
-    constructor() {
-        this._modalList = new Map();
-    }
+let ModalService = class ModalService {
+    _modalList = new Map();
     _addChild(child, parent = document.body) {
         parent.appendChild(child);
     }
@@ -55,5 +54,8 @@ export class ModalService {
         }
         this._modalList.clear();
     }
-}
-Injectable("ModalService")([ModalService]);
+};
+ModalService = __decorate([
+    Injectable()
+], ModalService);
+export { ModalService };

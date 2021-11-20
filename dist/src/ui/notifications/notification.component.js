@@ -1,11 +1,13 @@
+import { __decorate, __metadata } from "tslib";
 import { Component, html, Renderer } from '@plumejs/core';
 import { Subject } from 'rxjs';
 import notificationStyles from './notification.component.scss';
-export class NotificationContainerComponent {
+let NotificationContainerComponent = class NotificationContainerComponent {
+    renderer;
+    _notifications = [];
+    onDismiss = new Subject();
     constructor(renderer) {
         this.renderer = renderer;
-        this._notifications = [];
-        this.onDismiss = new Subject();
         this.dismiss = this.dismiss.bind(this);
     }
     setNotifications(message) {
@@ -56,15 +58,21 @@ export class NotificationContainerComponent {
     render() {
         return html ` <div class="notifications_wrapper">${this._renderNotifications()}</div> `;
     }
-}
-Component({
-  selector: 'notification-container',
-  styles: notificationStyles
-})(["Renderer", NotificationContainerComponent]);
-export class NotificationMessage {
+};
+NotificationContainerComponent = __decorate([
+    Component({
+        selector: 'notification-container',
+        styles: notificationStyles
+    }),
+    __metadata("design:paramtypes", [Renderer])
+], NotificationContainerComponent);
+export { NotificationContainerComponent };
+let NotificationMessage = class NotificationMessage {
+    renderer;
+    ObservedProperties = ['notification'];
+    notification;
     constructor(renderer) {
         this.renderer = renderer;
-        this.ObservedProperties = ['notification'];
     }
     mount() {
         this.renderer.emitEvent('rendered');
@@ -99,8 +107,12 @@ export class NotificationMessage {
             return html `<div></div>`;
         }
     }
-}
-Component({
-  selector: 'notification-message',
-  useShadow: false
-})(["Renderer", NotificationMessage]);
+};
+NotificationMessage = __decorate([
+    Component({
+        selector: 'notification-message',
+        useShadow: false
+    }),
+    __metadata("design:paramtypes", [Renderer])
+], NotificationMessage);
+export { NotificationMessage };

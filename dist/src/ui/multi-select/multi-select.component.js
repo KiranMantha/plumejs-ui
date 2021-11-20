@@ -1,12 +1,20 @@
+import { __decorate, __metadata } from "tslib";
 import { Component, html, Renderer } from '@plumejs/core';
 import { windowClick } from '../../window-event.observable';
 import multiselectStyles from './multi-select.component.scss';
-export class MultiSelectComponent {
+let MultiSelectComponent = class MultiSelectComponent {
+    renderer;
+    ObservedProperties = ['multiSelectOptions'];
+    multiSelectOptions;
+    _windowClickListner;
+    _selectedOptions = [];
+    _buttonEle;
+    _buttonText;
+    _popupContainer;
+    _searchText = '';
+    _selectItemsListContainer;
     constructor(renderer) {
         this.renderer = renderer;
-        this.ObservedProperties = ['multiSelectOptions'];
-        this._selectedOptions = [];
-        this._searchText = '';
         this._onButtonClickTrigger = this._onButtonClickTrigger.bind(this);
         this._filterList = this._filterList.bind(this);
     }
@@ -238,8 +246,12 @@ export class MultiSelectComponent {
             return html `<div></div>`;
         }
     }
-}
-Component({
-  selector: 'multi-select',
-  styles: multiselectStyles
-})(["Renderer", MultiSelectComponent]);
+};
+MultiSelectComponent = __decorate([
+    Component({
+        selector: 'multi-select',
+        styles: multiselectStyles
+    }),
+    __metadata("design:paramtypes", [Renderer])
+], MultiSelectComponent);
+export { MultiSelectComponent };

@@ -1,7 +1,9 @@
+import { __decorate } from "tslib";
 import { Injectable } from '@plumejs/core';
 import { Message } from './message';
 import { NotificationType } from './notification.type';
-export class NotificationService {
+let NotificationService = class NotificationService {
+    _containerModel;
     _addChild(child, parent = document.body) {
         parent.appendChild(child);
     }
@@ -30,5 +32,8 @@ export class NotificationService {
         const message = new Message(content, type, autoHide);
         this._addMessage(message);
     }
-}
-Injectable("NotificationService")([NotificationService]);
+};
+NotificationService = __decorate([
+    Injectable()
+], NotificationService);
+export { NotificationService };

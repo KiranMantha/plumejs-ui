@@ -1,13 +1,17 @@
+import { __decorate, __metadata } from "tslib";
 import { Component, DomTransition, html } from '@plumejs/core';
 import { Subject } from 'rxjs';
 import modalComponentStyles from './modal.component.scss';
-export class ModalComponent {
+let ModalComponent = class ModalComponent {
+    domSrvc;
+    ObservedProperties = ['modalData'];
+    modalData;
+    onClose = new Subject();
+    onOpen = new Subject();
+    modalContentRef;
+    transitionDuration = 300;
     constructor(domSrvc) {
         this.domSrvc = domSrvc;
-        this.ObservedProperties = ['modalData'];
-        this.onClose = new Subject();
-        this.onOpen = new Subject();
-        this.transitionDuration = 300;
     }
     mount() {
         this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
@@ -56,8 +60,12 @@ export class ModalComponent {
       </div>
     `;
     }
-}
-Component({
-  selector: 'modal-dialog',
-  styles: modalComponentStyles
-})(["DomTransition", ModalComponent]);
+};
+ModalComponent = __decorate([
+    Component({
+        selector: 'modal-dialog',
+        styles: modalComponentStyles
+    }),
+    __metadata("design:paramtypes", [DomTransition])
+], ModalComponent);
+export { ModalComponent };
