@@ -1,6 +1,6 @@
 import { ComponentRef, Injectable } from '@plumejs/core';
 import { Message } from './message';
-import { NotificationContainerComponent } from './notification.component';
+import { NotificationContainerComponent } from './notification-container.component';
 import { NotificationType } from './notification.type';
 
 @Injectable()
