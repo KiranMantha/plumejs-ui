@@ -1,7 +1,10 @@
-import { __decorate, __metadata } from "tslib";
-import { Component, html, Renderer } from '@plumejs/core';
-import { windowClick } from '../../window-event.observable';
-import multiselectStyles from './multi-select.component.scss';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MultiSelectComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@plumejs/core");
+const window_event_observable_1 = require("../../window-event.observable");
+const multi_select_component_scss_1 = (0, tslib_1.__importDefault)(require("./multi-select.component.scss"));
 let MultiSelectComponent = class MultiSelectComponent {
     renderer;
     ObservedProperties = ['multiSelectOptions'];
@@ -32,7 +35,7 @@ let MultiSelectComponent = class MultiSelectComponent {
         this._setButtonTextOnInit(this.multiSelectOptions.multiple);
     }
     mount() {
-        this._windowClickListner = windowClick.subscribe(() => {
+        this._windowClickListner = window_event_observable_1.windowClick.subscribe(() => {
             this._popupContainer.classList.remove('show-popup');
         });
     }
@@ -164,7 +167,7 @@ let MultiSelectComponent = class MultiSelectComponent {
         const checked = this._isItemExistsInSelectedValues(item, isMultiple);
         const itemType = typeof item;
         if (isMultiple) {
-            return html ` <label for="id-${index}" class="select-item">
+            return (0, core_1.html) ` <label for="id-${index}" class="select-item">
         <input
           name="select"
           id="id-${index}"
@@ -178,7 +181,7 @@ let MultiSelectComponent = class MultiSelectComponent {
       </label>`;
         }
         else {
-            return html ` <label for="id-${index}" class="select-item">
+            return (0, core_1.html) ` <label for="id-${index}" class="select-item">
         <input
           name="select"
           id="id-${index}"
@@ -199,19 +202,19 @@ let MultiSelectComponent = class MultiSelectComponent {
     }
     _renderFilterInput() {
         if (!!this.multiSelectOptions.enableFilter) {
-            return html `
+            return (0, core_1.html) `
         <div class="multi-select-filter">
           <input class="filter-input" type="text" value="${this._searchText}" onkeyup=${this._filterList} />
         </div>
       `;
         }
         else {
-            return html ``;
+            return (0, core_1.html) ``;
         }
     }
     render() {
         if (this.multiSelectOptions && this.multiSelectOptions.data.length > 0) {
-            return html `
+            return (0, core_1.html) `
         <div class="multi-select-container" onclick=${this._preventClickPropagation}>
           <button
             ref=${(node) => {
@@ -243,15 +246,15 @@ let MultiSelectComponent = class MultiSelectComponent {
       `;
         }
         else {
-            return html `<div></div>`;
+            return (0, core_1.html) `<div></div>`;
         }
     }
 };
-MultiSelectComponent = __decorate([
-    Component({
+MultiSelectComponent = (0, tslib_1.__decorate)([
+    (0, core_1.Component)({
         selector: 'multi-select',
-        styles: multiselectStyles
+        styles: multi_select_component_scss_1.default
     }),
-    __metadata("design:paramtypes", [Renderer])
+    (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])
 ], MultiSelectComponent);
-export { MultiSelectComponent };
+exports.MultiSelectComponent = MultiSelectComponent;

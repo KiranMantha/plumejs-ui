@@ -1,7 +1,10 @@
-import { __decorate } from "tslib";
-import { Injectable } from '@plumejs/core';
-import { Message } from './message';
-import { NotificationType } from './notification.type';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NotificationService = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@plumejs/core");
+const message_1 = require("./message");
+const notification_type_1 = require("./notification.type");
 let NotificationService = class NotificationService {
     _containerModel;
     _addChild(child, parent = document.body) {
@@ -28,12 +31,12 @@ let NotificationService = class NotificationService {
         }
         this._containerModel.setNotifications(message);
     }
-    sendMessage(content, type = NotificationType.Info, autoHide = false) {
-        const message = new Message(content, type, autoHide);
+    sendMessage(content, type = notification_type_1.NotificationType.Info, autoHide = false) {
+        const message = new message_1.Message(content, type, autoHide);
         this._addMessage(message);
     }
 };
-NotificationService = __decorate([
-    Injectable()
+NotificationService = (0, tslib_1.__decorate)([
+    (0, core_1.Injectable)()
 ], NotificationService);
-export { NotificationService };
+exports.NotificationService = NotificationService;

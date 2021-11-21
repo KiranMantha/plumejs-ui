@@ -1,13 +1,16 @@
-import { __decorate, __metadata } from "tslib";
-import { Component, DomTransition, html } from '@plumejs/core';
-import { Subject } from 'rxjs';
-import modalComponentStyles from './modal.component.scss';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ModalComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@plumejs/core");
+const rxjs_1 = require("rxjs");
+const modal_component_scss_1 = (0, tslib_1.__importDefault)(require("./modal.component.scss"));
 let ModalComponent = class ModalComponent {
     domSrvc;
     ObservedProperties = ['modalData'];
     modalData;
-    onClose = new Subject();
-    onOpen = new Subject();
+    onClose = new rxjs_1.Subject();
+    onOpen = new rxjs_1.Subject();
     modalContentRef;
     transitionDuration = 300;
     constructor(domSrvc) {
@@ -28,10 +31,10 @@ let ModalComponent = class ModalComponent {
     }
     _renderModalCloseButton() {
         if (this.modalData.hideDefaultCloseButton) {
-            return html ``;
+            return (0, core_1.html) ``;
         }
         else {
-            return html `
+            return (0, core_1.html) `
         <button
           class="btn-close"
           onclick=${() => {
@@ -44,7 +47,7 @@ let ModalComponent = class ModalComponent {
         }
     }
     render() {
-        return html `
+        return (0, core_1.html) `
       <div class="modalDialog">
         <div
           ref=${(node) => {
@@ -61,11 +64,11 @@ let ModalComponent = class ModalComponent {
     `;
     }
 };
-ModalComponent = __decorate([
-    Component({
+ModalComponent = (0, tslib_1.__decorate)([
+    (0, core_1.Component)({
         selector: 'modal-dialog',
-        styles: modalComponentStyles
+        styles: modal_component_scss_1.default
     }),
-    __metadata("design:paramtypes", [DomTransition])
+    (0, tslib_1.__metadata)("design:paramtypes", [core_1.DomTransition])
 ], ModalComponent);
-export { ModalComponent };
+exports.ModalComponent = ModalComponent;

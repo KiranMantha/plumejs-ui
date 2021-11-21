@@ -1,11 +1,14 @@
-import { __decorate, __metadata } from "tslib";
-import { Component, html, Renderer } from '@plumejs/core';
-import { Subject } from 'rxjs';
-import notificationStyles from './notification.component.scss';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NotificationMessage = exports.NotificationContainerComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@plumejs/core");
+const rxjs_1 = require("rxjs");
+const notification_component_scss_1 = (0, tslib_1.__importDefault)(require("./notification.component.scss"));
 let NotificationContainerComponent = class NotificationContainerComponent {
     renderer;
     _notifications = [];
-    onDismiss = new Subject();
+    onDismiss = new rxjs_1.Subject();
     constructor(renderer) {
         this.renderer = renderer;
         this.dismiss = this.dismiss.bind(this);
@@ -38,7 +41,7 @@ let NotificationContainerComponent = class NotificationContainerComponent {
                     message: msg,
                     dismiss: this.dismiss
                 };
-                return html `
+                return (0, core_1.html) `
           <notification-message
             onrendered=${(e) => {
                     this._renderNotification(e.target, notify);
@@ -49,24 +52,24 @@ let NotificationContainerComponent = class NotificationContainerComponent {
             return list;
         }
         else {
-            return html `<div></div>`;
+            return (0, core_1.html) `<div></div>`;
         }
     }
     unmount() {
         this.onDismiss.complete();
     }
     render() {
-        return html ` <div class="notifications_wrapper">${this._renderNotifications()}</div> `;
+        return (0, core_1.html) ` <div class="notifications_wrapper">${this._renderNotifications()}</div> `;
     }
 };
-NotificationContainerComponent = __decorate([
-    Component({
+NotificationContainerComponent = (0, tslib_1.__decorate)([
+    (0, core_1.Component)({
         selector: 'notification-container',
-        styles: notificationStyles
+        styles: notification_component_scss_1.default
     }),
-    __metadata("design:paramtypes", [Renderer])
+    (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])
 ], NotificationContainerComponent);
-export { NotificationContainerComponent };
+exports.NotificationContainerComponent = NotificationContainerComponent;
 let NotificationMessage = class NotificationMessage {
     renderer;
     ObservedProperties = ['notification'];
@@ -83,7 +86,7 @@ let NotificationMessage = class NotificationMessage {
     }
     render() {
         if (this.notification && this.notification.message.content) {
-            return html `
+            return (0, core_1.html) `
         <div
           class="notification ${this.notification.message.type === 'info'
                 ? 'is-info'
@@ -104,15 +107,15 @@ let NotificationMessage = class NotificationMessage {
       `;
         }
         else {
-            return html `<div></div>`;
+            return (0, core_1.html) `<div></div>`;
         }
     }
 };
-NotificationMessage = __decorate([
-    Component({
+NotificationMessage = (0, tslib_1.__decorate)([
+    (0, core_1.Component)({
         selector: 'notification-message',
         useShadow: false
     }),
-    __metadata("design:paramtypes", [Renderer])
+    (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])
 ], NotificationMessage);
-export { NotificationMessage };
+exports.NotificationMessage = NotificationMessage;
