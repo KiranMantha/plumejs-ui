@@ -1,6 +1,6 @@
 {
   "name": "@plumejs/ui",
-  "version": "3.0.0-beta",
+  "version": "3.0.0",
   "description": "A collection of UI components built using PlumeJs.",
   "files": [
     "dist/**/*"
@@ -31,7 +31,7 @@
     "plumejs-ui"
   ],
   "dependencies": {
-    "plumejs": "^2.0.8"
+    "@plumejs/core": "3.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",
