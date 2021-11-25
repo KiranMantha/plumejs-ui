@@ -1,85 +1,70 @@
-import { Injectable } from "plumejs";
-import { IModal, IModalOptions } from "./modal.interface";
-import registerModalComponent from "./modal-component/modal.component";
+import { ComponentRef, Injectable } from '@plumejs/core';
+import { ModalComponent } from './modal-component/modal.component';
+import { IModal, IModalOptions } from './modal.interface';
 
 @Injectable()
 export class ModalService {
-	private _modalList: Array<HTMLElement> = [];
+  private _modalList: Map<number, HTMLElement> = new Map();
 
-	constructor() {
-		registerModalComponent();
-	}
+  private _addChild(child: HTMLElement, parent: HTMLElement = document.body) {
+    parent.appendChild(child);
+  }
 
-	private _addChild(child: HTMLElement, parent: HTMLElement = document.body) {
-		parent.appendChild(child);
-	}
+  private _removeChild(child: HTMLElement, parent: HTMLElement = document.body) {
+    parent.removeChild(child);
+  }
 
-	private _removeChild(
-		child: HTMLElement,
-		parent: HTMLElement = document.body
-	) {
-		parent.removeChild(child);
-	}
+  private _addModal(options: IModalOptions): IModal {
+    const modalDOM = document.createElement('modal-dialog');
+    this._addChild(modalDOM);
+    const modalRef = modalDOM as unknown as ComponentRef<ModalComponent>;
+    const model = modalRef.getInstance();
+    const modelId = new Date().getTime();
+    const modalData: IModal = {
+      onClose: model.onClose,
+      onOpen: model.onOpen,
+      Id: modelId
+    };
 
-	private _addModal(options: IModalOptions): IModal {
-		const modalRef: any = document.createElement("modal-dialog");
-		this._addChild(modalRef);
-		const model = modalRef.getModel();
-		const modelId = new Date().getTime();
-		let modal: IModal = {
-			onClose: model.onClose,
-			onOpen: model.onOpen,
-			Id: modelId
-		};
+    model.onClose.subscribe(() => {
+      this.close(modalData);
+    });
 
-		model.onClose.subscribe(() => {
-			this.close(modal);
-		});
+    modalRef.setProps({
+      modalData: {
+        Id: modelId,
+        title: options.modalTitle,
+        bodyTemplate: options.renderTemplate(),
+        backdrop: options.backdrop || false,
+        hideDefaultCloseButton: options.hideDefaultCloseButton || false
+      }
+    });
 
-		model.modalData = {
-			Id: modelId,
-			title: options.modalTitle,
-			bodyTemplate: options.renderTemplate(),
-			backdrop: options.backdrop || false,
-			isModalOpen: true,
-			hideDefaultCloseButton: options.hideDefaultCloseButton || false
-		};
+    if (!!options.modalClass) {
+      modalDOM.classList.add(options.modalClass);
+    }
 
-		if(!!options.modalClass) {
-			modalRef.classList.add(options.modalClass);
-		}
-		
-		model.update();
-		this._modalList.push(modalRef);
-		return modal;
-	}
+    this._modalList.set(modelId, modalDOM);
+    return modalData;
+  }
 
-	private _close(modalRef: any, index: number) {
-		index > -1 && this._modalList.splice(index, 1);
-		this._removeChild(modalRef);
-	}
+  show(options: IModalOptions): IModal {
+    if (!options.renderTemplate) {
+      throw Error('Provide renderTemplate function to render html inside modal component.');
+    }
+    return this._addModal(options);
+  }
 
-	show(options: IModalOptions): IModal {
-		if (!options.renderTemplate) {
-			throw Error("Provide renderTemplate function to render html inside modal component.");
-		}
-		return this._addModal(options);
-	}
+  close(modal: IModal) {
+    const modalRef = this._modalList.get(modal.Id);
+    this._removeChild(modalRef);
+    this._modalList.delete(modal.Id);
+  }
 
-	close(modal: IModal) {
-		let index = -1;
-		let modalRef = this._modalList.filter((x, i) => {
-			if (x.getModel().modalData.Id === modal.Id) {
-				index = i;
-				return x;
-			}
-		})[0];
-		modalRef && this._close(modalRef, index);
-	}
-
-	closeAll() {
-		this._modalList.forEach((modalRef, i) => {
-			this._close(modalRef, i);
-		});
-	}
+  closeAll() {
+    for (const modalRef of this._modalList.values()) {
+      this._removeChild(modalRef);
+    }
+    this._modalList.clear();
+  }
 }

@@ -1,56 +1,44 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ToggleComponent = void 0;
 const tslib_1 = require("tslib");
-const plumejs_1 = require("plumejs");
-const toggle_component_scss_1 = tslib_1.__importDefault(require("./toggle.component.scss"));
-const registerToggleComponent = () => {
-    let ToggleComponent = class ToggleComponent {
-        constructor() {
-            this.toggleOptions = {
-                onchange: () => { },
-                onText: '',
-                offText: '',
-                isSelected: false
-            };
-            this._id = Math.random();
-            this._showWidget = false;
-            this.toggleChange = this.toggleChange.bind(this);
+const core_1 = require("@plumejs/core");
+const toggle_component_scss_1 = (0, tslib_1.__importDefault)(require("./toggle.component.scss"));
+let ToggleComponent = class ToggleComponent {
+    ObservedProperties = ['toggleOptions'];
+    toggleOptions;
+    _id = Math.random();
+    constructor() {
+        this.toggleChange = this.toggleChange.bind(this);
+    }
+    toggleChange(e) {
+        const value = e.target.checked;
+        this.toggleOptions.onchange(value);
+    }
+    render() {
+        if (this.toggleOptions) {
+            return (0, core_1.html) ` <div class="toggle-container">
+        <span>${this.toggleOptions.offText ? this.toggleOptions.offText.translate() : ''}</span>
+        <input
+          type="checkbox"
+          id="${this._id}"
+          checked="${!!this.toggleOptions.isSelected}"
+          onchange=${this.toggleChange}
+        />
+        <label for="${this._id}"></label>
+        <span>${this.toggleOptions.onText ? this.toggleOptions.onText.translate() : ''}</span>
+      </div>`;
         }
-        inputChanged(oldVal, newVal) {
-            if (newVal.onchange) {
-                this._showWidget = true;
-            }
+        else {
+            return (0, core_1.html) `<div></div>`;
         }
-        toggleChange(e) {
-            let value = e.target.checked;
-            this.toggleOptions.onchange(value);
-        }
-        render() {
-            if (this._showWidget) {
-                return plumejs_1.html `
-                <div class='toggle-container'>
-                    <span>${this.toggleOptions.offText ? this.toggleOptions.offText.translate() : ''}</span>
-                    <input type='checkbox' id='${this._id}' checked='${!!this.toggleOptions.isSelected}' onchange=${this.toggleChange}/>
-                    <label for='${this._id}'></label>
-                    <span>${this.toggleOptions.onText ? this.toggleOptions.onText.translate() : ''}</span>
-                </div>`;
-            }
-            else {
-                return plumejs_1.html `<div></div>`;
-            }
-        }
-    };
-    tslib_1.__decorate([
-        plumejs_1.Input(),
-        tslib_1.__metadata("design:type", Object)
-    ], ToggleComponent.prototype, "toggleOptions", void 0);
-    ToggleComponent = tslib_1.__decorate([
-        plumejs_1.Component({
-            selector: 'toggle-button',
-            styles: toggle_component_scss_1.default
-        }),
-        tslib_1.__metadata("design:paramtypes", [])
-    ], ToggleComponent);
+    }
 };
-exports.registerToggleComponent = registerToggleComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9nZ2xlLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy91aS90b2dnbGUvdG9nZ2xlLmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxxQ0FBeUQ7QUFDekQsNEZBQW1EO0FBU25ELE1BQU0sdUJBQXVCLEdBQUcsR0FBRyxFQUFFO0lBS2pDLElBQU0sZUFBZSxHQUFyQixNQUFNLGVBQWU7UUFZakI7WUFWQSxrQkFBYSxHQUFpQjtnQkFDMUIsUUFBUSxFQUFFLEdBQUcsRUFBRSxHQUFHLENBQUM7Z0JBQ25CLE1BQU0sRUFBRSxFQUFFO2dCQUNWLE9BQU8sRUFBRSxFQUFFO2dCQUNYLFVBQVUsRUFBRSxLQUFLO2FBQ3BCLENBQUM7WUFFTSxRQUFHLEdBQUcsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDO1lBQ3BCLGdCQUFXLEdBQUcsS0FBSyxDQUFDO1lBR3hCLElBQUksQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDckQsQ0FBQztRQUVELFlBQVksQ0FBQyxNQUFvQixFQUFFLE1BQW9CO1lBQ25ELElBQUcsTUFBTSxDQUFDLFFBQVEsRUFBRTtnQkFDaEIsSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUM7YUFDM0I7UUFDTCxDQUFDO1FBRUQsWUFBWSxDQUFDLENBQVE7WUFDakIsSUFBSSxLQUFLLEdBQUksQ0FBQyxDQUFDLE1BQWMsQ0FBQyxPQUFPLENBQUM7WUFDdEMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDdkMsQ0FBQztRQUVELE1BQU07WUFDRixJQUFJLElBQUksQ0FBQyxXQUFXLEVBQUU7Z0JBQ2xCLE9BQU8sY0FBSSxDQUFBOzs0QkFFRSxJQUFJLENBQUMsYUFBYSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxPQUFPLENBQUMsU0FBUyxFQUFFLENBQUMsQ0FBQyxDQUFDLEVBQUU7aURBQ25ELElBQUksQ0FBQyxHQUFHLGNBQWMsQ0FBQyxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsVUFBVSxjQUFjLElBQUksQ0FBQyxZQUFZO2tDQUNwRyxJQUFJLENBQUMsR0FBRzs0QkFDYixJQUFJLENBQUMsYUFBYSxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxNQUFNLENBQUMsU0FBUyxFQUFFLENBQUMsQ0FBQyxDQUFDLEVBQUU7dUJBQzVFLENBQUM7YUFDWDtpQkFBTTtnQkFDSCxPQUFPLGNBQUksQ0FBQSxhQUFhLENBQUE7YUFDM0I7UUFDTCxDQUFDO0tBQ0osQ0FBQTtJQXRDRztRQURDLGVBQUssRUFBRTs7MERBTU47SUFQQSxlQUFlO1FBSnBCLG1CQUFTLENBQUM7WUFDUCxRQUFRLEVBQUUsZUFBZTtZQUN6QixNQUFNLEVBQUUsK0JBQVk7U0FDdkIsQ0FBQzs7T0FDSSxlQUFlLENBd0NwQjtBQUNMLENBQUMsQ0FBQTtBQUVRLDBEQUF1QiJ9
+ToggleComponent = (0, tslib_1.__decorate)([
+    (0, core_1.Component)({
+        selector: 'toggle-button',
+        styles: toggle_component_scss_1.default
+    }),
+    (0, tslib_1.__metadata)("design:paramtypes", [])
+], ToggleComponent);
+exports.ToggleComponent = ToggleComponent;

@@ -1,15 +1,19 @@
 {
-  "name": "plumejs-ui",
-  "version": "1.1.1",
-  "description": "A collection of UI components built using PlumeJs",
+  "name": "@plumejs/ui",
+  "version": "3.0.0",
+  "description": "A collection of UI components built using PlumeJs.",
   "files": [
     "dist/**/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "build": "npm run lint && rimraf dist && tsc && copyfiles src/**/*.scss dist/",
+    "lint": "eslint . --ext .ts --fix",
     "patch-update": "npm version patch",
     "tag": "git push --follow-tags",
-    "tag-release": "npm run patch-update && npm run tag",
-    "tsc": "tsc && copyfiles src/**/*.scss dist/"
+    "tag-release": "npm run patch-update && npm run tag"
   },
   "main": "./dist/index.js",
   "license": "ISC",
@@ -26,10 +30,18 @@
     "plumejs",
     "plumejs-ui"
   ],
+  "dependencies": {
+    "@plumejs/core": "3.0.0"
+  },
   "devDependencies": {
-    "bootstrap": "^4.3.1",
-    "copyfiles": "^2.2.0",
-    "plumejs": "^2.2.2",
-    "typescript": "^3.7.2"
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "copyfiles": "^2.4.1",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "ttypescript": "^1.5.12",
+    "typescript": "^4.5.2"
   }
 }

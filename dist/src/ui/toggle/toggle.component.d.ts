@@ -1,8 +1,15 @@
-interface IToggleInput {
-    onchange: (checked?: boolean) => void;
+import { IHooks } from '@plumejs/core';
+export interface IToggleInput {
+    onchange(checked?: boolean): void;
     onText?: string;
     offText?: string;
     isSelected?: boolean;
 }
-declare const registerToggleComponent: () => void;
-export { registerToggleComponent, IToggleInput };
+export declare class ToggleComponent implements IHooks {
+    readonly ObservedProperties: readonly ["toggleOptions"];
+    toggleOptions: IToggleInput;
+    private _id;
+    constructor();
+    private toggleChange;
+    render(): DocumentFragment;
+}

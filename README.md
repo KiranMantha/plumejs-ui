@@ -1,6 +1,6 @@
-[![GitHub contributors](https://img.shields.io/github/contributors/kiranmantha/plumejs-ui)](https://GitHub.com/KiranMantha/plumejs-ui/graphs/contributors/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![GitHub contributors](https://img.shields.io/github/contributors/kiranmantha/@plumejs/ui)](https://GitHub.com/KiranMantha/@plumejs/ui/graphs/contributors/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-[![npm](https://img.shields.io/npm/dw/plumejs-ui)](https://www.npmjs.com/package/plumejs-ui)  [![npm](https://img.shields.io/npm/v/plumejs-ui)](https://www.npmjs.com/package/plumejs-ui)
+[![npm](https://img.shields.io/npm/dw/@plumejs/ui)](https://www.npmjs.com/package/@plumejs/ui)  [![npm](https://img.shields.io/npm/v/@plumejs/ui)](https://www.npmjs.com/package/@plumejs/ui)
 
 Demo [here](https://kiranmantha.github.io/plumejs/#/controls). Check console logs for further details.
 
@@ -18,13 +18,18 @@ https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
 
 https://github.com/karlhorky/typescript-tricks
 
-## Plumejs repo
-Please find the documentation [here](https://github.com/kiranmantha/plumejs).
+# PlumeJs UI
+
+This module is a collection of UI components built using [PlumeJs](https://github.com/kiranmantha/plumejs).
 
 ## Installation
-`npm i -S plumejs-ui`
+`npm i -S @plumejs/ui`
 
-### Changes needed in your application
+## Upcoming
+
+Tabs Component
+
+## Changes needed in your application
 
 Update your plumejs application's `base.config.js` as:
 
@@ -50,13 +55,15 @@ to
 ModalService exposes three methods show, close and closeAll. Inorder to use this service:
 
 ```
-import { ModalService, IModal } from 'plumejs-ui';
+import { Component } from '@plumejs/core';
+import { ModalService, IModal } from '@plumejs/ui';
 
 @Component({
     selector: 'your-selector'
 })
 class YourComponent {
     modal:IModal;
+
     constructor(private modalService:ModalService){ }
 
     showModal() {
@@ -96,7 +103,8 @@ class YourComponent {
 NotificationService is used to show simple notification. Inorder to use this
 
 ```
-import { NotificationService, NotificationType } from 'plumejs-ui';
+import { Component } from '@plumejs/core';
+import { NotificationService, NotificationType } from '@plumejs/ui';
 
 @Component({
     selector: 'your-selector'
@@ -123,9 +131,11 @@ class YourComponent {
 Toggle button provide a switch interface. It accepts input `toggleOptions`. It can be used as:
 
 ```
-import { IToggleInput, registerToggleComponent } from 'plumejs-ui';
+import { Component, html } from '@plumejs/core';
+import { IToggleInput, registerToggleComponent } from '@plumejs/ui';
 
-registerToggleComponent(); // Call this function in your root component. No need to execute this when ever you import.
+// Call this function in your root component. No need to execute this when ever you import.
+registerToggleComponent();
 
 @Component({
     selector: 'my-comp'
@@ -159,9 +169,11 @@ class MyComponent {
 This component can replace traditional html dropdown and also can be transformed as multi select dropdown. To use this:
 
 ```
-import { IMultiSelectOptions, registerMultiSelectComponent } from 'plumejs-ui';
+import { Component, html } from '@plumejs/core';
+import { IMultiSelectOptions, registerMultiSelectComponent } from '@plumejs/ui';
 
-registerMultiSelectComponent(); // Call this function in your root component. No need to execute this when ever you import.
+// Call this function in your root component. No need to execute this when ever you import.
+registerMultiSelectComponent();
 
 @Component({
     selector: 'your-selector'
@@ -230,8 +242,8 @@ class YourComponent {
 		},
 
         // A listener function to get selected option. 
-        // If data is object array option will be a simple object in the case of single select or an array of objects in the case of multi select.
-        // If data is string array option will be a string in the case of single select or an array of strings in the case of multi select. 
+        // If data is object array, option will be a simple object in the case of single select or an array of objects in the case of multi select.
+        // If data is string array, option will be a string in the case of single select or an array of strings in the case of multi select. 
         // Required.
 		onchange: (selectedOption: any) => { console.log(selectedOption); }
 
