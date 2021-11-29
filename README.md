@@ -1,6 +1,6 @@
-[![GitHub contributors](https://img.shields.io/github/contributors/kiranmantha/@plumejs/ui)](https://GitHub.com/KiranMantha/@plumejs/ui/graphs/contributors/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![GitHub contributors](https://img.shields.io/github/contributors/kiranmantha/plumejs-ui)](https://GitHub.com/KiranMantha/plumejs-ui/graphs/contributors/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://GitHub.com/KiranMantha/plumejs-ui/pulls)
 
-[![npm](https://img.shields.io/npm/dw/@plumejs/ui)](https://www.npmjs.com/package/@plumejs/ui)  [![npm](https://img.shields.io/npm/v/@plumejs/ui)](https://www.npmjs.com/package/@plumejs/ui)
+[![npm](https://img.shields.io/npm/dw/@plumejs/ui)](https://www.npmjs.com/package/@plumejs/ui) [![npm](https://img.shields.io/npm/v/@plumejs/ui)](https://www.npmjs.com/package/@plumejs/ui)
 
 Demo [here](https://kiranmantha.github.io/plumejs/#/controls). Check console logs for further details.
 
@@ -23,6 +23,7 @@ https://github.com/karlhorky/typescript-tricks
 This module is a collection of UI components built using [PlumeJs](https://github.com/kiranmantha/plumejs).
 
 ## Installation
+
 `npm i -S @plumejs/ui`
 
 ## Upcoming
@@ -33,8 +34,9 @@ Tabs Component
 
 Update your plumejs application's `base.config.js` as:
 
-from 
-```
+from
+
+```javascript
 {
     test: /\.(s*)css$/,
     exclude: /node_modules/,
@@ -43,7 +45,8 @@ from
 ```
 
 to
-```
+
+```javascript
 {
     test: /\.(s*)css$/,
     use: ['css-loader', 'sass-loader']
@@ -54,7 +57,7 @@ to
 
 ModalService exposes three methods show, close and closeAll. Inorder to use this service:
 
-```
+```typescript
 import { Component } from '@plumejs/core';
 import { ModalService, IModal } from '@plumejs/ui';
 
@@ -102,27 +105,27 @@ class YourComponent {
 
 NotificationService is used to show simple notification. Inorder to use this
 
-```
+```typescript
 import { Component } from '@plumejs/core';
 import { NotificationService, NotificationType } from '@plumejs/ui';
 
 @Component({
-    selector: 'your-selector'
+  selector: 'your-selector'
 })
 class YourComponent {
-    constructor(private notifySrvc: NotificationService){}
+  constructor(private notifySrvc: NotificationService) {}
 
-    showNotification() {
-        //sendMessage accepts two arguments, text and optional notification type
-        //By default info type is displayed
-        this.notifySrvc.sendMessage('hello world');
+  showNotification() {
+    //sendMessage accepts two arguments, text and optional notification type
+    //By default info type is displayed
+    this.notifySrvc.sendMessage('hello world');
 
-        // This display notification with danger type
-        this.notifySrvc.sendMessage('hello world', NotificationType.Danger);
+    // This display notification with danger type
+    this.notifySrvc.sendMessage('hello world', NotificationType.Danger);
 
-        // This display auto hide notification after 2sec
-        this.notifySrvc.sendMessage('hello world', NotificationType.Info, true);
-    }
+    // This display auto hide notification after 2sec
+    this.notifySrvc.sendMessage('hello world', NotificationType.Info, true);
+  }
 }
 ```
 
@@ -130,26 +133,24 @@ class YourComponent {
 
 Toggle button provide a switch interface. It accepts input `toggleOptions`. It can be used as:
 
-```
-import { Component, html } from '@plumejs/core';
-import { IToggleInput, registerToggleComponent } from '@plumejs/ui';
-
-// Call this function in your root component. No need to execute this when ever you import.
-registerToggleComponent();
+```typescript
+import { Component, html, ComponentRef } from '@plumejs/core';
+import { IToggleInput, ToggleComponent } from '@plumejs/ui';
 
 @Component({
     selector: 'my-comp'
 })
 class MyComponent {
+    toggleRef: ComponentRef<ToggleComponent>;
     toggleInput:IToggleInput = {
-        onchange: this.onToggleChange // executed when toggle change. Required.
+        onchange: (checked: boolean) => { this.onToggleChange(checked); } // executed when toggle change. Required.
         onText: 'my.translation' // string. also works for translation or normal text. Optional. will not display text when not passed.
         offText: 'my.translation' // string. also works for translation or normal text. Optional. will not display text when not passed.
         isSelected: true // boolean. set the initial state of toggle switch. will be false by default. Optional
     }
 
-    constructor() {
-        this.onToggleChange = this.onToggleChange.bind(this);
+    mount() {
+        this.toggleRef.setProps(this.toggleInput);
     }
 
     onToggleChange(_checked: boolean) {
@@ -158,7 +159,7 @@ class MyComponent {
 
     render() {
         return html`
-            <toggle-button toggleOptions=${ this.toggleInput }></toggle-button>
+            <toggle-button ref=${(node) => { this.toggleRef = node; }}></toggle-button>
         `
     }
 }
@@ -168,17 +169,15 @@ class MyComponent {
 
 This component can replace traditional html dropdown and also can be transformed as multi select dropdown. To use this:
 
-```
-import { Component, html } from '@plumejs/core';
-import { IMultiSelectOptions, registerMultiSelectComponent } from '@plumejs/ui';
-
-// Call this function in your root component. No need to execute this when ever you import.
-registerMultiSelectComponent();
+```typescript
+import { Component, html, ComponentRef } from '@plumejs/core';
+import { IMultiSelectOptions, MultiSelectComponent } from '@plumejs/ui';
 
 @Component({
     selector: 'your-selector'
 })
 class YourComponent {
+    multiSelectRef: ComponentRef<MultiSelectComponent>;
     multiSelectOptions: IMultiSelectOptions = {
         // The items collection to display in dropdown list.
         // The items can be objects or strings.
@@ -204,31 +203,31 @@ class YourComponent {
             name: 'option2'
         }],
 
-        // The property of item in items collection which needs to display as option text. 
-        // This can't be a nested property. 
+        // The property of item in items collection which needs to display as option text.
+        // This can't be a nested property.
         // Optional. Not required if data is string array.
 		displayField: 'name',
 
-        // The flag which helps to render as single select or multi select dropdown. Default false. 
+        // The flag which helps to render as single select or multi select dropdown. Default false.
         // Optional.
 		multiple: false,
 
-        // The flag which enable search to find option in log dropdown list. Default false. 
-        // Will work for both single select/ multi select lists. 
+        // The flag which enable search to find option in log dropdown list. Default false.
+        // Will work for both single select/ multi select lists.
         // Optional.
 		enableFilter: true,
 
-        // The flag to disable dropdown. Default false. 
+        // The flag to disable dropdown. Default false.
         // Optional.
 		disableDropdown: false,
 
-        // Default button text when no item is selected. Default 'Select'. 
+        // Default button text when no item is selected. Default 'Select'.
         // Optional.
         nonSelectedText: 'Select',
 
-        // The function used to display custom text in the case of multi select list. 
-        // The argument `options` is the options selected in multi select. 
-        // By default the button text is displayed as comma seperated options. 
+        // The function used to display custom text in the case of multi select list.
+        // The argument `options` is the options selected in multi select.
+        // By default the button text is displayed as comma seperated options.
         // Optional.
 		buttonText: (options:Array<any>) => {
 			if (options.length === 0) {
@@ -241,9 +240,9 @@ class YourComponent {
 			}
 		},
 
-        // A listener function to get selected option. 
+        // A listener function to get selected option.
         // If data is object array, option will be a simple object in the case of single select or an array of objects in the case of multi select.
-        // If data is string array, option will be a string in the case of single select or an array of strings in the case of multi select. 
+        // If data is string array, option will be a string in the case of single select or an array of strings in the case of multi select.
         // Required.
 		onchange: (selectedOption: any) => { console.log(selectedOption); }
 
@@ -252,9 +251,13 @@ class YourComponent {
         resetWidget: false
 	}
 
+    mount() {
+        this.multiSelectRef.setProps(this.multiSelectOptions);
+    }
+
     render() {
         return html`
-            <multi-select multiSelectOptions=${ this.multiSelectOptions }></multi-select>
+            <multi-select ref=${(node) => { this.multiSelectRef = node; }}></multi-select>
         `;
     }
 }
