@@ -8,9 +8,6 @@ let ToggleComponent = class ToggleComponent {
     ObservedProperties = ['toggleOptions'];
     toggleOptions;
     _id = Math.random();
-    constructor() {
-        this.toggleChange = this.toggleChange.bind(this);
-    }
     toggleChange(e) {
         const value = e.target.checked;
         this.toggleOptions.onchange(value);
@@ -23,7 +20,9 @@ let ToggleComponent = class ToggleComponent {
           type="checkbox"
           id="${this._id}"
           checked="${!!this.toggleOptions.isSelected}"
-          onchange=${this.toggleChange}
+          onchange=${(e) => {
+                this.toggleChange(e);
+            }}
         />
         <label for="${this._id}"></label>
         <span>${this.toggleOptions.onText ? this.toggleOptions.onText.translate() : ''}</span>
@@ -38,7 +37,6 @@ ToggleComponent = (0, tslib_1.__decorate)([
     (0, core_1.Component)({
         selector: 'toggle-button',
         styles: toggle_component_scss_1.default
-    }),
-    (0, tslib_1.__metadata)("design:paramtypes", [])
+    })
 ], ToggleComponent);
 exports.ToggleComponent = ToggleComponent;

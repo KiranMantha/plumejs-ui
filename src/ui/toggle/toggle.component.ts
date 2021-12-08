@@ -18,10 +18,6 @@ export class ToggleComponent implements IHooks {
   toggleOptions: IToggleInput;
   private _id = Math.random();
 
-  constructor() {
-    this.toggleChange = this.toggleChange.bind(this);
-  }
-
   private toggleChange(e: Event) {
     const value = (e.target as any).checked;
     this.toggleOptions.onchange(value);
@@ -35,7 +31,9 @@ export class ToggleComponent implements IHooks {
           type="checkbox"
           id="${this._id}"
           checked="${!!this.toggleOptions.isSelected}"
-          onchange=${this.toggleChange}
+          onchange=${(e: Event) => {
+            this.toggleChange(e);
+          }}
         />
         <label for="${this._id}"></label>
         <span>${this.toggleOptions.onText ? this.toggleOptions.onText.translate() : ''}</span>

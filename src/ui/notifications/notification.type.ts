@@ -7,5 +7,5 @@ export enum NotificationType {
 
 export interface INotification {
   message: Message;
-  dismiss: (index: number) => void;
+  dismiss: () => void;
 }

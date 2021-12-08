@@ -11,7 +11,6 @@ let NotificationContainerComponent = class NotificationContainerComponent {
     onDismiss = new rxjs_1.Subject();
     constructor(renderer) {
         this.renderer = renderer;
-        this.dismiss = this.dismiss.bind(this);
     }
     setNotifications(message) {
         this._notifications.push(message);
@@ -30,7 +29,7 @@ let NotificationContainerComponent = class NotificationContainerComponent {
         target.setProps({ notification });
         if (notification.message.autoHide) {
             setTimeout(() => {
-                notification.dismiss(notification.message.index);
+                notification.dismiss();
             }, 2000);
         }
     }
@@ -39,7 +38,9 @@ let NotificationContainerComponent = class NotificationContainerComponent {
             const list = this._notifications.map((msg) => {
                 const notify = {
                     message: msg,
-                    dismiss: this.dismiss
+                    dismiss: () => {
+                        this.dismiss(msg.index);
+                    }
                 };
                 return (0, core_1.html) `
           <notification-message

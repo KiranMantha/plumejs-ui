@@ -9,7 +9,6 @@ export declare class ToggleComponent implements IHooks {
     readonly ObservedProperties: readonly ["toggleOptions"];
     toggleOptions: IToggleInput;
     private _id;
-    constructor();
     private toggleChange;
     render(): DocumentFragment;
 }

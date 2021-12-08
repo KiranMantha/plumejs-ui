@@ -16,7 +16,7 @@ let NotificationMessage = class NotificationMessage {
     }
     onDismiss(e) {
         e.preventDefault();
-        this.notification.dismiss(this.notification.message.index);
+        this.notification.dismiss();
     }
     render() {
         if (this.notification && this.notification.message.content) {

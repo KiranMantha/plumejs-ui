@@ -15,15 +15,12 @@ export class MultiSelectComponent implements IHooks {
   private _windowClickListner: Subscription;
   private _selectedOptions: Array<any> = [];
   private _buttonEle: HTMLButtonElement;
-  private _buttonText: string;
+  private _buttonText = '';
   private _popupContainer: HTMLDivElement;
   private _searchText = '';
   private _selectItemsListContainer: HTMLDivElement;
 
-  constructor(private renderer: Renderer) {
-    this._onButtonClickTrigger = this._onButtonClickTrigger.bind(this);
-    this._filterList = this._filterList.bind(this);
-  }
+  constructor(private renderer: Renderer) {}
 
   onPropsChanged() {
     if (!!this.multiSelectOptions.resetWidget) {
@@ -218,7 +215,14 @@ export class MultiSelectComponent implements IHooks {
     if (!!this.multiSelectOptions.enableFilter) {
       return html`
         <div class="multi-select-filter">
-          <input class="filter-input" type="text" value="${this._searchText}" onkeyup=${this._filterList} />
+          <input
+            class="filter-input"
+            type="text"
+            value="${this._searchText}"
+            onkeyup=${(e: Event) => {
+              this._filterList(e);
+            }}
+          />
         </div>
       `;
     } else {
@@ -229,13 +233,19 @@ export class MultiSelectComponent implements IHooks {
   render() {
     if (this.multiSelectOptions && this.multiSelectOptions.data.length > 0) {
       return html`
+        <details class="dmulti-select">
+          <summary>click me</summary>
+          <div>i'm dropdown</div>
+        </details>
         <div class="multi-select-container" onclick=${this._preventClickPropagation}>
           <button
             ref=${(node) => {
               this._buttonEle = node;
             }}
             class="multi-select-trigger"
-            onclick=${this._onButtonClickTrigger}
+            onclick=${() => {
+              this._onButtonClickTrigger();
+            }}
             disabled=${!!this.multiSelectOptions.disableDropdown}
           >
             ${this._buttonText.translate()}

@@ -18,7 +18,7 @@ export class NotificationMessage implements IHooks {
 
   onDismiss(e: Event) {
     e.preventDefault();
-    this.notification.dismiss(this.notification.message.index);
+    this.notification.dismiss();
   }
 
   render() {
