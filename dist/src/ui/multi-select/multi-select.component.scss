@@ -11,24 +11,52 @@ $padder: 0.5rem 1rem;
     position: relative;
     cursor: pointer;
     padding: $padder;
+    line-height: 1;
+    color: initial;
     border: 1px solid $trigger-border-color;
 
     &::-webkit-details-marker {
       display: none;
     }
+
+    &::after {
+      border: 3px solid transparent;
+      border-radius: 2px;
+      border-right: 0;
+      border-top: 0;
+      content: '';
+      display: block;
+      height: 7px;
+      margin-top: -0.4375em;
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      transform: rotate(-45deg);
+      transform-origin: center;
+      width: 7px;
+      border-color: #3273dc;
+      right: 1.125em;
+      z-index: 4;
+    }
   }
 
-  &[open] > summary::before {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 80;
-    display: block;
-    cursor: default;
-    content: ' ';
-    background: transparent;
+  &[open] > summary {
+    &::before {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 80;
+      display: block;
+      cursor: default;
+      content: ' ';
+      background: transparent;
+    }
+    &::after {
+      transform: rotate(135deg);
+      margin-top: -0.2em;
+    }
   }
 }
 
