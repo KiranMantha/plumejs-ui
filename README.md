@@ -55,15 +55,6 @@ to
 
 # Usage
 
-In order to use the UI components, first they need to be registered in root component like follows:
-
-```typescript
-import { registerUIComponents } from '@plumejs/ui';
-registerUIComponents();
-```
-
-And that's it. They are ready to be used.
-
 ## Modal Service
 
 ModalService exposes three methods show, close and closeAll. Inorder to use this service:
