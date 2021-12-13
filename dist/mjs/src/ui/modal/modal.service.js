@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ModalService = void 0;
-const tslib_1 = require("tslib");
-const core_1 = require("@plumejs/core");
+import { __decorate } from "tslib";
+import { Injectable } from '@plumejs/core';
 let ModalService = class ModalService {
     _modalList = new Map();
     _addChild(child, parent = document.body) {
@@ -58,7 +55,7 @@ let ModalService = class ModalService {
         this._modalList.clear();
     }
 };
-ModalService = (0, tslib_1.__decorate)([
-    (0, core_1.Injectable)()
+ModalService = __decorate([
+    Injectable()
 ], ModalService);
-exports.ModalService = ModalService;
+export { ModalService };

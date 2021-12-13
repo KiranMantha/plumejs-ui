@@ -5,18 +5,28 @@
   "files": [
     "dist/**/*"
   ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/mjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/mjs/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "npm run lint && rimraf dist && tsc && copyfiles src/**/*.scss dist/",
+    "build": "npm run lint && rimraf dist && npm run build:mjs && npm run build:cjs",
+    "build:mjs": "tsc -p tsconfig.json && copyfiles src/**/*.scss dist/mjs",
+    "build:cjs": "tsc -p tsconfig-cjs.json && copyfiles src/**/*.scss dist/cjs",
     "lint": "eslint . --ext .ts --fix",
     "patch-update": "npm version patch",
     "tag": "git push --follow-tags",
     "tag-release": "npm run patch-update && npm run tag"
   },
-  "main": "./dist/index.js",
-  "license": "ISC",
+  "license": "SEE LICENSE IN LICENSE",
   "author": "KiranMantha <kiranv.mantha@gmail.com>",
   "repository": {
     "type": "git",

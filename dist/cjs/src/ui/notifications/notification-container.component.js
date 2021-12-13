@@ -6,11 +6,10 @@ const core_1 = require("@plumejs/core");
 const rxjs_1 = require("rxjs");
 const notification_container_component_scss_1 = (0, tslib_1.__importDefault)(require("./notification-container.component.scss"));
 let NotificationContainerComponent = class NotificationContainerComponent {
-    renderer;
-    _notifications = [];
-    onDismiss = new rxjs_1.Subject();
     constructor(renderer) {
         this.renderer = renderer;
+        this._notifications = [];
+        this.onDismiss = new rxjs_1.Subject();
     }
     setNotifications(message) {
         this._notifications.push(message);

@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.NotificationMessage = void 0;
-const tslib_1 = require("tslib");
-const core_1 = require("@plumejs/core");
-const notification_component_scss_1 = (0, tslib_1.__importDefault)(require("./notification.component.scss"));
+import { __decorate, __metadata } from "tslib";
+import { Component, html, Renderer } from '@plumejs/core';
+import notificationStyles from './notification.component.scss';
 let NotificationMessage = class NotificationMessage {
     renderer;
     ObservedProperties = ['notification'];
@@ -20,7 +17,7 @@ let NotificationMessage = class NotificationMessage {
     }
     render() {
         if (this.notification && this.notification.message.content) {
-            return (0, core_1.html) `
+            return html `
         <div
           class="notification ${this.notification.message.type === 'info'
                 ? 'is-info'
@@ -41,15 +38,15 @@ let NotificationMessage = class NotificationMessage {
       `;
         }
         else {
-            return (0, core_1.html) `<div></div>`;
+            return html `<div></div>`;
         }
     }
 };
-NotificationMessage = (0, tslib_1.__decorate)([
-    (0, core_1.Component)({
+NotificationMessage = __decorate([
+    Component({
         selector: 'notification-message',
-        styles: notification_component_scss_1.default
+        styles: notificationStyles
     }),
-    (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])
+    __metadata("design:paramtypes", [Renderer])
 ], NotificationMessage);
-exports.NotificationMessage = NotificationMessage;
+export { NotificationMessage };

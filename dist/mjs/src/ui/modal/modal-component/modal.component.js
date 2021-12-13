@@ -1,16 +1,13 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ModalComponent = void 0;
-const tslib_1 = require("tslib");
-const core_1 = require("@plumejs/core");
-const rxjs_1 = require("rxjs");
-const modal_component_scss_1 = (0, tslib_1.__importDefault)(require("./modal.component.scss"));
+import { __decorate, __metadata } from "tslib";
+import { Component, DomTransition, html } from '@plumejs/core';
+import { Subject } from 'rxjs';
+import modalComponentStyles from './modal.component.scss';
 let ModalComponent = class ModalComponent {
     domSrvc;
     ObservedProperties = ['modalData'];
     modalData;
-    onClose = new rxjs_1.Subject();
-    onOpen = new rxjs_1.Subject();
+    onClose = new Subject();
+    onOpen = new Subject();
     modalContentRef;
     transitionDuration = 300;
     constructor(domSrvc) {
@@ -31,10 +28,10 @@ let ModalComponent = class ModalComponent {
     }
     _renderModalCloseButton() {
         if (this.modalData.hideDefaultCloseButton) {
-            return (0, core_1.html) ``;
+            return html ``;
         }
         else {
-            return (0, core_1.html) `
+            return html `
         <button
           class="btn-close"
           onclick=${() => {
@@ -47,7 +44,7 @@ let ModalComponent = class ModalComponent {
         }
     }
     render() {
-        return (0, core_1.html) `
+        return html `
       <div class="modalDialog">
         <div
           ref=${(node) => {
@@ -64,11 +61,11 @@ let ModalComponent = class ModalComponent {
     `;
     }
 };
-ModalComponent = (0, tslib_1.__decorate)([
-    (0, core_1.Component)({
+ModalComponent = __decorate([
+    Component({
         selector: 'modal-dialog',
-        styles: modal_component_scss_1.default
+        styles: modalComponentStyles
     }),
-    (0, tslib_1.__metadata)("design:paramtypes", [core_1.DomTransition])
+    __metadata("design:paramtypes", [DomTransition])
 ], ModalComponent);
-exports.ModalComponent = ModalComponent;
+export { ModalComponent };

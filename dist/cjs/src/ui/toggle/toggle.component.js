@@ -5,9 +5,10 @@ const tslib_1 = require("tslib");
 const core_1 = require("@plumejs/core");
 const toggle_component_scss_1 = (0, tslib_1.__importDefault)(require("./toggle.component.scss"));
 let ToggleComponent = class ToggleComponent {
-    ObservedProperties = ['toggleOptions'];
-    toggleOptions;
-    _id = Math.random();
+    constructor() {
+        this.ObservedProperties = ['toggleOptions'];
+        this._id = Math.random();
+    }
     toggleChange(e) {
         const value = e.target.checked;
         this.toggleOptions.onchange(value);
