@@ -1,4 +1,4 @@
 export { IModal, ModalService } from './ui/modal';
-export { IMultiSelectOptions, MultiSelectComponent } from './ui/multi-select';
+export { IMultiSelectOptions, MultiSelectComponent, registerUIMultiSelect } from './ui/multi-select';
 export { NotificationService, NotificationType } from './ui/notifications';
-export { IToggleInput, ToggleComponent } from './ui/toggle';
+export { IToggleInput, ToggleComponent, registerUIToggle } from './ui/toggle';
