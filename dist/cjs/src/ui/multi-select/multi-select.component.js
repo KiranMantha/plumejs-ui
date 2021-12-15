@@ -214,10 +214,6 @@ let MultiSelectComponent = class MultiSelectComponent {
     render() {
         if (this.multiSelectOptions && this.multiSelectOptions.data.length > 0) {
             return (0, core_1.html) `
-        <details class="dmulti-select">
-          <summary>click me</summary>
-          <div>i'm dropdown</div>
-        </details>
         <div class="multi-select-container" onclick=${this._preventClickPropagation}>
           <button
             ref=${(node) => {
