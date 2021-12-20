@@ -9,7 +9,7 @@ let ModalService = class ModalService {
         parent.removeChild(child);
     }
     _addModal(options) {
-        const modalDOM = document.createElement('modal-dialog');
+        const modalDOM = document.createElement('ui-modal-dialog');
         this._addChild(modalDOM);
         const modalRef = modalDOM;
         const model = modalRef.getInstance();

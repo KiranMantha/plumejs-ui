@@ -63,7 +63,7 @@ let ModalComponent = class ModalComponent {
 };
 ModalComponent = __decorate([
     Component({
-        selector: 'modal-dialog',
+        selector: 'ui-modal-dialog',
         styles: modalComponentStyles
     }),
     __metadata("design:paramtypes", [DomTransition])

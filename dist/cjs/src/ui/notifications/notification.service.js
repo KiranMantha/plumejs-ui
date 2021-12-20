@@ -13,9 +13,9 @@ let NotificationService = class NotificationService {
         parent.removeChild(child);
     }
     _addMessage(message) {
-        let notificationContainer = document.getElementsByTagName('notification-container')[0];
+        let notificationContainer = document.getElementsByTagName('ui-notification-container')[0];
         if (!notificationContainer) {
-            notificationContainer = document.createElement('notification-container');
+            notificationContainer = document.createElement('ui-notification-container');
             this._addChild(notificationContainer);
         }
         if (!this._containerModel) {

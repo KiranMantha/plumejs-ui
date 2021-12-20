@@ -40,11 +40,11 @@ let NotificationContainerComponent = class NotificationContainerComponent {
                     }
                 };
                 return html `
-          <notification-message
+          <ui-notification-message
             onrendered=${(e) => {
                     this._renderNotification(e.target, notify);
                 }}
-          ></notification-message>
+          ></ui-notification-message>
         `;
             });
             return list;
@@ -62,7 +62,7 @@ let NotificationContainerComponent = class NotificationContainerComponent {
 };
 NotificationContainerComponent = __decorate([
     Component({
-        selector: 'notification-container',
+        selector: 'ui-notification-container',
         styles: notificationContainerStyles
     }),
     __metadata("design:paramtypes", [Renderer])

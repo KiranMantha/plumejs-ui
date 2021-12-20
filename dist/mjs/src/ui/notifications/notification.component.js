@@ -44,7 +44,7 @@ let NotificationMessage = class NotificationMessage {
 };
 NotificationMessage = __decorate([
     Component({
-        selector: 'notification-message',
+        selector: 'ui-notification-message',
         styles: notificationStyles
     }),
     __metadata("design:paramtypes", [Renderer])

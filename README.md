@@ -145,7 +145,6 @@ import { IToggleInput, ToggleComponent } from '@plumejs/ui';
 class MyComponent {
     toggleRef: ComponentRef<ToggleComponent>;
     toggleInput:IToggleInput = {
-        onchange: (checked: boolean) => { this.onToggleChange(checked); } // executed when toggle change. Required.
         onText: 'my.translation' // string. also works for translation or normal text. Optional. will not display text when not passed.
         offText: 'my.translation' // string. also works for translation or normal text. Optional. will not display text when not passed.
         isSelected: true // boolean. set the initial state of toggle switch. will be false by default. Optional
@@ -161,7 +160,12 @@ class MyComponent {
 
     render() {
         return html`
-            <toggle-button ref=${(node) => { this.toggleRef = node; }}></toggle-button>
+            <ui-toggle-button
+              ref=${(node) => { this.toggleRef = node; }}
+              ontogglechange=${(event) => {
+                this.onToggleChange(event.detail);
+              }}>
+            </ui-toggle-button>
         `
     }
 }

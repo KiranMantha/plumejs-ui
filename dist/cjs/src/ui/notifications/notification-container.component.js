@@ -42,11 +42,11 @@ let NotificationContainerComponent = class NotificationContainerComponent {
                     }
                 };
                 return (0, core_1.html) `
-          <notification-message
+          <ui-notification-message
             onrendered=${(e) => {
                     this._renderNotification(e.target, notify);
                 }}
-          ></notification-message>
+          ></ui-notification-message>
         `;
             });
             return list;
@@ -64,7 +64,7 @@ let NotificationContainerComponent = class NotificationContainerComponent {
 };
 NotificationContainerComponent = (0, tslib_1.__decorate)([
     (0, core_1.Component)({
-        selector: 'notification-container',
+        selector: 'ui-notification-container',
         styles: notification_container_component_scss_1.default
     }),
     (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])

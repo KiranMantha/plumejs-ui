@@ -16,9 +16,11 @@ export class NotificationService {
   }
 
   private _addMessage(message: Message) {
-    let notificationContainer: HTMLElement = document.getElementsByTagName('notification-container')[0] as HTMLElement;
+    let notificationContainer: HTMLElement = document.getElementsByTagName(
+      'ui-notification-container'
+    )[0] as HTMLElement;
     if (!notificationContainer) {
-      notificationContainer = document.createElement('notification-container');
+      notificationContainer = document.createElement('ui-notification-container');
       this._addChild(notificationContainer);
     }
 

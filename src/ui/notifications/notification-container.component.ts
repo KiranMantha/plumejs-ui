@@ -6,7 +6,7 @@ import notificationContainerStyles from './notification-container.component.scss
 import { INotification } from './notification.type';
 
 @Component({
-  selector: 'notification-container',
+  selector: 'ui-notification-container',
   styles: notificationContainerStyles
 })
 export class NotificationContainerComponent implements IHooks {
@@ -48,11 +48,11 @@ export class NotificationContainerComponent implements IHooks {
           }
         };
         return html`
-          <notification-message
+          <ui-notification-message
             onrendered=${(e) => {
               this._renderNotification(e.target, notify);
             }}
-          ></notification-message>
+          ></ui-notification-message>
         `;
       });
       return list;

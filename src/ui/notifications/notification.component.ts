@@ -3,7 +3,7 @@ import notificationStyles from './notification.component.scss';
 import { INotification } from './notification.type';
 
 @Component({
-  selector: 'notification-message',
+  selector: 'ui-notification-message',
   styles: notificationStyles
 })
 export class NotificationMessage implements IHooks {

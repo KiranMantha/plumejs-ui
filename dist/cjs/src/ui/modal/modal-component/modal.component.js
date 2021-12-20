@@ -63,7 +63,7 @@ let ModalComponent = class ModalComponent {
 };
 ModalComponent = (0, tslib_1.__decorate)([
     (0, core_1.Component)({
-        selector: 'modal-dialog',
+        selector: 'ui-modal-dialog',
         styles: modal_component_scss_1.default
     }),
     (0, tslib_1.__metadata)("design:paramtypes", [core_1.DomTransition])

@@ -4,7 +4,7 @@ import { IModalData } from '../modal.interface';
 import modalComponentStyles from './modal.component.scss';
 
 @Component({
-  selector: 'modal-dialog',
+  selector: 'ui-modal-dialog',
   styles: modalComponentStyles
 })
 export class ModalComponent implements IHooks {
