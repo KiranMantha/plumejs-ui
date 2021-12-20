@@ -7,11 +7,13 @@ const defaultDropdownOptions: IDropdownOptions<any> = {
   multiple: false,
   defaultText: 'Select',
   buttonText: null,
-  enableFilter: false
+  enableFilter: false,
+  disable: false,
+  resetDropdown: false
 };
 
 @Component({
-  selector: 'app-dropdown',
+  selector: 'ui-dropdown',
   styles: dropdownStyles
 })
 export class DropdownComponent<T> {
@@ -33,7 +35,14 @@ export class DropdownComponent<T> {
         ...defaultDropdownOptions,
         ...this.dropdownOptions
       };
-      const { multiple } = this.dropdownOptions;
+      const { multiple, resetDropdown } = this.dropdownOptions;
+      if (!!resetDropdown) {
+        this._selectedOptions = [];
+        this.dropdownOptions.options = this.dropdownOptions.options.map((option) => {
+          option.selected = false;
+          return option;
+        });
+      }
       this._isMultiSelect = multiple;
       this._getSummaryText();
     }
@@ -133,7 +142,7 @@ export class DropdownComponent<T> {
     if (this.dropdownOptions.options.length) {
       return html`
         <details
-          class="dropdown-component"
+          class="ui-dropdown-component ${this.dropdownOptions.disable ? 'disabled' : ''}"
           ref=${(node) => {
             this._detailsNode = node;
           }}
@@ -147,8 +156,8 @@ export class DropdownComponent<T> {
               ${this._summaryText}
             </div>
           </summary>
-          <div class="relative">
-            <div class="dropdown-menu">
+          <div class="ui-relative">
+            <div class="ui-dropdown-menu">
               <ul
                 ref=${(node) => {
                   this._optionsContainerNode = node;

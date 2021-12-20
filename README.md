@@ -167,101 +167,103 @@ class MyComponent {
 }
 ```
 
-## Multi-select Dropdown
+## Dropdown
 
-This component can replace traditional html dropdown and also can be transformed as multi select dropdown. To use this:
+The former multiselect dropdown is completely re-written from scratch to be more permformant. This component can replace traditional html dropdown and also can be transformed as multi select dropdown. To use this:
 
 ```typescript
 import { Component, html, ComponentRef } from '@plumejs/core';
-import { IMultiSelectOptions, MultiSelectComponent } from '@plumejs/ui';
+import { IDropdownOptions, IOption, DropdownComponent, registerUIDropdown } from '@plumejs/ui';
+
+// register dropdown. if this is done at root component level then no need to call this again.
+registerUIDropdown();
 
 @Component({
-    selector: 'your-selector'
+  selector: 'your-selector'
 })
 class YourComponent {
-    multiSelectRef: ComponentRef<MultiSelectComponent>;
-    multiSelectOptions: IMultiSelectOptions = {
-        // The items collection to display in dropdown list.
-        // The items can be objects or strings.
-        // Required
-		data: [{
-			name: 'option1'
-		}, {
-            name: 'option2'
-        },{
-            name: 'option3'
-        },{
-            name: 'option4'
-        },{
-            name: 'option5'
-        }],
+  // the dropdown component now specify what is the type of option.
+  dropdownRef: ComponentRef<DropdownComponent<string>>;
+  dropdownOptions: IDropdownOptions<string> = {
+    // The items collection to display in dropdown list.
+    // The items should be in {label: string, value: string | boolean | number | object, selected: boolean optional} format.
+    // in this example the value is of string type
+    // Required
+    options: [
+      {
+        label: 'Option 1',
+        value: 'o1'
+      },
+      {
+        label: 'Option 2',
+        value: 'o2',
+        selected: true // optional
+      },
+      {
+        label: 'Option 3',
+        value: 'o3'
+      },
+      {
+        label: 'Option 4',
+        value: 'o4'
+      }
+    ],
 
-        // The property to preselect items in dropdown.
-        // Accepts object array or string array.
-        // Optional
-        selectedValues: [{
-			name: 'option1'
-		}, {
-            name: 'option2'
-        }],
+    // The flag which helps to render as single select or multi select dropdown. Default false.
+    // Optional.
+    multiple: false,
 
-        // The property of item in items collection which needs to display as option text.
-        // This can't be a nested property.
-        // Optional. Not required if data is string array.
-		displayField: 'name',
+    // The flag enables search to find option in log dropdown list. Default false.
+    // Will work for both single select / multi select lists.
+    // Optional.
+    enableFilter: true,
 
-        // The flag which helps to render as single select or multi select dropdown. Default false.
-        // Optional.
-		multiple: false,
+    // The flag to disable dropdown. Default false.
+    // Optional.
+    disable: false,
 
-        // The flag which enable search to find option in log dropdown list. Default false.
-        // Will work for both single select/ multi select lists.
-        // Optional.
-		enableFilter: true,
+    // Default button text when no item is selected. Default 'Select'.
+    // Optional.
+    defaultText: 'Select',
 
-        // The flag to disable dropdown. Default false.
-        // Optional.
-		disableDropdown: false,
+    // A boolean flag used to reset dropdown widget.
+    // Optional
+    resetDropdown: false,
 
-        // Default button text when no item is selected. Default 'Select'.
-        // Optional.
-        nonSelectedText: 'Select',
-
-        // The function used to display custom text in the case of multi select list.
-        // The argument `options` is the options selected in multi select.
-        // By default the button text is displayed as comma seperated options.
-        // Optional.
-		buttonText: (options:Array<any>) => {
-			if (options.length === 0) {
-				return 'None selected';
-			}
-			else if (options.length > 3) {
-				return options.length + ' selected';
-			} else {
-				return options.map(i=>i.name).join(', ');
-			}
-		},
-
-        // A listener function to get selected option.
-        // If data is object array, option will be a simple object in the case of single select or an array of objects in the case of multi select.
-        // If data is string array, option will be a string in the case of single select or an array of strings in the case of multi select.
-        // Required.
-		onchange: (selectedOption: any) => { console.log(selectedOption); }
-
-        // A boolean flag used to reset multi select widget.
-        // Optional
-        resetWidget: false
-	}
-
-    mount() {
-        this.multiSelectRef.setProps(this.multiSelectOptions);
+    // The function used to display custom text in the case of multi select list.
+    // The argument `options` is the options selected in multi select.
+    // By default the button text is displayed as comma seperated options.
+    // Optional.
+    buttonText: (options: IOption<string[]>) => {
+      if (options.length === 0) {
+        return 'None selected';
+      } else if (options.length > 3) {
+        return options.length + ' selected';
+      } else {
+        return options.map((i) => i.label).join(', ');
+      }
     }
+  };
 
-    render() {
-        return html`
-            <multi-select ref=${(node) => { this.multiSelectRef = node; }}></multi-select>
-        `;
-    }
+  mount() {
+    this.dropdownRef.setProps({
+      dropdownOptions: this.dropdownOptions
+    });
+  }
+
+  render() {
+    return html`
+      <ui-dropdown
+        ref=${(node) => {
+          this.dropdownRef = node;
+        }}
+        onoptionselected=${(event) => {
+          // return selected options
+          // Array if in case of multi select mode
+          console.log(event.detail);
+        }}
+      ></ui-dropdown>
+    `;
+  }
 }
-
 ```

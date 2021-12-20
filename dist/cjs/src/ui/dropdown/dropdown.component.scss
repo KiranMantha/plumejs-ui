@@ -2,8 +2,18 @@ $padder: 0.5rem 1rem;
 $trigger-border-color: #ccc;
 $option-hover-color: #eee;
 $chevron-color: #3273dc;
+$disabled-color: rgba(16, 16, 16, 0.3);
 
-.dropdown-component {
+.ui-dropdown-component {
+  &.disabled {
+    cursor: not-allowed;
+
+    & > summary {
+      pointer-events: none;
+      color: $disabled-color;
+    }
+  }
+
   & > summary {
     list-style: none;
     position: relative;
@@ -61,12 +71,11 @@ $chevron-color: #3273dc;
     }
   }
 
-  .relative {
+  .ui-relative {
     position: relative;
   }
 
-  .dropdown-menu {
-    display: initial;
+  .ui-dropdown-menu {
     position: absolute;
     top: auto;
     left: 0px;
@@ -74,8 +83,6 @@ $chevron-color: #3273dc;
     border: 1px solid $trigger-border-color;
     background-color: #fff;
     border-radius: 2px;
-    padding: 0;
-    min-width: auto;
     z-index: 100;
 
     ul {
@@ -140,6 +147,7 @@ $chevron-color: #3273dc;
           position: relative;
           padding: $padder;
           border-left: 3px solid transparent;
+          white-space: nowrap;
 
           &:hover {
             background-color: $option-hover-color;

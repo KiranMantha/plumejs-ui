@@ -8,5 +8,7 @@ export interface IDropdownOptions<T> {
   multiple?: boolean;
   defaultText?: string;
   enableFilter?: boolean;
+  disable?: boolean;
+  resetDropdown?: boolean;
   buttonText?: (options: IOption<T>[]) => string;
 }

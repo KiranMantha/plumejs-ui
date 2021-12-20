@@ -6,7 +6,9 @@ const defaultDropdownOptions = {
     multiple: false,
     defaultText: 'Select',
     buttonText: null,
-    enableFilter: false
+    enableFilter: false,
+    disable: false,
+    resetDropdown: false
 };
 let DropdownComponent = class DropdownComponent {
     renderer;
@@ -27,7 +29,14 @@ let DropdownComponent = class DropdownComponent {
                 ...defaultDropdownOptions,
                 ...this.dropdownOptions
             };
-            const { multiple } = this.dropdownOptions;
+            const { multiple, resetDropdown } = this.dropdownOptions;
+            if (!!resetDropdown) {
+                this._selectedOptions = [];
+                this.dropdownOptions.options = this.dropdownOptions.options.map((option) => {
+                    option.selected = false;
+                    return option;
+                });
+            }
             this._isMultiSelect = multiple;
             this._getSummaryText();
         }
@@ -122,7 +131,7 @@ let DropdownComponent = class DropdownComponent {
         if (this.dropdownOptions.options.length) {
             return html `
         <details
-          class="dropdown-component"
+          class="ui-dropdown-component ${this.dropdownOptions.disable ? 'disabled' : ''}"
           ref=${(node) => {
                 this._detailsNode = node;
             }}
@@ -136,8 +145,8 @@ let DropdownComponent = class DropdownComponent {
               ${this._summaryText}
             </div>
           </summary>
-          <div class="relative">
-            <div class="dropdown-menu">
+          <div class="ui-relative">
+            <div class="ui-dropdown-menu">
               <ul
                 ref=${(node) => {
                 this._optionsContainerNode = node;
@@ -157,7 +166,7 @@ let DropdownComponent = class DropdownComponent {
 };
 DropdownComponent = __decorate([
     Component({
-        selector: 'app-dropdown',
+        selector: 'ui-dropdown',
         styles: dropdownStyles
     }),
     __metadata("design:paramtypes", [Renderer])

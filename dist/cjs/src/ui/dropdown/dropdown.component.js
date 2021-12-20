@@ -9,7 +9,9 @@ const defaultDropdownOptions = {
     multiple: false,
     defaultText: 'Select',
     buttonText: null,
-    enableFilter: false
+    enableFilter: false,
+    disable: false,
+    resetDropdown: false
 };
 let DropdownComponent = class DropdownComponent {
     constructor(renderer) {
@@ -22,7 +24,14 @@ let DropdownComponent = class DropdownComponent {
     onPropsChanged() {
         if (this.dropdownOptions.options.length) {
             this.dropdownOptions = Object.assign(Object.assign({}, defaultDropdownOptions), this.dropdownOptions);
-            const { multiple } = this.dropdownOptions;
+            const { multiple, resetDropdown } = this.dropdownOptions;
+            if (!!resetDropdown) {
+                this._selectedOptions = [];
+                this.dropdownOptions.options = this.dropdownOptions.options.map((option) => {
+                    option.selected = false;
+                    return option;
+                });
+            }
             this._isMultiSelect = multiple;
             this._getSummaryText();
         }
@@ -117,7 +126,7 @@ let DropdownComponent = class DropdownComponent {
         if (this.dropdownOptions.options.length) {
             return (0, core_1.html) `
         <details
-          class="dropdown-component"
+          class="ui-dropdown-component ${this.dropdownOptions.disable ? 'disabled' : ''}"
           ref=${(node) => {
                 this._detailsNode = node;
             }}
@@ -131,8 +140,8 @@ let DropdownComponent = class DropdownComponent {
               ${this._summaryText}
             </div>
           </summary>
-          <div class="relative">
-            <div class="dropdown-menu">
+          <div class="ui-relative">
+            <div class="ui-dropdown-menu">
               <ul
                 ref=${(node) => {
                 this._optionsContainerNode = node;
@@ -152,7 +161,7 @@ let DropdownComponent = class DropdownComponent {
 };
 DropdownComponent = (0, tslib_1.__decorate)([
     (0, core_1.Component)({
-        selector: 'app-dropdown',
+        selector: 'ui-dropdown',
         styles: dropdown_component_scss_1.default
     }),
     (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])
