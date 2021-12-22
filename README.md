@@ -61,7 +61,10 @@ ModalService exposes three methods show, close and closeAll. Inorder to use this
 
 ```typescript
 import { Component } from '@plumejs/core';
-import { ModalService, IModal } from '@plumejs/ui';
+import { registerUIModal, ModalService, IModal } from '@plumejs/ui';
+
+// no need to call in routes if done in root component
+registerUIModal();
 
 @Component({
     selector: 'your-selector'
@@ -109,7 +112,10 @@ NotificationService is used to show simple notification. Inorder to use this
 
 ```typescript
 import { Component } from '@plumejs/core';
-import { NotificationService, NotificationType } from '@plumejs/ui';
+import { registerUINotifications, NotificationService, NotificationType } from '@plumejs/ui';
+
+// no need to call in routes if done in root component
+registerUINotifications();
 
 @Component({
   selector: 'your-selector'
@@ -137,7 +143,10 @@ Toggle button provide a switch interface. It accepts input `toggleOptions`. It c
 
 ```typescript
 import { Component, html, ComponentRef } from '@plumejs/core';
-import { IToggleInput, ToggleComponent } from '@plumejs/ui';
+import { registerUIToggle, IToggleInput, ToggleComponent } from '@plumejs/ui';
+
+// no need to call in routes if done in root component
+registerUIToggle();
 
 @Component({
     selector: 'my-comp'

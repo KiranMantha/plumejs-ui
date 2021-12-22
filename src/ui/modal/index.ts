@@ -1,3 +1,4 @@
-import './modal-component/modal.component';
+const registerUIModal = () => import('./modal-component/modal.component');
 export { IModal } from './modal.interface';
 export { ModalService } from './modal.service';
+export { registerUIModal };
