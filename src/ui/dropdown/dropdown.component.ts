@@ -142,30 +142,27 @@ export class DropdownComponent<T> {
     if (this.dropdownOptions.options.length) {
       return html`
         <details
-          class="ui-dropdown-component ${this.dropdownOptions.disable ? 'disabled' : ''}"
+          role="dropdown"
+          class="${this.dropdownOptions.disable ? 'disabled' : ''}"
           ref=${(node) => {
             this._detailsNode = node;
           }}
         >
-          <summary>
-            <div
+          <summary
+            ref=${(node) => {
+              this._summaryNode = node;
+            }}
+          >
+            ${this._summaryText}
+          </summary>
+          <div>
+            <ul
               ref=${(node) => {
-                this._summaryNode = node;
+                this._optionsContainerNode = node;
               }}
             >
-              ${this._summaryText}
-            </div>
-          </summary>
-          <div class="ui-relative">
-            <div class="ui-dropdown-menu">
-              <ul
-                ref=${(node) => {
-                  this._optionsContainerNode = node;
-                }}
-              >
-                ${this._buildItems()}
-              </ul>
-            </div>
+              ${this._buildItems()}
+            </ul>
           </div>
         </details>
       `;
