@@ -30,6 +30,11 @@ export class ModalComponent implements IHooks {
     );
   }
 
+  unmount() {
+    this.onOpen.unsubscribe();
+    this.onClose.unsubscribe();
+  }
+
   private _close() {
     this.domSrvc.onTransitionEnd(
       this.modalContentRef,

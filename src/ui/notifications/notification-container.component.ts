@@ -62,7 +62,7 @@ export class NotificationContainerComponent implements IHooks {
   }
 
   unmount() {
-    this.onDismiss.complete();
+    this.onDismiss.unsubscribe();
   }
 
   render() {

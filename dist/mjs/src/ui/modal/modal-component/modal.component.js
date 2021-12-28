@@ -19,6 +19,10 @@ let ModalComponent = class ModalComponent {
             this.onOpen.complete();
         }, this.transitionDuration);
     }
+    unmount() {
+        this.onOpen.unsubscribe();
+        this.onClose.unsubscribe();
+    }
     _close() {
         this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
             this.onClose.next();

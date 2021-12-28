@@ -11,6 +11,7 @@ export declare class ModalComponent implements IHooks {
     private transitionDuration;
     constructor(domSrvc: DomTransition);
     mount(): void;
+    unmount(): void;
     private _close;
     private _renderModalCloseButton;
     render(): DocumentFragment;
