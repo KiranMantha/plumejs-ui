@@ -47,6 +47,7 @@ details[role='list'] {
   &[open] > summary {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    margin: 0;
 
     &::before {
       position: fixed;
@@ -77,11 +78,18 @@ details[role='list'] {
     background-color: #fff;
     z-index: 100;
     list-style: none;
+    margin: 0;
+    padding: 0;
 
     li {
       box-sizing: border-box;
       padding: 0;
       color: inherit;
+      margin: 0;
+
+      &::marker {
+        content: '';
+      }
 
       &.filter {
         padding: $padder;
@@ -138,6 +146,7 @@ details[role='list'] {
         padding: $padder;
         border-left: 3px solid transparent;
         white-space: nowrap;
+        margin: 0;
 
         &:hover {
           background-color: $option-hover-color;
