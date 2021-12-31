@@ -54,6 +54,9 @@ $white: #fff;
     cursor: pointer;
     border-radius: 2px;
     color: $white;
+    width: auto;
+    padding: 0 8px;
+    margin: 0;
 
     &.hide-notify {
       display: none;
