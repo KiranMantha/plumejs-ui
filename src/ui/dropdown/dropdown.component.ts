@@ -142,28 +142,28 @@ export class DropdownComponent<T> {
     if (this.dropdownOptions.options.length) {
       return html`
         <details
-          role="dropdown"
+          role="list"
           class="${this.dropdownOptions.disable ? 'disabled' : ''}"
           ref=${(node) => {
             this._detailsNode = node;
           }}
         >
           <summary
+            aria-haspopup="listbox"
             ref=${(node) => {
               this._summaryNode = node;
             }}
           >
             ${this._summaryText}
           </summary>
-          <div>
-            <ul
-              ref=${(node) => {
-                this._optionsContainerNode = node;
-              }}
-            >
-              ${this._buildItems()}
-            </ul>
-          </div>
+          <ul
+            role="listbox"
+            ref=${(node) => {
+              this._optionsContainerNode = node;
+            }}
+          >
+            ${this._buildItems()}
+          </ul>
         </details>
       `;
     } else {

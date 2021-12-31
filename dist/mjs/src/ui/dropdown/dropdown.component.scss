@@ -5,7 +5,9 @@ $chevron-color: #3273dc;
 $checkmark-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23FFF' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
 $chevron-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(65, 84, 98, 0.999)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 
-details[role='dropdown'] {
+details[role='list'] {
+  position: relative;
+
   &.disabled {
     cursor: not-allowed;
     & > summary {
@@ -40,10 +42,6 @@ details[role='dropdown'] {
       margin-top: -2px;
       margin-left: 10px;
     }
-
-    div {
-      margin-right: 30px;
-    }
   }
 
   &[open] > summary {
@@ -67,11 +65,7 @@ details[role='dropdown'] {
     }
   }
 
-  summary + div {
-    position: relative;
-  }
-
-  summary + div ul {
+  summary + ul {
     position: absolute;
     top: auto;
     left: 0px;
