@@ -17,6 +17,7 @@
   .modalDialog-content {
     font-size: inherit;
     font-family: inherit;
+    color: inherit;
     position: relative;
     background: #fff;
     z-index: 1;
@@ -37,12 +38,15 @@
     }
 
     .btn-close {
+      display: inline;
+      width: auto;
+      color: inherit;
       cursor: pointer;
       border: none;
       outline: none;
       background: #fff;
       font-weight: 600;
-      font-size: 2rem;
+      font-size: 1.5rem;
       line-height: 1;
       position: absolute;
       right: 0;
