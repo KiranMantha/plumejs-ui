@@ -20,6 +20,7 @@ let NotificationMessage = class NotificationMessage {
         if (this.notification && this.notification.message.content) {
             return (0, core_1.html) `
         <div
+          part="notification"
           class="notification ${this.notification.message.type === 'info'
                 ? 'is-info'
                 : this.notification.message.type === 'danger'

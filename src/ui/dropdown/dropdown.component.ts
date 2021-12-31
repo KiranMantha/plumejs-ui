@@ -143,6 +143,7 @@ export class DropdownComponent<T> {
       return html`
         <details
           role="list"
+          part="list"
           class="${this.dropdownOptions.disable ? 'disabled' : ''}"
           ref=${(node) => {
             this._detailsNode = node;

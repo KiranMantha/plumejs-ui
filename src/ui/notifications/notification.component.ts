@@ -25,6 +25,7 @@ export class NotificationMessage implements IHooks {
     if (this.notification && this.notification.message.content) {
       return html`
         <div
+          part="notification"
           class="notification ${this.notification.message.type === 'info'
             ? 'is-info'
             : this.notification.message.type === 'danger'

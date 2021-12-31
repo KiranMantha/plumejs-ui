@@ -127,6 +127,7 @@ let DropdownComponent = class DropdownComponent {
             return (0, core_1.html) `
         <details
           role="list"
+          part="list"
           class="${this.dropdownOptions.disable ? 'disabled' : ''}"
           ref=${(node) => {
                 this._detailsNode = node;

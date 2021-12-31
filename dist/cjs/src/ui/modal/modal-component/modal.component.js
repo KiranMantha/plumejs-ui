@@ -49,7 +49,7 @@ let ModalComponent = class ModalComponent {
     }
     render() {
         return (0, core_1.html) `
-      <div class="modalDialog">
+      <div class="modalDialog" part="modalDialog">
         <div
           ref=${(node) => {
             this.modalContentRef = node;

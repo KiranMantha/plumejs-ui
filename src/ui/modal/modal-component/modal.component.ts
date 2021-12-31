@@ -66,7 +66,7 @@ export class ModalComponent implements IHooks {
 
   render() {
     return html`
-      <div class="modalDialog">
+      <div class="modalDialog" part="modalDialog">
         <div
           ref=${(node) => {
             this.modalContentRef = node;

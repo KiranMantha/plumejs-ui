@@ -21,7 +21,7 @@ let ToggleComponent = class ToggleComponent {
         this.renderer.emitEvent('togglechange', value);
     }
     render() {
-        return (0, core_1.html) `<div class="toggle-container">
+        return (0, core_1.html) `<div class="toggle-container" part="toggle-container">
       <span>${this.toggleOptions.offText.translate()}</span>
       <input
         type="checkbox"

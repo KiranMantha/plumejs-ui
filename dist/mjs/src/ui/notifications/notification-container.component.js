@@ -57,7 +57,7 @@ let NotificationContainerComponent = class NotificationContainerComponent {
         this.onDismiss.unsubscribe();
     }
     render() {
-        return html ` <div class="notifications_wrapper">${this._renderNotifications()}</div> `;
+        return html ` <div class="notifications_wrapper" part="notifications_wrapper">${this._renderNotifications()}</div> `;
     }
 };
 NotificationContainerComponent = __decorate([
