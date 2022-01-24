@@ -63,7 +63,8 @@ let NotificationContainerComponent = class NotificationContainerComponent {
 NotificationContainerComponent = __decorate([
     Component({
         selector: 'ui-notification-container',
-        styles: notificationContainerStyles
+        styles: notificationContainerStyles,
+        deps: [Renderer]
     }),
     __metadata("design:paramtypes", [Renderer])
 ], NotificationContainerComponent);

@@ -14,7 +14,8 @@ const defaultDropdownOptions: IDropdownOptions<any> = {
 
 @Component({
   selector: 'ui-dropdown',
-  styles: dropdownStyles
+  styles: dropdownStyles,
+  deps: [Renderer]
 })
 export class DropdownComponent<T> {
   readonly ObservedProperties = <const>['dropdownOptions'];

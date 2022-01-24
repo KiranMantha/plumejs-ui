@@ -3,9 +3,14 @@ import { Message } from './message';
 import { NotificationContainerComponent } from './notification-container.component';
 import { NotificationType } from './notification.type';
 
-@Injectable()
+@Injectable({ name: 'NotificationService' })
 export class NotificationService {
   private _containerModel: NotificationContainerComponent;
+
+  sendMessage(content: string, type: NotificationType = NotificationType.Info, autoHide = false) {
+    const message = new Message(content, type, autoHide);
+    this._addMessage(message);
+  }
 
   private _addChild(child: HTMLElement, parent: HTMLElement = document.body) {
     parent.appendChild(child);
@@ -36,10 +41,5 @@ export class NotificationService {
     }
 
     this._containerModel.setNotifications(message);
-  }
-
-  sendMessage(content: string, type: NotificationType = NotificationType.Info, autoHide = false) {
-    const message = new Message(content, type, autoHide);
-    this._addMessage(message);
   }
 }

@@ -5,7 +5,8 @@ import modalComponentStyles from './modal.component.scss';
 
 @Component({
   selector: 'ui-modal-dialog',
-  styles: modalComponentStyles
+  styles: modalComponentStyles,
+  deps: [DomTransition]
 })
 export class ModalComponent implements IHooks {
   readonly ObservedProperties = <const>['modalData'];

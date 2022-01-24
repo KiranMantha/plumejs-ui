@@ -61,6 +61,6 @@ let ModalService = class ModalService {
     }
 };
 ModalService = (0, tslib_1.__decorate)([
-    (0, core_1.Injectable)()
+    (0, core_1.Injectable)({ name: 'ModalService' })
 ], ModalService);
 exports.ModalService = ModalService;

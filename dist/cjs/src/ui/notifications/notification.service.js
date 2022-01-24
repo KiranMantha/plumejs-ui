@@ -6,6 +6,10 @@ const core_1 = require("@plumejs/core");
 const message_1 = require("./message");
 const notification_type_1 = require("./notification.type");
 let NotificationService = class NotificationService {
+    sendMessage(content, type = notification_type_1.NotificationType.Info, autoHide = false) {
+        const message = new message_1.Message(content, type, autoHide);
+        this._addMessage(message);
+    }
     _addChild(child, parent = document.body) {
         parent.appendChild(child);
     }
@@ -30,12 +34,8 @@ let NotificationService = class NotificationService {
         }
         this._containerModel.setNotifications(message);
     }
-    sendMessage(content, type = notification_type_1.NotificationType.Info, autoHide = false) {
-        const message = new message_1.Message(content, type, autoHide);
-        this._addMessage(message);
-    }
 };
 NotificationService = (0, tslib_1.__decorate)([
-    (0, core_1.Injectable)()
+    (0, core_1.Injectable)({ name: 'NotificationService' })
 ], NotificationService);
 exports.NotificationService = NotificationService;

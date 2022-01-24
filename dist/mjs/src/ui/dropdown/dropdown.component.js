@@ -165,7 +165,8 @@ let DropdownComponent = class DropdownComponent {
 DropdownComponent = __decorate([
     Component({
         selector: 'ui-dropdown',
-        styles: dropdownStyles
+        styles: dropdownStyles,
+        deps: [Renderer]
     }),
     __metadata("design:paramtypes", [Renderer])
 ], DropdownComponent);

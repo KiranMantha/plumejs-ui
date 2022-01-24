@@ -67,12 +67,13 @@ import { registerUIModal, ModalService, IModal } from '@plumejs/ui';
 registerUIModal();
 
 @Component({
-    selector: 'your-selector'
+    selector: 'your-selector',
+    deps: [ModalService]
 })
 class YourComponent {
     modal:IModal;
 
-    constructor(private modalService:ModalService){ }
+    constructor(private modalService: ModalService){ }
 
     showModal() {
         //show method returns IModal interface which have property `Id` and methods `onOpen, onClose`
@@ -118,7 +119,8 @@ import { registerUINotifications, NotificationService, NotificationType } from '
 registerUINotifications();
 
 @Component({
-  selector: 'your-selector'
+  selector: 'your-selector',
+  deps: [NotificationService]
 })
 class YourComponent {
   constructor(private notifySrvc: NotificationService) {}

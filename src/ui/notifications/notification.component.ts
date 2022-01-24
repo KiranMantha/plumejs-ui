@@ -4,7 +4,8 @@ import { INotification } from './notification.type';
 
 @Component({
   selector: 'ui-notification-message',
-  styles: notificationStyles
+  styles: notificationStyles,
+  deps: [Renderer]
 })
 export class NotificationMessage implements IHooks {
   readonly ObservedProperties = <const>['notification'];

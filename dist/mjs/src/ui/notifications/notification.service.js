@@ -4,6 +4,10 @@ import { Message } from './message';
 import { NotificationType } from './notification.type';
 let NotificationService = class NotificationService {
     _containerModel;
+    sendMessage(content, type = NotificationType.Info, autoHide = false) {
+        const message = new Message(content, type, autoHide);
+        this._addMessage(message);
+    }
     _addChild(child, parent = document.body) {
         parent.appendChild(child);
     }
@@ -28,12 +32,8 @@ let NotificationService = class NotificationService {
         }
         this._containerModel.setNotifications(message);
     }
-    sendMessage(content, type = NotificationType.Info, autoHide = false) {
-        const message = new Message(content, type, autoHide);
-        this._addMessage(message);
-    }
 };
 NotificationService = __decorate([
-    Injectable()
+    Injectable({ name: 'NotificationService' })
 ], NotificationService);
 export { NotificationService };

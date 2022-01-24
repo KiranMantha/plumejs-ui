@@ -7,7 +7,8 @@ import { INotification } from './notification.type';
 
 @Component({
   selector: 'ui-notification-container',
-  styles: notificationContainerStyles
+  styles: notificationContainerStyles,
+  deps: [Renderer]
 })
 export class NotificationContainerComponent implements IHooks {
   private _notifications: Array<Message> = [];

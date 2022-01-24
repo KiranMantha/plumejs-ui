@@ -15,7 +15,8 @@ const defaultToggleOptions: IToggleInput = {
 
 @Component({
   selector: 'ui-toggle-button',
-  styles: toggleStyles
+  styles: toggleStyles,
+  deps: [Renderer]
 })
 export class ToggleComponent implements IHooks {
   readonly ObservedProperties = <const>['toggleOptions'];
