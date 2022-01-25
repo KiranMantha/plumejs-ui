@@ -36,6 +36,6 @@ let NotificationService = class NotificationService {
     }
 };
 NotificationService = (0, tslib_1.__decorate)([
-    (0, core_1.Injectable)({ name: 'NotificationService' })
+    (0, core_1.Injectable)()
 ], NotificationService);
 exports.NotificationService = NotificationService;

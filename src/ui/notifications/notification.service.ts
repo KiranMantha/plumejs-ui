@@ -3,7 +3,7 @@ import { Message } from './message';
 import { NotificationContainerComponent } from './notification-container.component';
 import { NotificationType } from './notification.type';
 
-@Injectable({ name: 'NotificationService' })
+@Injectable()
 export class NotificationService {
   private _containerModel: NotificationContainerComponent;
 

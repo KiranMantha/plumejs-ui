@@ -2,7 +2,7 @@ import { ComponentRef, Injectable } from '@plumejs/core';
 import { ModalComponent } from './modal-component/modal.component';
 import { IModal, IModalOptions } from './modal.interface';
 
-@Injectable({ name: 'ModalService' })
+@Injectable()
 export class ModalService {
   private _modalList: Map<number, HTMLElement> = new Map();
 

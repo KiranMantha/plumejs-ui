@@ -34,6 +34,6 @@ let NotificationService = class NotificationService {
     }
 };
 NotificationService = __decorate([
-    Injectable({ name: 'NotificationService' })
+    Injectable()
 ], NotificationService);
 export { NotificationService };

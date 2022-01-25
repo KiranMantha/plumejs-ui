@@ -56,6 +56,6 @@ let ModalService = class ModalService {
     }
 };
 ModalService = __decorate([
-    Injectable({ name: 'ModalService' })
+    Injectable()
 ], ModalService);
 export { ModalService };
