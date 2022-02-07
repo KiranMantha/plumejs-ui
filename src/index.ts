@@ -1,4 +1,4 @@
-export * from './ui/modal';
-export * from './ui/multi-select';
-export * from './ui/notifications';
-export * from './ui/toggle';
+export { IModal, ModalService, registerUIModal } from './ui/modal';
+export { NotificationService, NotificationType, registerUINotifications } from './ui/notifications';
+export { IToggleInput, ToggleComponent, registerUIToggle } from './ui/toggle';
+export { IDropdownOptions, IOption, DropdownComponent, registerUIDropdown } from './ui/dropdown';

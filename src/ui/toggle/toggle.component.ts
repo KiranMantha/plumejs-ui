@@ -1,47 +1,49 @@
-import { Component, html, IHooks } from '@plumejs/core';
+import { Component, html, IHooks, Renderer } from '@plumejs/core';
 import toggleStyles from './toggle.component.scss';
 
 export interface IToggleInput {
-  onchange(checked?: boolean): void;
   onText?: string;
   offText?: string;
   isSelected?: boolean;
 }
 
+const defaultToggleOptions: IToggleInput = {
+  onText: 'ON',
+  offText: 'OFF',
+  isSelected: false
+};
+
 @Component({
-  selector: 'toggle-button',
-  styles: toggleStyles
+  selector: 'ui-toggle-button',
+  styles: toggleStyles,
+  deps: [Renderer]
 })
 export class ToggleComponent implements IHooks {
   readonly ObservedProperties = <const>['toggleOptions'];
 
-  toggleOptions: IToggleInput;
+  toggleOptions: IToggleInput = { ...defaultToggleOptions };
   private _id = Math.random();
 
-  constructor() {
-    this.toggleChange = this.toggleChange.bind(this);
-  }
+  constructor(private renderer: Renderer) {}
 
   private toggleChange(e: Event) {
     const value = (e.target as any).checked;
-    this.toggleOptions.onchange(value);
+    this.renderer.emitEvent('togglechange', value);
   }
 
   render() {
-    if (this.toggleOptions) {
-      return html` <div class="toggle-container">
-        <span>${this.toggleOptions.offText ? this.toggleOptions.offText.translate() : ''}</span>
-        <input
-          type="checkbox"
-          id="${this._id}"
-          checked="${!!this.toggleOptions.isSelected}"
-          onchange=${this.toggleChange}
-        />
-        <label for="${this._id}"></label>
-        <span>${this.toggleOptions.onText ? this.toggleOptions.onText.translate() : ''}</span>
-      </div>`;
-    } else {
-      return html`<div></div>`;
-    }
+    return html`<div class="toggle-container" part="toggle-container">
+      <span>${this.toggleOptions.offText.translate()}</span>
+      <input
+        type="checkbox"
+        id="${this._id}"
+        checked="${!!this.toggleOptions.isSelected}"
+        onchange=${(e: Event) => {
+          this.toggleChange(e);
+        }}
+      />
+      <label for="${this._id}"></label>
+      <span>${this.toggleOptions.onText.translate()}</span>
+    </div>`;
   }
 }

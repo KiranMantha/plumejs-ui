@@ -4,8 +4,9 @@ import { IModalData } from '../modal.interface';
 import modalComponentStyles from './modal.component.scss';
 
 @Component({
-  selector: 'modal-dialog',
-  styles: modalComponentStyles
+  selector: 'ui-modal-dialog',
+  styles: modalComponentStyles,
+  deps: [DomTransition]
 })
 export class ModalComponent implements IHooks {
   readonly ObservedProperties = <const>['modalData'];
@@ -28,6 +29,11 @@ export class ModalComponent implements IHooks {
       },
       this.transitionDuration
     );
+  }
+
+  unmount() {
+    this.onOpen.unsubscribe();
+    this.onClose.unsubscribe();
   }
 
   private _close() {
@@ -61,7 +67,7 @@ export class ModalComponent implements IHooks {
 
   render() {
     return html`
-      <div class="modalDialog">
+      <div class="modalDialog" part="modalDialog">
         <div
           ref=${(node) => {
             this.modalContentRef = node;

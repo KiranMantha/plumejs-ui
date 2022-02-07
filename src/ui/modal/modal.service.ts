@@ -15,7 +15,7 @@ export class ModalService {
   }
 
   private _addModal(options: IModalOptions): IModal {
-    const modalDOM = document.createElement('modal-dialog');
+    const modalDOM = document.createElement('ui-modal-dialog');
     this._addChild(modalDOM);
     const modalRef = modalDOM as unknown as ComponentRef<ModalComponent>;
     const model = modalRef.getInstance();

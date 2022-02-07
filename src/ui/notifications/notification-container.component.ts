@@ -6,16 +6,15 @@ import notificationContainerStyles from './notification-container.component.scss
 import { INotification } from './notification.type';
 
 @Component({
-  selector: 'notification-container',
-  styles: notificationContainerStyles
+  selector: 'ui-notification-container',
+  styles: notificationContainerStyles,
+  deps: [Renderer]
 })
 export class NotificationContainerComponent implements IHooks {
   private _notifications: Array<Message> = [];
   onDismiss: Subject<number> = new Subject();
 
-  constructor(private renderer: Renderer) {
-    this.dismiss = this.dismiss.bind(this);
-  }
+  constructor(private renderer: Renderer) {}
 
   setNotifications(message: Message) {
     this._notifications.push(message);
@@ -35,7 +34,7 @@ export class NotificationContainerComponent implements IHooks {
     target.setProps({ notification });
     if (notification.message.autoHide) {
       setTimeout(() => {
-        notification.dismiss(notification.message.index);
+        notification.dismiss();
       }, 2000);
     }
   }
@@ -45,14 +44,16 @@ export class NotificationContainerComponent implements IHooks {
       const list = this._notifications.map((msg: Message) => {
         const notify: INotification = {
           message: msg,
-          dismiss: this.dismiss
+          dismiss: () => {
+            this.dismiss(msg.index);
+          }
         };
         return html`
-          <notification-message
+          <ui-notification-message
             onrendered=${(e) => {
               this._renderNotification(e.target, notify);
             }}
-          ></notification-message>
+          ></ui-notification-message>
         `;
       });
       return list;
@@ -62,10 +63,10 @@ export class NotificationContainerComponent implements IHooks {
   }
 
   unmount() {
-    this.onDismiss.complete();
+    this.onDismiss.unsubscribe();
   }
 
   render() {
-    return html` <div class="notifications_wrapper">${this._renderNotifications()}</div> `;
+    return html` <div class="notifications_wrapper" part="notifications_wrapper">${this._renderNotifications()}</div> `;
   }
 }

@@ -7,6 +7,11 @@ import { NotificationType } from './notification.type';
 export class NotificationService {
   private _containerModel: NotificationContainerComponent;
 
+  sendMessage(content: string, type: NotificationType = NotificationType.Info, autoHide = false) {
+    const message = new Message(content, type, autoHide);
+    this._addMessage(message);
+  }
+
   private _addChild(child: HTMLElement, parent: HTMLElement = document.body) {
     parent.appendChild(child);
   }
@@ -16,9 +21,11 @@ export class NotificationService {
   }
 
   private _addMessage(message: Message) {
-    let notificationContainer: HTMLElement = document.getElementsByTagName('notification-container')[0] as HTMLElement;
+    let notificationContainer: HTMLElement = document.getElementsByTagName(
+      'ui-notification-container'
+    )[0] as HTMLElement;
     if (!notificationContainer) {
-      notificationContainer = document.createElement('notification-container');
+      notificationContainer = document.createElement('ui-notification-container');
       this._addChild(notificationContainer);
     }
 
@@ -34,10 +41,5 @@ export class NotificationService {
     }
 
     this._containerModel.setNotifications(message);
-  }
-
-  sendMessage(content: string, type: NotificationType = NotificationType.Info, autoHide = false) {
-    const message = new Message(content, type, autoHide);
-    this._addMessage(message);
   }
 }

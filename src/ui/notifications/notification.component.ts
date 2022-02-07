@@ -3,8 +3,9 @@ import notificationStyles from './notification.component.scss';
 import { INotification } from './notification.type';
 
 @Component({
-  selector: 'notification-message',
-  styles: notificationStyles
+  selector: 'ui-notification-message',
+  styles: notificationStyles,
+  deps: [Renderer]
 })
 export class NotificationMessage implements IHooks {
   readonly ObservedProperties = <const>['notification'];
@@ -18,13 +19,14 @@ export class NotificationMessage implements IHooks {
 
   onDismiss(e: Event) {
     e.preventDefault();
-    this.notification.dismiss(this.notification.message.index);
+    this.notification.dismiss();
   }
 
   render() {
     if (this.notification && this.notification.message.content) {
       return html`
         <div
+          part="notification"
           class="notification ${this.notification.message.type === 'info'
             ? 'is-info'
             : this.notification.message.type === 'danger'
