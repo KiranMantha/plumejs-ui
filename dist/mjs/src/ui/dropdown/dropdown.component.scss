@@ -66,9 +66,14 @@ details[role='list'] {
     &::after {
       transform: rotate(180deg);
     }
+
+    & + ul {
+      display: initial;
+    }
   }
 
   summary + ul {
+    display: none;
     position: absolute;
     top: auto;
     left: 0px;
@@ -82,6 +87,15 @@ details[role='list'] {
     list-style: none;
     margin: 0;
     padding: 0;
+
+    &.top {
+      border-top: 1px solid $trigger-border-color;
+      border-bottom: none;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
 
     li {
       box-sizing: border-box;

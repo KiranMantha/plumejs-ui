@@ -13,8 +13,11 @@ export declare class DropdownComponent<T> {
     constructor(renderer: Renderer);
     onPropsChanged(): void;
     onOptionSelected(isChecked: boolean, selectedOption: IOption<T>, index: number): void;
-    _getSummaryText(): void;
-    _buildItems(): DocumentFragment[];
-    _filterList(filterText: string): void;
+    onToggle(): void;
+    private getSummaryText;
+    private buildItems;
+    private filterList;
+    private setDropdownPosition;
+    private isInViewPort;
     render(): DocumentFragment;
 }
