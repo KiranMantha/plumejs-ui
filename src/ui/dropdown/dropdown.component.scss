@@ -21,7 +21,6 @@ details[role='list'] {
 
   & > summary {
     list-style: none;
-    position: relative;
     cursor: pointer;
     padding: $padder;
     line-height: 1;
@@ -76,8 +75,8 @@ details[role='list'] {
     display: none;
     position: absolute;
     top: auto;
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     border: 1px solid $trigger-border-color;
     border-top: none;
     border-bottom-left-radius: 2px;

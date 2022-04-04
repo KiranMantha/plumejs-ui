@@ -56,8 +56,9 @@ let ModalComponent = class ModalComponent {
         }}
           class="modalDialog-content in out"
         >
-          <div class="title">
-            ${this.modalData ? this.modalData.title : ''} ${this.modalData && this._renderModalCloseButton()}
+          <div class="modalDialog-header">
+            <div class="title">${this.modalData ? this.modalData.title : ''}</div>
+            ${this.modalData && this._renderModalCloseButton()}
           </div>
           <div>${this.modalData && this.modalData.bodyTemplate}</div>
         </div>
