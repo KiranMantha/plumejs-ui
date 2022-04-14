@@ -11,24 +11,24 @@ let ModalComponent = class ModalComponent {
         this.ObservedProperties = ['modalData'];
         this.onClose = new rxjs_1.Subject();
         this.onOpen = new rxjs_1.Subject();
-        this.transitionDuration = 300;
     }
     mount() {
-        this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+            yield this.domSrvc.animationsComplete(this.modalContentRef);
             this.onOpen.next();
             this.onOpen.complete();
-        }, this.transitionDuration);
+        });
     }
     unmount() {
         this.onOpen.unsubscribe();
         this.onClose.unsubscribe();
     }
     _close() {
-        this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+            this.modalContentRef.classList.remove('in');
+            yield this.domSrvc.animationsComplete(this.modalContentRef);
             this.onClose.next();
-            this.onClose.complete();
-        }, this.transitionDuration);
-        this.modalContentRef.classList.remove('in');
+        });
     }
     _renderModalCloseButton() {
         if (this.modalData.hideDefaultCloseButton) {

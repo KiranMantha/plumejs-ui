@@ -9,26 +9,22 @@ let ModalComponent = class ModalComponent {
     onClose = new Subject();
     onOpen = new Subject();
     modalContentRef;
-    transitionDuration = 300;
     constructor(domSrvc) {
         this.domSrvc = domSrvc;
     }
-    mount() {
-        this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
-            this.onOpen.next();
-            this.onOpen.complete();
-        }, this.transitionDuration);
+    async mount() {
+        await this.domSrvc.animationsComplete(this.modalContentRef);
+        this.onOpen.next();
+        this.onOpen.complete();
     }
     unmount() {
         this.onOpen.unsubscribe();
         this.onClose.unsubscribe();
     }
-    _close() {
-        this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
-            this.onClose.next();
-            this.onClose.complete();
-        }, this.transitionDuration);
+    async _close() {
         this.modalContentRef.classList.remove('in');
+        await this.domSrvc.animationsComplete(this.modalContentRef);
+        this.onClose.next();
     }
     _renderModalCloseButton() {
         if (this.modalData.hideDefaultCloseButton) {
