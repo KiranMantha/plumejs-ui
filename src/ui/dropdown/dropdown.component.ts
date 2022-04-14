@@ -151,13 +151,13 @@ export class DropdownComponent<T> {
 
   private setDropdownPosition() {
     if (this.isInViewPort(this._optionsContainerNode)) {
-      if (this._optionsContainerNode.classList.contains('top')) {
+      if (this._detailsNode.classList.contains('top')) {
         this._optionsContainerNode.removeAttribute('style');
-        this._optionsContainerNode.classList.remove('top');
+        this._detailsNode.classList.remove('top');
       }
     } else {
       this._optionsContainerNode.style.bottom = this._detailsNode.getBoundingClientRect().height + 'px';
-      this._optionsContainerNode.classList.add('top');
+      this._detailsNode.classList.add('top');
     }
   }
 
