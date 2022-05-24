@@ -5,6 +5,7 @@ import modalComponentStyles from './modal.component.scss';
 
 @Component({
   selector: 'ui-modal-dialog',
+  standalone: true,
   styles: modalComponentStyles,
   deps: [DomTransition]
 })

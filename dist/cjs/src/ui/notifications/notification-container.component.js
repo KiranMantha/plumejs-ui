@@ -65,6 +65,7 @@ let NotificationContainerComponent = class NotificationContainerComponent {
 NotificationContainerComponent = (0, tslib_1.__decorate)([
     (0, core_1.Component)({
         selector: 'ui-notification-container',
+        standalone: true,
         styles: notification_container_component_scss_1.default,
         deps: [core_1.Renderer]
     }),

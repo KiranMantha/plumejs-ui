@@ -195,6 +195,7 @@ DropdownComponent = (0, tslib_1.__decorate)([
     (0, core_1.Component)({
         selector: 'ui-dropdown',
         styles: dropdown_component_scss_1.default,
+        standalone: true,
         deps: [core_1.Renderer]
     }),
     (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])

@@ -65,6 +65,7 @@ let ModalComponent = class ModalComponent {
 ModalComponent = __decorate([
     Component({
         selector: 'ui-modal-dialog',
+        standalone: true,
         styles: modalComponentStyles,
         deps: [DomTransition]
     }),

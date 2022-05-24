@@ -4,6 +4,7 @@ import { INotification } from './notification.type';
 
 @Component({
   selector: 'ui-notification-message',
+  standalone: true,
   styles: notificationStyles,
   deps: [Renderer]
 })

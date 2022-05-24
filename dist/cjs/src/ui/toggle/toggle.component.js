@@ -39,6 +39,7 @@ let ToggleComponent = class ToggleComponent {
 ToggleComponent = (0, tslib_1.__decorate)([
     (0, core_1.Component)({
         selector: 'ui-toggle-button',
+        standalone: true,
         styles: toggle_component_scss_1.default,
         deps: [core_1.Renderer]
     }),

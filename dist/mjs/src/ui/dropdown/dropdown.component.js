@@ -200,6 +200,7 @@ DropdownComponent = __decorate([
     Component({
         selector: 'ui-dropdown',
         styles: dropdownStyles,
+        standalone: true,
         deps: [Renderer]
     }),
     __metadata("design:paramtypes", [Renderer])

@@ -37,6 +37,7 @@ let ToggleComponent = class ToggleComponent {
 ToggleComponent = __decorate([
     Component({
         selector: 'ui-toggle-button',
+        standalone: true,
         styles: toggleStyles,
         deps: [Renderer]
     }),

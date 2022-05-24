@@ -7,6 +7,7 @@ import { INotification } from './notification.type';
 
 @Component({
   selector: 'ui-notification-container',
+  standalone: true,
   styles: notificationContainerStyles,
   deps: [Renderer]
 })

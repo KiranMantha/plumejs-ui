@@ -15,6 +15,7 @@ const defaultDropdownOptions: IDropdownOptions<any> = {
 @Component({
   selector: 'ui-dropdown',
   styles: dropdownStyles,
+  standalone: true,
   deps: [Renderer]
 })
 export class DropdownComponent<T> {
