@@ -4,7 +4,7 @@ exports.NotificationContainerComponent = void 0;
 const tslib_1 = require("tslib");
 const core_1 = require("@plumejs/core");
 const rxjs_1 = require("rxjs");
-const notification_container_component_scss_1 = (0, tslib_1.__importDefault)(require("./notification-container.component.scss"));
+const notification_container_component_scss_1 = tslib_1.__importDefault(require("./notification-container.component.scss"));
 let NotificationContainerComponent = class NotificationContainerComponent {
     constructor(renderer) {
         this.renderer = renderer;
@@ -62,13 +62,13 @@ let NotificationContainerComponent = class NotificationContainerComponent {
         return (0, core_1.html) ` <div class="notifications_wrapper" part="notifications_wrapper">${this._renderNotifications()}</div> `;
     }
 };
-NotificationContainerComponent = (0, tslib_1.__decorate)([
+NotificationContainerComponent = tslib_1.__decorate([
     (0, core_1.Component)({
         selector: 'ui-notification-container',
         standalone: true,
         styles: notification_container_component_scss_1.default,
         deps: [core_1.Renderer]
     }),
-    (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])
+    tslib_1.__metadata("design:paramtypes", [core_1.Renderer])
 ], NotificationContainerComponent);
 exports.NotificationContainerComponent = NotificationContainerComponent;

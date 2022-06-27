@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DropdownComponent = void 0;
 const tslib_1 = require("tslib");
 const core_1 = require("@plumejs/core");
-const dropdown_component_scss_1 = (0, tslib_1.__importDefault)(require("./dropdown.component.scss"));
+const dropdown_component_scss_1 = tslib_1.__importDefault(require("./dropdown.component.scss"));
 const defaultDropdownOptions = {
     options: [],
     multiple: false,
@@ -191,13 +191,13 @@ let DropdownComponent = class DropdownComponent {
         }
     }
 };
-DropdownComponent = (0, tslib_1.__decorate)([
+DropdownComponent = tslib_1.__decorate([
     (0, core_1.Component)({
         selector: 'ui-dropdown',
         styles: dropdown_component_scss_1.default,
         standalone: true,
         deps: [core_1.Renderer]
     }),
-    (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])
+    tslib_1.__metadata("design:paramtypes", [core_1.Renderer])
 ], DropdownComponent);
 exports.DropdownComponent = DropdownComponent;

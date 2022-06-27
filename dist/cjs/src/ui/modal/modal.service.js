@@ -60,7 +60,7 @@ let ModalService = class ModalService {
         this._modalList.clear();
     }
 };
-ModalService = (0, tslib_1.__decorate)([
+ModalService = tslib_1.__decorate([
     (0, core_1.Injectable)()
 ], ModalService);
 exports.ModalService = ModalService;

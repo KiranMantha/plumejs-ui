@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ToggleComponent = void 0;
 const tslib_1 = require("tslib");
 const core_1 = require("@plumejs/core");
-const toggle_component_scss_1 = (0, tslib_1.__importDefault)(require("./toggle.component.scss"));
+const toggle_component_scss_1 = tslib_1.__importDefault(require("./toggle.component.scss"));
 const defaultToggleOptions = {
     onText: 'ON',
     offText: 'OFF',
@@ -36,13 +36,13 @@ let ToggleComponent = class ToggleComponent {
     </div>`;
     }
 };
-ToggleComponent = (0, tslib_1.__decorate)([
+ToggleComponent = tslib_1.__decorate([
     (0, core_1.Component)({
         selector: 'ui-toggle-button',
         standalone: true,
         styles: toggle_component_scss_1.default,
         deps: [core_1.Renderer]
     }),
-    (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])
+    tslib_1.__metadata("design:paramtypes", [core_1.Renderer])
 ], ToggleComponent);
 exports.ToggleComponent = ToggleComponent;
