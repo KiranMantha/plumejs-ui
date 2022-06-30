@@ -35,7 +35,7 @@ let NotificationService = class NotificationService {
         this._containerModel.setNotifications(message);
     }
 };
-NotificationService = (0, tslib_1.__decorate)([
+NotificationService = tslib_1.__decorate([
     (0, core_1.Injectable)()
 ], NotificationService);
 exports.NotificationService = NotificationService;

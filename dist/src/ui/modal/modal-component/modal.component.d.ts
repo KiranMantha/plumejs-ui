@@ -8,9 +8,8 @@ export declare class ModalComponent implements IHooks {
     onClose: Subject<void>;
     onOpen: Subject<void>;
     private modalContentRef;
-    private transitionDuration;
     constructor(domSrvc: DomTransition);
-    mount(): void;
+    mount(): Promise<void>;
     unmount(): void;
     private _close;
     private _renderModalCloseButton;

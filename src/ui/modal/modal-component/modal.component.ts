@@ -5,6 +5,7 @@ import modalComponentStyles from './modal.component.scss';
 
 @Component({
   selector: 'ui-modal-dialog',
+  standalone: true,
   styles: modalComponentStyles,
   deps: [DomTransition]
 })
@@ -16,19 +17,13 @@ export class ModalComponent implements IHooks {
   onOpen: Subject<void> = new Subject();
 
   private modalContentRef: HTMLElement;
-  private transitionDuration = 300;
 
   constructor(private domSrvc: DomTransition) {}
 
-  mount() {
-    this.domSrvc.onTransitionEnd(
-      this.modalContentRef,
-      () => {
-        this.onOpen.next();
-        this.onOpen.complete();
-      },
-      this.transitionDuration
-    );
+  async mount() {
+    await this.domSrvc.animationsComplete(this.modalContentRef);
+    this.onOpen.next();
+    this.onOpen.complete();
   }
 
   unmount() {
@@ -36,16 +31,10 @@ export class ModalComponent implements IHooks {
     this.onClose.unsubscribe();
   }
 
-  private _close() {
-    this.domSrvc.onTransitionEnd(
-      this.modalContentRef,
-      () => {
-        this.onClose.next();
-        this.onClose.complete();
-      },
-      this.transitionDuration
-    );
+  private async _close() {
     this.modalContentRef.classList.remove('in');
+    await this.domSrvc.animationsComplete(this.modalContentRef);
+    this.onClose.next();
   }
 
   private _renderModalCloseButton() {
@@ -74,8 +63,9 @@ export class ModalComponent implements IHooks {
           }}
           class="modalDialog-content in out"
         >
-          <div class="title">
-            ${this.modalData ? this.modalData.title : ''} ${this.modalData && this._renderModalCloseButton()}
+          <div class="modalDialog-header">
+            <div class="title">${this.modalData ? this.modalData.title : ''}</div>
+            ${this.modalData && this._renderModalCloseButton()}
           </div>
           <div>${this.modalData && this.modalData.bodyTemplate}</div>
         </div>

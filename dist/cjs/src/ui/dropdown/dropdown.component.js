@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DropdownComponent = void 0;
 const tslib_1 = require("tslib");
 const core_1 = require("@plumejs/core");
-const dropdown_component_scss_1 = (0, tslib_1.__importDefault)(require("./dropdown.component.scss"));
+const dropdown_component_scss_1 = tslib_1.__importDefault(require("./dropdown.component.scss"));
 const defaultDropdownOptions = {
     options: [],
     multiple: false,
@@ -33,7 +33,7 @@ let DropdownComponent = class DropdownComponent {
                 });
             }
             this._isMultiSelect = multiple;
-            this._getSummaryText();
+            this.getSummaryText();
         }
     }
     onOptionSelected(isChecked, selectedOption, index) {
@@ -60,7 +60,14 @@ let DropdownComponent = class DropdownComponent {
             option: !this._isMultiSelect ? selectedOption : this._selectedOptions
         });
     }
-    _getSummaryText() {
+    onToggle() {
+        this._optionsContainerNode.removeAttribute('style');
+        this._optionsContainerNode.classList.remove('top');
+        if (this._detailsNode.open) {
+            this.setDropdownPosition();
+        }
+    }
+    getSummaryText() {
         this._selectedOptions = this.dropdownOptions.options.filter((item) => !!item.selected);
         if (this._isMultiSelect) {
             this._summaryText = this._selectedOptions.map((item) => item.label).join(',') || this.dropdownOptions.defaultText;
@@ -75,7 +82,7 @@ let DropdownComponent = class DropdownComponent {
             }
         }
     }
-    _buildItems() {
+    buildItems() {
         const items = this.dropdownOptions.options.map((item, index) => {
             return (0, core_1.html) `
         <li>
@@ -97,7 +104,7 @@ let DropdownComponent = class DropdownComponent {
         <input
           type="search"
           oninput=${(e) => {
-                this._filterList(e.target.value);
+                this.filterList(e.target.value);
             }}
         />
       </li>`;
@@ -105,7 +112,7 @@ let DropdownComponent = class DropdownComponent {
         }
         return items;
     }
-    _filterList(filterText) {
+    filterList(filterText) {
         const labels = this._optionsContainerNode.querySelectorAll('label');
         Array.from(labels).forEach((element) => {
             const itemText = element.textContent || element.innerText;
@@ -122,6 +129,30 @@ let DropdownComponent = class DropdownComponent {
             }
         });
     }
+    setDropdownPosition() {
+        if (this.isInViewPort(this._optionsContainerNode)) {
+            if (this._detailsNode.classList.contains('top')) {
+                this._optionsContainerNode.removeAttribute('style');
+                this._detailsNode.classList.remove('top');
+            }
+        }
+        else {
+            this._optionsContainerNode.style.bottom = this._detailsNode.getBoundingClientRect().height + 'px';
+            this._detailsNode.classList.add('top');
+        }
+    }
+    isInViewPort(element) {
+        const bounding = element.getBoundingClientRect();
+        if (bounding.top >= 0 &&
+            bounding.left >= 0 &&
+            bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
+            bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     render() {
         if (this.dropdownOptions.options.length) {
             return (0, core_1.html) `
@@ -131,6 +162,9 @@ let DropdownComponent = class DropdownComponent {
           class="${this.dropdownOptions.disable ? 'disabled' : ''}"
           ref=${(node) => {
                 this._detailsNode = node;
+            }}
+          ontoggle=${() => {
+                this.onToggle();
             }}
         >
           <summary
@@ -147,7 +181,7 @@ let DropdownComponent = class DropdownComponent {
                 this._optionsContainerNode = node;
             }}
           >
-            ${this._buildItems()}
+            ${this.buildItems()}
           </ul>
         </details>
       `;
@@ -157,12 +191,13 @@ let DropdownComponent = class DropdownComponent {
         }
     }
 };
-DropdownComponent = (0, tslib_1.__decorate)([
+DropdownComponent = tslib_1.__decorate([
     (0, core_1.Component)({
         selector: 'ui-dropdown',
         styles: dropdown_component_scss_1.default,
+        standalone: true,
         deps: [core_1.Renderer]
     }),
-    (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])
+    tslib_1.__metadata("design:paramtypes", [core_1.Renderer])
 ], DropdownComponent);
 exports.DropdownComponent = DropdownComponent;

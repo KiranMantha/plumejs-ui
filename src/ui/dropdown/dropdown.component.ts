@@ -15,12 +15,14 @@ const defaultDropdownOptions: IDropdownOptions<any> = {
 @Component({
   selector: 'ui-dropdown',
   styles: dropdownStyles,
+  standalone: true,
   deps: [Renderer]
 })
 export class DropdownComponent<T> {
   readonly ObservedProperties = <const>['dropdownOptions'];
 
   dropdownOptions: IDropdownOptions<T> = { ...defaultDropdownOptions };
+
   private _detailsNode: HTMLElement;
   private _summaryNode: HTMLElement;
   private _optionsContainerNode: HTMLElement;
@@ -45,7 +47,7 @@ export class DropdownComponent<T> {
         });
       }
       this._isMultiSelect = multiple;
-      this._getSummaryText();
+      this.getSummaryText();
     }
   }
 
@@ -78,7 +80,16 @@ export class DropdownComponent<T> {
     });
   }
 
-  _getSummaryText() {
+  onToggle() {
+    this._optionsContainerNode.removeAttribute('style');
+    this._optionsContainerNode.classList.remove('top');
+
+    if ((this._detailsNode as any).open) {
+      this.setDropdownPosition();
+    }
+  }
+
+  private getSummaryText() {
     this._selectedOptions = this.dropdownOptions.options.filter((item) => !!item.selected);
     if (this._isMultiSelect) {
       this._summaryText = this._selectedOptions.map((item) => item.label).join(',') || this.dropdownOptions.defaultText;
@@ -92,7 +103,7 @@ export class DropdownComponent<T> {
     }
   }
 
-  _buildItems() {
+  private buildItems() {
     const items = this.dropdownOptions.options.map((item, index) => {
       return html`
         <li>
@@ -114,7 +125,7 @@ export class DropdownComponent<T> {
         <input
           type="search"
           oninput=${(e) => {
-            this._filterList(e.target.value);
+            this.filterList(e.target.value);
           }}
         />
       </li>`;
@@ -123,7 +134,7 @@ export class DropdownComponent<T> {
     return items;
   }
 
-  _filterList(filterText: string) {
+  private filterList(filterText: string) {
     const labels = this._optionsContainerNode.querySelectorAll('label');
     Array.from(labels).forEach((element: HTMLLabelElement) => {
       const itemText = element.textContent || element.innerText;
@@ -139,6 +150,35 @@ export class DropdownComponent<T> {
     });
   }
 
+  private setDropdownPosition() {
+    if (this.isInViewPort(this._optionsContainerNode)) {
+      if (this._detailsNode.classList.contains('top')) {
+        this._optionsContainerNode.removeAttribute('style');
+        this._detailsNode.classList.remove('top');
+      }
+    } else {
+      this._optionsContainerNode.style.bottom = this._detailsNode.getBoundingClientRect().height + 'px';
+      this._detailsNode.classList.add('top');
+    }
+  }
+
+  private isInViewPort(element: HTMLElement) {
+    // Get the bounding client rectangle position in the viewport
+    const bounding = element.getBoundingClientRect();
+    // Checking part. Here the code checks if it's *fully* visible
+    // Edit this part if you just want a partial visibility
+    if (
+      bounding.top >= 0 &&
+      bounding.left >= 0 &&
+      bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
+      bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     if (this.dropdownOptions.options.length) {
       return html`
@@ -148,6 +188,9 @@ export class DropdownComponent<T> {
           class="${this.dropdownOptions.disable ? 'disabled' : ''}"
           ref=${(node) => {
             this._detailsNode = node;
+          }}
+          ontoggle=${() => {
+            this.onToggle();
           }}
         >
           <summary
@@ -164,7 +207,7 @@ export class DropdownComponent<T> {
               this._optionsContainerNode = node;
             }}
           >
-            ${this._buildItems()}
+            ${this.buildItems()}
           </ul>
         </details>
       `;

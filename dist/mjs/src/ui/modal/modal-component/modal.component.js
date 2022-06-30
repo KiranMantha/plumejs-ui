@@ -9,26 +9,22 @@ let ModalComponent = class ModalComponent {
     onClose = new Subject();
     onOpen = new Subject();
     modalContentRef;
-    transitionDuration = 300;
     constructor(domSrvc) {
         this.domSrvc = domSrvc;
     }
-    mount() {
-        this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
-            this.onOpen.next();
-            this.onOpen.complete();
-        }, this.transitionDuration);
+    async mount() {
+        await this.domSrvc.animationsComplete(this.modalContentRef);
+        this.onOpen.next();
+        this.onOpen.complete();
     }
     unmount() {
         this.onOpen.unsubscribe();
         this.onClose.unsubscribe();
     }
-    _close() {
-        this.domSrvc.onTransitionEnd(this.modalContentRef, () => {
-            this.onClose.next();
-            this.onClose.complete();
-        }, this.transitionDuration);
+    async _close() {
         this.modalContentRef.classList.remove('in');
+        await this.domSrvc.animationsComplete(this.modalContentRef);
+        this.onClose.next();
     }
     _renderModalCloseButton() {
         if (this.modalData.hideDefaultCloseButton) {
@@ -56,8 +52,9 @@ let ModalComponent = class ModalComponent {
         }}
           class="modalDialog-content in out"
         >
-          <div class="title">
-            ${this.modalData ? this.modalData.title : ''} ${this.modalData && this._renderModalCloseButton()}
+          <div class="modalDialog-header">
+            <div class="title">${this.modalData ? this.modalData.title : ''}</div>
+            ${this.modalData && this._renderModalCloseButton()}
           </div>
           <div>${this.modalData && this.modalData.bodyTemplate}</div>
         </div>
@@ -68,6 +65,7 @@ let ModalComponent = class ModalComponent {
 ModalComponent = __decorate([
     Component({
         selector: 'ui-modal-dialog',
+        standalone: true,
         styles: modalComponentStyles,
         deps: [DomTransition]
     }),

@@ -21,7 +21,6 @@ details[role='list'] {
 
   & > summary {
     list-style: none;
-    position: relative;
     cursor: pointer;
     padding: $padder;
     line-height: 1;
@@ -66,13 +65,28 @@ details[role='list'] {
     &::after {
       transform: rotate(180deg);
     }
+
+    & + ul {
+      display: initial;
+    }
+  }
+
+  &[open].top > summary {
+    border-radius: 0 0 2px 2px;
+
+    & + ul {
+      border-top: 1px solid $trigger-border-color;
+      border-bottom: none;
+      border-radius: 2px 2px 0 0;
+    }
   }
 
   summary + ul {
+    display: none;
     position: absolute;
     top: auto;
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     border: 1px solid $trigger-border-color;
     border-top: none;
     border-bottom-left-radius: 2px;

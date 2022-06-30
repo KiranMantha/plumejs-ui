@@ -15,6 +15,7 @@ const defaultToggleOptions: IToggleInput = {
 
 @Component({
   selector: 'ui-toggle-button',
+  standalone: true,
   styles: toggleStyles,
   deps: [Renderer]
 })

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NotificationMessage = void 0;
 const tslib_1 = require("tslib");
 const core_1 = require("@plumejs/core");
-const notification_component_scss_1 = (0, tslib_1.__importDefault)(require("./notification.component.scss"));
+const notification_component_scss_1 = tslib_1.__importDefault(require("./notification.component.scss"));
 let NotificationMessage = class NotificationMessage {
     constructor(renderer) {
         this.renderer = renderer;
@@ -44,12 +44,13 @@ let NotificationMessage = class NotificationMessage {
         }
     }
 };
-NotificationMessage = (0, tslib_1.__decorate)([
+NotificationMessage = tslib_1.__decorate([
     (0, core_1.Component)({
         selector: 'ui-notification-message',
+        standalone: true,
         styles: notification_component_scss_1.default,
         deps: [core_1.Renderer]
     }),
-    (0, tslib_1.__metadata)("design:paramtypes", [core_1.Renderer])
+    tslib_1.__metadata("design:paramtypes", [core_1.Renderer])
 ], NotificationMessage);
 exports.NotificationMessage = NotificationMessage;
