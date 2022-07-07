@@ -5,22 +5,17 @@
   "files": [
     "dist/**/*"
   ],
-  "main": "dist/cjs/index.js",
-  "module": "dist/mjs/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/mjs/index.js",
-      "require": "./dist/cjs/index.js"
-    }
-  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "npm run lint && rimraf dist && npm run build:mjs && npm run build:cjs",
-    "build:mjs": "tsc -p tsconfig.json && copyfiles src/**/*.scss dist/mjs",
-    "build:cjs": "tsc -p tsconfig-cjs.json && copyfiles src/**/*.scss dist/cjs",
+    "build": "npm run lint && rimraf dist && npm run compile",
+    "compile": "tsc && copyfiles src/**/*.scss dist",
     "lint": "eslint . --ext .ts --fix",
     "patch-update": "npm version patch",
     "tag": "git push --follow-tags",
