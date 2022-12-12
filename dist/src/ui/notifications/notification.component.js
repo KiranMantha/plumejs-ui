@@ -1,6 +1,7 @@
 import { __decorate, __metadata } from "tslib";
 import { Component, html, Renderer } from '@plumejs/core';
 import notificationStyles from './notification.component.scss';
+import { NotificationType } from './notification.type';
 let NotificationMessage = class NotificationMessage {
     renderer;
     ObservedProperties = ['notification'];
@@ -20,9 +21,9 @@ let NotificationMessage = class NotificationMessage {
             return html `
         <div
           part="notification"
-          class="notification ${this.notification.message.type === 'info'
+          class="notification ${this.notification.message.type === NotificationType.Info
                 ? 'is-info'
-                : this.notification.message.type === 'danger'
+                : this.notification.message.type === NotificationType.Danger
                     ? 'is-danger'
                     : ''}"
         >
@@ -39,7 +40,7 @@ let NotificationMessage = class NotificationMessage {
       `;
         }
         else {
-            return html `<div></div>`;
+            return html ``;
         }
     }
 };

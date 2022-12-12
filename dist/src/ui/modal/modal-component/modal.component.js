@@ -1,7 +1,7 @@
 import { __decorate, __metadata } from "tslib";
 import { Component, DomTransition, html } from '@plumejs/core';
 import { Subject } from 'rxjs';
-import modalComponentStyles from './modal.component.scss?inline';
+import modalComponentStyles from './modal.component.scss';
 let ModalComponent = class ModalComponent {
     domSrvc;
     ObservedProperties = ['modalData'];

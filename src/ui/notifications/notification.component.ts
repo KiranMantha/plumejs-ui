@@ -1,6 +1,6 @@
 import { Component, html, IHooks, Renderer } from '@plumejs/core';
 import notificationStyles from './notification.component.scss';
-import { INotification } from './notification.type';
+import { INotification, NotificationType } from './notification.type';
 
 @Component({
   selector: 'ui-notification-message',
@@ -28,9 +28,9 @@ export class NotificationMessage implements IHooks {
       return html`
         <div
           part="notification"
-          class="notification ${this.notification.message.type === 'info'
+          class="notification ${this.notification.message.type === NotificationType.Info
             ? 'is-info'
-            : this.notification.message.type === 'danger'
+            : this.notification.message.type === NotificationType.Danger
             ? 'is-danger'
             : ''}"
         >
@@ -46,7 +46,7 @@ export class NotificationMessage implements IHooks {
         </div>
       `;
     } else {
-      return html`<div></div>`;
+      return html``;
     }
   }
 }

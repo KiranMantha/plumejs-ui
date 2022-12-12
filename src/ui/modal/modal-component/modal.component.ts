@@ -1,7 +1,7 @@
 import { Component, DomTransition, html, IHooks } from '@plumejs/core';
 import { Subject } from 'rxjs';
 import { IModalData } from '../modal.interface';
-import modalComponentStyles from './modal.component.scss?inline';
+import modalComponentStyles from './modal.component.scss';
 
 @Component({
   selector: 'ui-modal-dialog',

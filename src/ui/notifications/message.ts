@@ -6,9 +6,9 @@ export class Message {
   index: number;
   autoHide = false;
 
-  constructor(content: string, type: string = NotificationType.Info, autoHide = false) {
+  constructor(content: string, type: NotificationType = NotificationType.Info, autoHide = false) {
     this.content = content;
-    this.type = type;
+    this.type = type || NotificationType.Info;
     this.autoHide = autoHide;
   }
 }

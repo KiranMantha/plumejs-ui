@@ -212,7 +212,7 @@ export class DropdownComponent<T> {
         </details>
       `;
     } else {
-      return html`<div></div>`;
+      return html``;
     }
   }
 }

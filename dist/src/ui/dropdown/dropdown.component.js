@@ -192,7 +192,7 @@ let DropdownComponent = class DropdownComponent {
       `;
         }
         else {
-            return html `<div></div>`;
+            return html ``;
         }
     }
 };
