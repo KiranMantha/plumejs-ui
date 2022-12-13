@@ -164,8 +164,7 @@ let DropdownComponent = class DropdownComponent {
           part="list"
           class="${this.dropdownOptions.disable ? 'disabled' : ''}"
           ref=${(node) => {
-                if (!this._detailsNode)
-                    this._detailsNode = node;
+                this._detailsNode = node;
             }}
           ontoggle=${() => {
                 this.onToggle();
@@ -174,8 +173,7 @@ let DropdownComponent = class DropdownComponent {
           <summary
             aria-haspopup="listbox"
             ref=${(node) => {
-                if (!this._summaryNode)
-                    this._summaryNode = node;
+                this._summaryNode = node;
             }}
           >
             ${this.getSummaryText()}
@@ -183,8 +181,7 @@ let DropdownComponent = class DropdownComponent {
           <ul
             role="listbox"
             ref=${(node) => {
-                if (!this._optionsContainerNode)
-                    this._optionsContainerNode = node;
+                this._optionsContainerNode = node;
             }}
           >
             ${this.buildItems()}
