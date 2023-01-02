@@ -2,9 +2,9 @@
 
 .notifications_wrapper {
   position: fixed;
-  top: 3.5rem;
+  top: 0;
   right: 0;
-  padding: 10px;
+  padding: 20px;
 }
 
 @include breakpoint(sm) {

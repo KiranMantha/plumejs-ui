@@ -5,22 +5,17 @@
   "files": [
     "dist/**/*"
   ],
-  "main": "dist/cjs/index.js",
-  "module": "dist/mjs/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/mjs/index.js",
-      "require": "./dist/cjs/index.js"
-    }
-  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "npm run lint && rimraf dist && npm run build:mjs && npm run build:cjs",
-    "build:mjs": "tsc -p tsconfig.json && copyfiles src/**/*.scss dist/mjs",
-    "build:cjs": "tsc -p tsconfig-cjs.json && copyfiles src/**/*.scss dist/cjs",
+    "build": "npm run lint && rimraf dist && npm run compile",
+    "compile": "tsc && copyfiles src/**/*.scss dist",
     "lint": "eslint . --ext .ts --fix",
     "patch-update": "npm version patch",
     "tag": "git push --follow-tags",
@@ -41,17 +36,18 @@
     "plumejs-ui"
   ],
   "dependencies": {
-    "@plumejs/core": "^3.2.0"
+    "@plumejs/core": "^3.3.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
     "copyfiles": "^2.4.1",
-    "eslint": "^8.2.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.4.1",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.1",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.5.2",
-    "typescript": "^4.5.2"
+    "rxjs": "^7.8.0",
+    "typescript": "^4.9.4"
   }
 }

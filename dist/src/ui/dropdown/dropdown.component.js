@@ -31,36 +31,29 @@ let DropdownComponent = class DropdownComponent {
             };
             const { multiple, resetDropdown } = this.dropdownOptions;
             if (!!resetDropdown) {
+                this._optionsContainerNode.innerHTML = '';
                 this._selectedOptions = [];
                 this.dropdownOptions.options = this.dropdownOptions.options.map((option) => {
                     option.selected = false;
                     return option;
                 });
             }
+            else {
+                this._selectedOptions = this.dropdownOptions.options.filter((item) => !!item.selected);
+            }
             this._isMultiSelect = multiple;
-            this.getSummaryText();
         }
     }
     onOptionSelected(isChecked, selectedOption, index) {
-        let selectedText = '';
         if (!this._isMultiSelect) {
-            selectedText = selectedOption.label;
             this._detailsNode.removeAttribute('open');
+            this._selectedOptions = [selectedOption];
         }
         else {
             this.dropdownOptions.options[index].selected = isChecked;
             this._selectedOptions = this.dropdownOptions.options.filter((item) => !!item.selected);
-            if (this.dropdownOptions.buttonText) {
-                selectedText = this.dropdownOptions.buttonText(this._selectedOptions);
-            }
-            else if (this._selectedOptions.length) {
-                selectedText = this._selectedOptions.map((item) => item.label).join(', ');
-            }
-            else {
-                selectedText = this.dropdownOptions.defaultText;
-            }
         }
-        this._summaryNode.textContent = selectedText;
+        this._summaryNode.textContent = this.getSummaryText();
         this.renderer.emitEvent('optionselected', {
             option: !this._isMultiSelect ? selectedOption : this._selectedOptions
         });
@@ -73,34 +66,39 @@ let DropdownComponent = class DropdownComponent {
         }
     }
     getSummaryText() {
-        this._selectedOptions = this.dropdownOptions.options.filter((item) => !!item.selected);
         if (this._isMultiSelect) {
-            this._summaryText = this._selectedOptions.map((item) => item.label).join(',') || this.dropdownOptions.defaultText;
+            if (this._selectedOptions.length) {
+                return (this.dropdownOptions.buttonText?.(this._selectedOptions) ||
+                    this._selectedOptions.map((item) => item.label).join(','));
+            }
+            else {
+                return this.dropdownOptions.defaultText;
+            }
         }
         else {
             if (this._selectedOptions.length) {
-                this._summaryText = this._selectedOptions[0].label;
+                return this._selectedOptions[0].label;
             }
             else {
                 this.dropdownOptions.options[0].selected = true;
-                this._summaryText = this.dropdownOptions.options[0].label;
+                return this.dropdownOptions.options[0].label;
             }
         }
     }
     buildItems() {
-        const items = this.dropdownOptions.options.map((item, index) => {
+        const items = this.dropdownOptions.options.map((option, index) => {
             return html `
         <li>
           <input
             name="select"
             id="id-${index}"
             type="${this._isMultiSelect ? 'checkbox' : 'radio'}"
-            checked=${!!item.selected}
+            checked=${!!option.selected}
             onchange=${(e) => {
-                this.onOptionSelected(e.target.checked, item, index);
+                this.onOptionSelected(e.target.checked, option, index);
             }}
           />
-          <label for="id-${index}"> ${item.label} </label>
+          <label for="id-${index}"> ${option.label} </label>
         </li>
       `;
         });
@@ -178,7 +176,7 @@ let DropdownComponent = class DropdownComponent {
                 this._summaryNode = node;
             }}
           >
-            ${this._summaryText}
+            ${this.getSummaryText()}
           </summary>
           <ul
             role="listbox"
@@ -192,7 +190,7 @@ let DropdownComponent = class DropdownComponent {
       `;
         }
         else {
-            return html `<div></div>`;
+            return html ``;
         }
     }
 };

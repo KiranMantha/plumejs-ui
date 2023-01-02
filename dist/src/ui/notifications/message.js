@@ -6,7 +6,7 @@ export class Message {
     autoHide = false;
     constructor(content, type = NotificationType.Info, autoHide = false) {
         this.content = content;
-        this.type = type;
+        this.type = type || NotificationType.Info;
         this.autoHide = autoHide;
     }
 }
