@@ -1,6 +1,6 @@
 {
   "name": "@plumejs/ui",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A collection of UI components built using PlumeJs.",
   "files": [
     "dist/**/*"
