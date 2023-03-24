@@ -1,6 +1,6 @@
 import { __decorate, __metadata } from "tslib";
 import { Component, html, Renderer } from '@plumejs/core';
-import notificationStyles from './notification.component.scss';
+import notificationStyles from './notification.component.scss?inline';
 import { NotificationType } from './notification.type';
 let NotificationMessage = class NotificationMessage {
     renderer;

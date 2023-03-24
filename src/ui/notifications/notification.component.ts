@@ -1,5 +1,5 @@
 import { Component, html, IHooks, Renderer } from '@plumejs/core';
-import notificationStyles from './notification.component.scss';
+import notificationStyles from './notification.component.scss?inline';
 import { INotification, NotificationType } from './notification.type';
 
 @Component({

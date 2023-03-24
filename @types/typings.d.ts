@@ -8,7 +8,7 @@ interface String {
   translate: (...args: any) => string;
 }
 
-declare module '*.scss' {
+declare module '*.scss?inline' {
   const content: any;
   // using style-loader will result in an object which is incompatible
   // hence use only css-loader and sass-loader which result in proper compiled css array

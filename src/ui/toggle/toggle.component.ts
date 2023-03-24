@@ -1,5 +1,5 @@
 import { Component, html, IHooks, Renderer } from '@plumejs/core';
-import toggleStyles from './toggle.component.scss';
+import toggleStyles from './toggle.component.scss?inline';
 
 export interface IToggleInput {
   onText?: string;
