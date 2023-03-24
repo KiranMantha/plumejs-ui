@@ -1,6 +1,6 @@
 import { __decorate, __metadata } from "tslib";
 import { Component, html, Renderer } from '@plumejs/core';
-import toggleStyles from './toggle.component.scss';
+import toggleStyles from './toggle.component.scss?inline';
 const defaultToggleOptions = {
     onText: 'ON',
     offText: 'OFF',

@@ -2,7 +2,7 @@ import { Component, ComponentRef, html, IHooks, Renderer } from '@plumejs/core';
 import { Subject } from 'rxjs';
 import { Message } from './message';
 import { NotificationMessage } from './notification.component';
-import notificationContainerStyles from './notification-container.component.scss';
+import notificationContainerStyles from './notification-container.component.scss?inline';
 import { INotification } from './notification.type';
 
 @Component({

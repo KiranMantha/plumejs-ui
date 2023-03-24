@@ -1,6 +1,6 @@
 import { __decorate, __metadata } from "tslib";
 import { Component, html, Renderer } from '@plumejs/core';
-import dropdownStyles from './dropdown.component.scss';
+import dropdownStyles from './dropdown.component.scss?inline';
 const defaultDropdownOptions = {
     options: [],
     multiple: false,

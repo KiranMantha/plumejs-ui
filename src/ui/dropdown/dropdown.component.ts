@@ -1,5 +1,5 @@
 import { Component, html, Renderer } from '@plumejs/core';
-import dropdownStyles from './dropdown.component.scss';
+import dropdownStyles from './dropdown.component.scss?inline';
 import { IDropdownOptions, IOption } from './dropdown.interface';
 
 const defaultDropdownOptions: IDropdownOptions<any> = {
