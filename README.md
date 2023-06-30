@@ -1,24 +1,10 @@
+# @plumejs/ui
+
 [![GitHub contributors](https://img.shields.io/github/contributors/kiranmantha/plumejs-ui)](https://GitHub.com/KiranMantha/plumejs-ui/graphs/contributors/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://GitHub.com/KiranMantha/plumejs-ui/pulls)
 
 [![npm](https://img.shields.io/npm/dw/@plumejs/ui)](https://www.npmjs.com/package/@plumejs/ui) [![npm](https://img.shields.io/npm/v/@plumejs/ui)](https://www.npmjs.com/package/@plumejs/ui) [![Dependencies](https://img.shields.io/badge/Dependencies-%40plumejs%2Fcore-green)](https://GitHub.com/KiranMantha/plumejs)
 
 Demo [here](https://kiranmantha.github.io/plumejs/#/controls). Check console logs for further details.
-
-### Useful Links
-
-https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions#Detecting_the_start_and_completion_of_a_transition
-
-https://stackoverflow.com/questions/9255279/callback-when-css3-transition-finishes
-
-crossbrowser transitions: https://gist.github.com/davidcalhoun/702826
-
-http://jsfiddle.net/swfour/M2B9B/14/ css auto hide
-
-https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
-
-https://github.com/karlhorky/typescript-tricks
-
-# PlumeJs UI
 
 This module is a collection of UI components built using [PlumeJs](https://github.com/kiranmantha/plumejs).
 
@@ -282,3 +268,17 @@ class YourComponent {
   }
 }
 ```
+
+## Useful Links
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions#Detecting_the_start_and_completion_of_a_transition
+
+https://stackoverflow.com/questions/9255279/callback-when-css3-transition-finishes
+
+crossbrowser transitions: https://gist.github.com/davidcalhoun/702826
+
+http://jsfiddle.net/swfour/M2B9B/14/ css auto hide
+
+https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
+
+https://github.com/karlhorky/typescript-tricks
