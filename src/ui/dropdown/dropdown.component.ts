@@ -19,7 +19,7 @@ const defaultDropdownOptions: IDropdownOptions<any> = {
   deps: [Renderer]
 })
 export class DropdownComponent<T> {
-  readonly ObservedProperties = <const>['dropdownOptions'];
+  static readonly observedProperties = <const>['dropdownOptions'];
 
   dropdownOptions: IDropdownOptions<T> = { ...defaultDropdownOptions };
 
@@ -32,7 +32,7 @@ export class DropdownComponent<T> {
 
   constructor(private renderer: Renderer) {}
 
-  onPropsChanged() {
+  onPropertiesChanged() {
     if (this.dropdownOptions.options.length) {
       this.dropdownOptions = {
         ...defaultDropdownOptions,
@@ -55,7 +55,6 @@ export class DropdownComponent<T> {
 
   onOptionSelected(isChecked: boolean, selectedOption: IOption<T>, index: number) {
     if (!this._isMultiSelect) {
-      this._detailsNode.removeAttribute('open');
       this._selectedOptions = [selectedOption];
     } else {
       // update selected options
@@ -182,6 +181,7 @@ export class DropdownComponent<T> {
           role="list"
           part="list"
           class="${this.dropdownOptions.disable ? 'disabled' : ''}"
+          data-preserve-attributes="${this._isMultiSelect}"
           ref=${(node) => {
             this._detailsNode = node;
           }}

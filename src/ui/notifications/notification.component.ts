@@ -9,7 +9,7 @@ import { INotification, NotificationType } from './notification.type';
   deps: [Renderer]
 })
 export class NotificationMessage implements IHooks {
-  readonly ObservedProperties = <const>['notification'];
+  static readonly observedProperties = <const>['notification'];
   notification: INotification;
 
   constructor(private renderer: Renderer) {}

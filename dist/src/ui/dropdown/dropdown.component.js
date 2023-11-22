@@ -12,7 +12,7 @@ const defaultDropdownOptions = {
 };
 let DropdownComponent = class DropdownComponent {
     renderer;
-    ObservedProperties = ['dropdownOptions'];
+    static observedProperties = ['dropdownOptions'];
     dropdownOptions = { ...defaultDropdownOptions };
     _detailsNode;
     _summaryNode;
@@ -23,7 +23,7 @@ let DropdownComponent = class DropdownComponent {
     constructor(renderer) {
         this.renderer = renderer;
     }
-    onPropsChanged() {
+    onPropertiesChanged() {
         if (this.dropdownOptions.options.length) {
             this.dropdownOptions = {
                 ...defaultDropdownOptions,
@@ -46,7 +46,6 @@ let DropdownComponent = class DropdownComponent {
     }
     onOptionSelected(isChecked, selectedOption, index) {
         if (!this._isMultiSelect) {
-            this._detailsNode.removeAttribute('open');
             this._selectedOptions = [selectedOption];
         }
         else {
@@ -163,6 +162,7 @@ let DropdownComponent = class DropdownComponent {
           role="list"
           part="list"
           class="${this.dropdownOptions.disable ? 'disabled' : ''}"
+          data-preserve-attributes="${this._isMultiSelect}"
           ref=${(node) => {
                 this._detailsNode = node;
             }}

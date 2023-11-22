@@ -4,7 +4,7 @@ import notificationStyles from './notification.component.scss?inline';
 import { NotificationType } from './notification.type';
 let NotificationMessage = class NotificationMessage {
     renderer;
-    ObservedProperties = ['notification'];
+    static observedProperties = ['notification'];
     notification;
     constructor(renderer) {
         this.renderer = renderer;

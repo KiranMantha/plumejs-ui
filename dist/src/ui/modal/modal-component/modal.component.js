@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import modalComponentStyles from './modal.component.scss?inline';
 let ModalComponent = class ModalComponent {
     domSrvc;
-    ObservedProperties = ['modalData'];
+    static observedProperties = ['modalData'];
     modalData;
     onClose = new Subject();
     onOpen = new Subject();
@@ -53,10 +53,10 @@ let ModalComponent = class ModalComponent {
           class="modalDialog-content in out"
         >
           <div class="modalDialog-header">
-            <div class="title">${this.modalData ? this.modalData.title : ''}</div>
-            ${this.modalData && this._renderModalCloseButton()}
+            <div class="title">${this.modalData ? this.modalData.title : null}</div>
+            ${this.modalData ? this._renderModalCloseButton() : null}
           </div>
-          <div>${this.modalData && this.modalData.bodyTemplate}</div>
+          <div>${this.modalData ? this.modalData.bodyTemplate() : null}</div>
         </div>
       </div>
     `;

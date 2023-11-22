@@ -10,7 +10,7 @@ import modalComponentStyles from './modal.component.scss?inline';
   deps: [DomTransition]
 })
 export class ModalComponent implements IHooks {
-  readonly ObservedProperties = <const>['modalData'];
+  static readonly observedProperties = <const>['modalData'];
 
   modalData: IModalData;
   onClose: Subject<void> = new Subject();
@@ -64,10 +64,10 @@ export class ModalComponent implements IHooks {
           class="modalDialog-content in out"
         >
           <div class="modalDialog-header">
-            <div class="title">${this.modalData ? this.modalData.title : ''}</div>
-            ${this.modalData && this._renderModalCloseButton()}
+            <div class="title">${this.modalData ? this.modalData.title : null}</div>
+            ${this.modalData ? this._renderModalCloseButton() : null}
           </div>
-          <div>${this.modalData && this.modalData.bodyTemplate}</div>
+          <div>${this.modalData ? this.modalData.bodyTemplate() : null}</div>
         </div>
       </div>
     `;

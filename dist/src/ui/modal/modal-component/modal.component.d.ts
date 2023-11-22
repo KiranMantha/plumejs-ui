@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { IModalData } from '../modal.interface';
 export declare class ModalComponent implements IHooks {
     private domSrvc;
-    readonly ObservedProperties: readonly ["modalData"];
+    static readonly observedProperties: readonly ["modalData"];
     modalData: IModalData;
     onClose: Subject<void>;
     onOpen: Subject<void>;
