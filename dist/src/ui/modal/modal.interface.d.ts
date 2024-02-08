@@ -9,7 +9,7 @@ export interface IModalOptions {
 export interface IModalData {
     Id: number;
     title: string;
-    bodyTemplate: string;
+    bodyTemplate: () => string;
     backdrop: boolean;
     hideDefaultCloseButton: boolean;
 }

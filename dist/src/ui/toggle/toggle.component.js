@@ -8,11 +8,17 @@ const defaultToggleOptions = {
 };
 let ToggleComponent = class ToggleComponent {
     renderer;
-    ObservedProperties = ['toggleOptions'];
+    static observedProperties = ['toggleOptions'];
     toggleOptions = { ...defaultToggleOptions };
     _id = Math.random();
     constructor(renderer) {
         this.renderer = renderer;
+    }
+    onPropertiesChanged() {
+        this.toggleOptions = {
+            ...defaultToggleOptions,
+            ...this.toggleOptions
+        };
     }
     toggleChange(e) {
         const value = e.target.checked;

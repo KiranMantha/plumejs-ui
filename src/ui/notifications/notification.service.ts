@@ -31,15 +31,19 @@ export class NotificationService {
 
     if (!this._containerModel) {
       const notificationContainerRef = notificationContainer as unknown as ComponentRef<NotificationContainerComponent>;
-      this._containerModel = notificationContainerRef.getInstance();
-      this._containerModel.onDismiss.subscribe((count: number) => {
-        if (count === 0) {
-          this._removeChild(notificationContainer);
-          this._containerModel = null;
-        }
-      });
-    }
 
-    this._containerModel.setNotifications(message);
+      setTimeout(() => {
+        this._containerModel = notificationContainerRef.getInstance();
+        this._containerModel.onDismiss.subscribe((count: number) => {
+          if (count === 0) {
+            this._removeChild(notificationContainer);
+            this._containerModel = null;
+          }
+        });
+        this._containerModel.setNotifications(message);
+      }, 0);
+    } else {
+      this._containerModel.setNotifications(message);
+    }
   }
 }

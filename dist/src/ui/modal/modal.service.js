@@ -26,7 +26,7 @@ let ModalService = class ModalService {
             modalData: {
                 Id: modelId,
                 title: options.modalTitle,
-                bodyTemplate: options.renderTemplate(),
+                bodyTemplate: options.renderTemplate,
                 backdrop: options.backdrop || false,
                 hideDefaultCloseButton: options.hideDefaultCloseButton || false
             }

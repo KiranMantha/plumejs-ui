@@ -22,15 +22,20 @@ let NotificationService = class NotificationService {
         }
         if (!this._containerModel) {
             const notificationContainerRef = notificationContainer;
-            this._containerModel = notificationContainerRef.getInstance();
-            this._containerModel.onDismiss.subscribe((count) => {
-                if (count === 0) {
-                    this._removeChild(notificationContainer);
-                    this._containerModel = null;
-                }
-            });
+            setTimeout(() => {
+                this._containerModel = notificationContainerRef.getInstance();
+                this._containerModel.onDismiss.subscribe((count) => {
+                    if (count === 0) {
+                        this._removeChild(notificationContainer);
+                        this._containerModel = null;
+                    }
+                });
+                this._containerModel.setNotifications(message);
+            }, 0);
         }
-        this._containerModel.setNotifications(message);
+        else {
+            this._containerModel.setNotifications(message);
+        }
     }
 };
 NotificationService = __decorate([

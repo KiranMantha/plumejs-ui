@@ -1,25 +1,19 @@
-import { __decorate, __metadata } from "tslib";
-import { Component, html, Renderer } from '@plumejs/core';
+import { __decorate } from "tslib";
+import { Component, html } from '@plumejs/core';
 import { Subject } from 'rxjs';
 import notificationContainerStyles from './notification-container.component.scss?inline';
 let NotificationContainerComponent = class NotificationContainerComponent {
-    renderer;
     _notifications = [];
     onDismiss = new Subject();
-    constructor(renderer) {
-        this.renderer = renderer;
-    }
     setNotifications(message) {
-        this._notifications.push(message);
+        this._notifications = [message, ...this._notifications];
         message.index = this._notifications.length - 1;
-        this.renderer.update();
     }
     dismiss(index) {
         this._notifications = this._notifications.filter((m) => {
             if (m.index !== index)
                 return m;
         });
-        this.renderer.update();
         this.onDismiss.next(this._notifications.length);
     }
     _renderNotification(target, notification) {
@@ -63,10 +57,8 @@ let NotificationContainerComponent = class NotificationContainerComponent {
 NotificationContainerComponent = __decorate([
     Component({
         selector: 'ui-notification-container',
-        standalone: true,
         styles: notificationContainerStyles,
-        deps: [Renderer]
-    }),
-    __metadata("design:paramtypes", [Renderer])
+        standalone: true
+    })
 ], NotificationContainerComponent);
 export { NotificationContainerComponent };

@@ -20,12 +20,19 @@ const defaultToggleOptions: IToggleInput = {
   deps: [Renderer]
 })
 export class ToggleComponent implements IHooks {
-  readonly ObservedProperties = <const>['toggleOptions'];
+  static readonly observedProperties = <const>['toggleOptions'];
 
   toggleOptions: IToggleInput = { ...defaultToggleOptions };
   private _id = Math.random();
 
   constructor(private renderer: Renderer) {}
+
+  onPropertiesChanged() {
+    this.toggleOptions = {
+      ...defaultToggleOptions,
+      ...this.toggleOptions
+    };
+  }
 
   private toggleChange(e: Event) {
     const value = (e.target as any).checked;

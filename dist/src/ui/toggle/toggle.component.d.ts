@@ -6,10 +6,11 @@ export interface IToggleInput {
 }
 export declare class ToggleComponent implements IHooks {
     private renderer;
-    readonly ObservedProperties: readonly ["toggleOptions"];
+    static readonly observedProperties: readonly ["toggleOptions"];
     toggleOptions: IToggleInput;
     private _id;
     constructor(renderer: Renderer);
+    onPropertiesChanged(): void;
     private toggleChange;
     render(): DocumentFragment;
 }

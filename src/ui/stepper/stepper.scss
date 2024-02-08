@@ -1,0 +1,56 @@
+.stepper {
+  display: flex;
+  flex-direction: column;
+
+  .step {
+    position: relative;
+    padding-left: 40px;
+    height: 100px;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 1.5em;
+      height: 1.5em;
+      line-height: 1.5em;
+      border-radius: 100%;
+      background: var(--gray-500);
+      position: absolute;
+      left: 0px;
+    }
+
+    &:after {
+      content: '';
+      display: inline-block;
+      width: 2px;
+      background: var(--gray-500);
+      position: absolute;
+      left: 11px;
+      top: 0px;
+      bottom: 0px;
+    }
+
+    &[data-completed='true'] {
+      &:before,
+      &:after {
+        background: var(--theme);
+      }
+    }
+
+    &:last-child {
+      height: auto;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    .title {
+      font-weight: 600;
+    }
+
+    .caption {
+      font-size: 12px;
+    }
+  }
+}
