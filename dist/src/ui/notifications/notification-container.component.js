@@ -6,7 +6,7 @@ let NotificationContainerComponent = class NotificationContainerComponent {
     _notifications = [];
     onDismiss = new Subject();
     setNotifications(message) {
-        this._notifications = [...this._notifications, message];
+        this._notifications = [message, ...this._notifications];
         message.index = this._notifications.length - 1;
     }
     dismiss(index) {

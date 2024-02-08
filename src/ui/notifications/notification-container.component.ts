@@ -15,7 +15,7 @@ export class NotificationContainerComponent implements IHooks {
   onDismiss: Subject<number> = new Subject();
 
   setNotifications(message: Message) {
-    this._notifications = [...this._notifications, message];
+    this._notifications = [message, ...this._notifications];
     message.index = this._notifications.length - 1;
   }
 
